@@ -24,4 +24,4 @@ Things you may want to cover:
 * ...
 
 
-Test push protection
+Test push protections
