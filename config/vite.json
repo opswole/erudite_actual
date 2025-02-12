@@ -1,5 +1,7 @@
 {
   "all": {
+    "host": "0.0.0.0",
+    "port": 3036,
     "sourceCodeDir": "app/javascript",
     "watchAdditionalPaths": []
   },
