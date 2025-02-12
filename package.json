@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
-    "tailwindcss": "^4.0.6"
+    "tailwindcss": "^4.0.6",
+    "vite-plugin-full-reload": "^1.2.0"
   }
 }
