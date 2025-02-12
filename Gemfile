@@ -64,6 +64,6 @@ end
 
 gem "tailwindcss-ruby", "~> 4.0"
 
-gem 'vite_rails'
+gem "vite_rails"
 
 gem "aws-sdk-s3"
