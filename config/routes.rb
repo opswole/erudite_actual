@@ -1,21 +1,36 @@
 Rails.application.routes.draw do
+  # Authentication
   resource :session
   resources :passwords, param: :token
 
+  # Default / behaviour
+  root to: "user/home#index"
+
+  # Pages with /admin prefix
   namespace :admin do
     resources :admins_home
     root to: "admins_home#index"
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Pages with /user prefix
+  namespace :user do
+    get "/profile", to: "profiles#show"
+    get "/notifications", to: "notifications#index"
+    get "/home", to: "home#index"
+    get "/tab/overview", to: "tabs#overview"
+    get "/tab/courses", to: "tabs#courses"
+    get "/tab/messages", to: "tabs#messages"
+    get "/tab/timetable", to: "tabs#timetable"
+  end
+
+  # Footer pages
+  get "/sitemap" => "sitemaps#index", as: :sitemap
+  get "/terms" => "terms#index", as: :terms
+  get "/privacy" => "privacies#index", as: :privacy
+  get "/accessibility" => "accessibilities#index", as: :accessibility
+  get "/contact" => "contacts#index", as: :contact
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

@@ -7,7 +7,10 @@
     "vite-plugin-ruby": "^5.1.1"
   },
   "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.12",
     "@tailwindcss/vite": "^4.0.6",
+    "stimulus-vite-helpers": "^3.1.0",
     "tailwindcss": "^4.0.6",
     "vite-plugin-full-reload": "^1.2.0"
   }
