@@ -8,15 +8,16 @@
     <ul class="menu menu-horizontal px-1">
       <li>
         <%# TODO add logo %>
-        <a class="btn btn-ghost text-xl">Erudite</a>
+        <%= link_to "Erudite", user_home_path, class: "btn btn-ghost text-xl" %>
       </li>
     </ul>
   </div>
   <div class="navbar-end">
     <%# TODO conditional button %>
     <a class="btn">{Conditional Button}</a>
-    <a class="btn">Button</a>
-    <a class="btn">Button</a>
-    <a class="btn">Notifications</a>
+    <%= link_to "Notifications", user_notifications_path, class:"btn"%>
+    <%= link_to "Profile", user_profile_path, class:"btn"%>
+    <%= button_to "Sign Out", session_path, method: :delete, class: "btn" %>
+
   </div>
 </div>
