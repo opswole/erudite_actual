@@ -1,1 +1,4 @@
-<h1>STUFF</h1>
+
+<% Current.user.attributes.each do |attribute, value| %>
+  <p><%= attribute.titleize %>: <%= value %> </p>
+<% end %>

@@ -1,0 +1,20 @@
+<div class="w-full flex justify-center items-center">
+  <div class="grid grid-cols-1 grid-rows-4 gap-2 w-full">
+    <div class="col-span-3 bg-blue-500 flex items-center justify-center text-white w-full">
+      Hi <%= Current.user.first_name %>,
+    </div>
+    <div class="col-span-3 row-start-2 bg-green-500 flex flex-col items-center justify-center text-white w-full" data-controller="tabs">
+      <div role="tablist" class="tabs tabs-lift tabs-xl">
+          <%= link_to "Overview", user_tab_overview_path, data: { turbo_frame: "tab_content", }, class: "tab" %>
+          <%= link_to "Courses", user_tab_courses_path, data: { turbo_frame: "tab_content"  }, class: "tab" %>
+          <%= link_to "Messages", user_tab_messages_path, data: { turbo_frame: "tab_content" }, class: "tab" %>
+          <%= link_to "Timetable", user_tab_timetable_path, data: { turbo_frame: "tab_content" }, class: "tab" %>
+      </div>
+    </div>
+
+    <%= turbo_frame_tag "tab_content", src: user_tab_overview_path %>
+
+  </div>
+</div>
+
+
