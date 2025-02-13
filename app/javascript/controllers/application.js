@@ -1,9 +1,8 @@
-import { Application } from "@hotwired/stimulus"
+import "@hotwired/turbo-rails"
 
-const application = Application.start()
+import '../controllers'
 
-// Configure Stimulus development experience
-application.debug = false
-window.Stimulus   = application
+document.addEventListener("turbo:frame-load", (event) => {
+    console.log("Turbo Frame Loaded:", event.target);
+});
 
-export { application }

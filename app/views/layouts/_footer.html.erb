@@ -1,9 +1,9 @@
 <footer class="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
   <nav class="grid grid-flow-col gap-4">
-    <a class="link link-hover">Sitemap</a>
-    <a class="link link-hover">Accessibility</a>
-    <a class="link link-hover">Privacy</a>
-    <a class="link link-hover">Terms</a>
-    <a class="link link-hover">Contact</a>
+    <%= link_to "Sitemap", sitemap_path, class:"link link-hover"%>
+    <%= link_to "Accessibility", accessibility_path, class:"link link-hover"%>
+    <%= link_to "Privacy", privacy_path, class:"link link-hover"%>
+    <%= link_to "Terms", terms_path, class:"link link-hover"%>
+    <%= link_to "Contact", contact_path, class:"link link-hover"%>
   </nav>
 </footer>
