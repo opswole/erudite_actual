@@ -39,7 +39,7 @@ RUN apt-get update -qq && \
 RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
     apt-get update -qq && \
     apt-get install --no-install-recommends -y nodejs && \
-    apt-get install --no-install-recommends -y npm && \  # Ensure npm is installed explicitly
+    apt-get install --no-install-recommends -y npm && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
