@@ -52,6 +52,6 @@ jobs:
       - name: Deploy using Kamal
         run: bin/kamal deploy
         env:
-          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
-          RAILS_MASTER_KEY: ${{ env.RAILS_MASTER_KEY }}
-          KAMAL_REGISTRY_PASSWORD: ${{ env.KAMAL_REGISTRY_PASSWORD }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
