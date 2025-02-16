@@ -36,7 +36,7 @@ jobs:
         env:
           KAMAL_REGISTRY_PASSWORD: "op://Dev_Keys/Erudite_Prod/KAMAL_REGISTRY_PASSWORD"
           RAILS_MASTER_KEY: "op://Dev_Keys/Erudite_Prod/PROD_MASTER_KEY"
-          SSH_PRIVATE_KEY: "op://Dev_Keys/ec2_aws/private key"
+          SSH_PRIVATE_KEY: "op://Dev_Keys/xseeaoug2ldsib3xiltkvbxidm/private key"
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
