@@ -10,8 +10,7 @@
 # Ignore all environment files.
 /.env*
 
-# Ignore JetBrains Stuff
-/.idea
+
 
 # Ignore all logfiles and tempfiles.
 /log/*
