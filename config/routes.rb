@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     get "/tab/timetable", to: "tabs#timetable"
   end
 
+  # Course testing against S3
+  get "/courses", to: "courses#index"
+
   # Footer pages
   get "/sitemap" => "sitemaps#index", as: :sitemap
   get "/terms" => "terms#index", as: :terms

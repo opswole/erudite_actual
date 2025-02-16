@@ -1,0 +1,7 @@
+<h1> Course Overview </h1> <br>
+
+<%= @course.files.first.filename %>
+
+<% @course.files.each do |file| %>
+  <%= image_tag(file.url, size: 300) %>
+<% end %>
