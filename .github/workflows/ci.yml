@@ -33,10 +33,12 @@ jobs:
 
       - name: Load secrets from 1Password
         uses: 1password/load-secrets-action@v2
+        with:
+          export-env: true
         env:
           KAMAL_REGISTRY_PASSWORD: "op://Dev_Keys/Erudite_Prod/KAMAL_REGISTRY_PASSWORD"
           RAILS_MASTER_KEY: "op://Dev_Keys/Erudite_Prod/PROD_MASTER_KEY"
-          SSH_PRIVATE_KEY: "op://Dev_Keys/xseeaoug2ldsib3xiltkvbxidm/private key"
+          SSH_PRIVATE_KEY: "op://Dev_Keys/ec2_aws/private key"
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -47,13 +49,9 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Debug Environment Variable
-        run: |
-          echo "SSH_PRIVATE_KEY starts with: ${SSH_PRIVATE_KEY:0:50}"
-
-#      - name: Deploy using Kamal
-#        run: bin/kamal deploy
-#        env:
-#          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
-#          RAILS_MASTER_KEY: ${{ env.RAILS_MASTER_KEY }}
-#          KAMAL_REGISTRY_PASSWORD: ${{ env.KAMAL_REGISTRY_PASSWORD }}
+      - name: Deploy using Kamal
+        run: bin/kamal deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
+          RAILS_MASTER_KEY: ${{ env.RAILS_MASTER_KEY }}
+          KAMAL_REGISTRY_PASSWORD: ${{ env.KAMAL_REGISTRY_PASSWORD }}
