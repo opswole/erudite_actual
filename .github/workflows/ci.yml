@@ -47,9 +47,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Deploy using Kamal
-        run: bin/kamal deploy
-        env:
-          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
-          RAILS_MASTER_KEY: ${{ env.RAILS_MASTER_KEY }}
-          KAMAL_REGISTRY_PASSWORD: ${{ env.KAMAL_REGISTRY_PASSWORD }}
+      - name: Test SSH Connection
+        run: ssh -o StrictHostKeyChecking=no -i "$SSH_PRIVATE_KEY" root@18.171.204.250 echo "SSH Connection Successful"
+
+#      - name: Deploy using Kamal
+#        run: bin/kamal deploy
+#        env:
+#          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
+#          RAILS_MASTER_KEY: ${{ env.RAILS_MASTER_KEY }}
+#          KAMAL_REGISTRY_PASSWORD: ${{ env.KAMAL_REGISTRY_PASSWORD }}
