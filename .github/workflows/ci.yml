@@ -26,15 +26,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Configure 1Password Service Account
+        uses: 1password/load-secrets-action/configure@v2
+        with:
+          service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+
       - name: Load secrets from 1Password
         uses: 1password/load-secrets-action@v2
         with:
           export-env: true
         env:
-          service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           KAMAL_REGISTRY_PASSWORD: op://Dev_Keys/Erudite_Prod/KAMAL_REGISTRY_PASSWORD
           RAILS_MASTER_KEY: op://Dev_Keys/Erudite_Prod/PROD_MASTER_KEY
-          SSH_PRIVATE_KEY: op://Dev_Keys/ec2_aws/private key
+          SSH_PRIVATE_KEY: op://Dev_Keys/ec2_aws/private\ key
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
