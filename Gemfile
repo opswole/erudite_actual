@@ -62,6 +62,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem "faker"
+
 gem "tailwindcss-ruby", "~> 4.0"
 
 gem "vite_rails"

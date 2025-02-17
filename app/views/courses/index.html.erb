@@ -1,7 +1,24 @@
-<h1> Course Overview </h1> <br>
+<h1> Course Overview </h1>
 
-<%= @course.files.first.filename %>
-
-<% @course.files.each do |file| %>
-  <%= image_tag(file.url, size: 300) %>
-<% end %>
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+  <tr>
+    <th>Course Title</th>
+    <th>Description</th>
+    <th>Files</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @courses.each do |course| %>
+    <tr>
+      <td><%= course.title %></td>
+      <td>
+        <% course.files.each do |file| %>
+          <p>Filename: <%= file.filename.to_s %></p>  <!-- Display filename -->
+          <%= image_tag(file) %>  <!-- Display image with a resize variant -->
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
