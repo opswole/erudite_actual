@@ -14,5 +14,10 @@
     "autoBuild": true,
     "publicOutputDir": "vite-test",
     "port": 3037
+  },
+  "production": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-test",
+    "port": 3037
   }
 }
