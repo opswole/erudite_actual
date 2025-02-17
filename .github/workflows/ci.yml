@@ -56,7 +56,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/id_rsa
-          ssh-keyscan 18.171.204.250 >> ~/.ssh/known_hosts
+          ssh-keyscan 188.166.153.61 >> ~/.ssh/known_hosts
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
