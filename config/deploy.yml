@@ -7,7 +7,7 @@ image: christopherfdev/erudite_actual
 # Deploy to these servers.
 servers:
   web:
-    - 18.171.204.250
+    - 188.166.153.61
   # job:
   #   hosts:
   #     - 192.168.0.1
