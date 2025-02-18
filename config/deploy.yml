@@ -7,7 +7,7 @@ image: christopherfdev/erudite_actual
 # Deploy to these servers.
 servers:
   web:
-    - 188.166.153.61
+    - 127.0.0.1
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -36,6 +36,7 @@ registry:
 env:
   secret:
     - RAILS_MASTER_KEY
+    - SECRET_KEY_BASE
   clear:
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
