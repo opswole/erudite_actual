@@ -47,3 +47,6 @@ node_modules
 
 
 /config/credentials/production.key
+/localhost.crt
+/localhost.csr
+/localhost.key
