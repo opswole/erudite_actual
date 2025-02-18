@@ -65,6 +65,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
           RAILS_MASTER_KEY: ${{ env.RAILS_MASTER_KEY }}
+          SECRET_KEY_BASE: ${{ env.SECRET_KEY_BASE }}
           KAMAL_REGISTRY_PASSWORD: ${{ env.KAMAL_REGISTRY_PASSWORD }}
           AWS_SECRET_KEY_ID: ${{ env.AWS_SECRET_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}

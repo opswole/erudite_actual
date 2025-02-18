@@ -45,3 +45,8 @@ node_modules
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
 
+
+/config/credentials/production.key
+/localhost.crt
+/localhost.csr
+/localhost.key
