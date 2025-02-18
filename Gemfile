@@ -62,6 +62,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem "rdoc", "~> 6.12.0"
+
 gem "faker"
 
 gem "tailwindcss-ruby", "~> 4.0"

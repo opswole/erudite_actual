@@ -8,14 +8,6 @@ require 'fileutils'
 
 
 puts "Cleaning up storage..."
-FileUtils.rm_rf(Rails.root.join('storage'))
-FileUtils.mkdir_p(Rails.root.join('storage'))
-
-
-ActiveStorage::Blob.all.each do |blob|
-  blob.purge
-end
-ActiveStorage::Attachment.destroy_all
 
 puts "Cleaning up database records..."
 User.destroy_all
