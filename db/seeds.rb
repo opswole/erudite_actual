@@ -149,7 +149,7 @@ units.each do |unit_data|
     )
 
     topic.files.attach(
-      io: File.open("/home/chris/Documents/erudite_docs/cs1_oop_principles/IMG_0969.jpg"),
+      io: File.open("#{Faker::LoremFlickr.image(size: "200x200", search_terms: [ 'cat' ])}"),
       filename: "test.jpg",
       content_type: "image/jpeg",
       key: "#{Rails.env}/blog_content/intuitive_filename-#{SecureRandom.uuid}.jpg"
