@@ -1,14 +1,36 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<div class="grid grid-cols-2 min-h-screen w-screen">
+  <div class="bg-blueviolet flex items-center justify-center min-h-screen">
+    <div class="flex items-center justify-center min-h-screen">
+      <%# TODO Not this forever %>
+      <%= image_tag("https://robohash.org/#{rand}.png?set=set2&size=500x500", alt: "Sign-in placeholder") %>
+    </div>
+  </div>
+  <div class="bg-aqua flex items-center justify-center min-h-screen">
+    <div class="p-6 bg-white rounded-lg shadow-lg w-full max-w-xl">
+      <%= form_with url: session_path do |form| %>
+        <div class="mb-4 w-full">
+          <%= form.label :email_address, "Email Address", class: "block font-medium text-gray-700 mb-2" %>
+          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username",
+                               placeholder: "Enter your email address",
+                               value: params[:email_address],
+                               class: "w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        </div>
 
-<%# TODO GET RID OF THIS %>
-<h1>GITHUB CI FUNCTIONAL</h1>
+        <div class="mb-4">
+          <%= form.label :password, "Password", class: "block font-medium text-gray-700 mb-2" %>
+          <%= form.password_field :password, required: true, autocomplete: "current-password",
+                                  placeholder: "Enter your password", maxlength: 72,
+                                  class: "w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        </div>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
-<br>
+        <div class="mb-4">
+          <%= form.submit "Sign in", class: "w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" %>
+        </div>
+      <% end %>
 
-<%= link_to "Forgot password?", new_password_path %>
+      <div class="text-center">
+        <%= link_to "Forgot password?", new_password_path, class: "text-blue-500 hover:underline" %>
+      </div>
+    </div>
+  </div>
+</div>
