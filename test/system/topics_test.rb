@@ -5,7 +5,7 @@ class TopicsTest < ApplicationSystemTestCase
     @topic = topics(:one)
   end
 
-  test "visiting the index" do
+  test "visiting the accessibility" do
     visit topics_url
     assert_selector "h1", text: "Topics"
   end

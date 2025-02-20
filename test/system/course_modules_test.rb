@@ -5,14 +5,14 @@ class CourseModulesTest < ApplicationSystemTestCase
     @course_module = course_modules(:one)
   end
 
-  test "visiting the index" do
+  test "visiting the accessibility" do
     visit course_modules_url
     assert_selector "h1", text: "Course modules"
   end
 
-  test "should create course module" do
+  test "should create courses module" do
     visit course_modules_url
-    click_on "New course module"
+    click_on "New courses module"
 
     fill_in "Course", with: @course_module.course_id
     fill_in "Description", with: @course_module.description
@@ -25,7 +25,7 @@ class CourseModulesTest < ApplicationSystemTestCase
 
   test "should update Course module" do
     visit course_module_url(@course_module)
-    click_on "Edit this course module", match: :first
+    click_on "Edit this courses module", match: :first
 
     fill_in "Course", with: @course_module.course_id
     fill_in "Description", with: @course_module.description
@@ -38,7 +38,7 @@ class CourseModulesTest < ApplicationSystemTestCase
 
   test "should destroy Course module" do
     visit course_module_url(@course_module)
-    click_on "Destroy this course module", match: :first
+    click_on "Destroy this courses module", match: :first
 
     assert_text "Course module was successfully destroyed"
   end

@@ -5,7 +5,7 @@ class CourseModulesControllerTest < ActionDispatch::IntegrationTest
     @course_module = course_modules(:one)
   end
 
-  test "should get index" do
+  test "should get accessibility" do
     get course_modules_url
     assert_response :success
   end

@@ -5,7 +5,7 @@ class UnitsControllerTest < ActionDispatch::IntegrationTest
     @unit = units(:one)
   end
 
-  test "should get index" do
+  test "should get accessibility" do
     get units_url
     assert_response :success
   end
