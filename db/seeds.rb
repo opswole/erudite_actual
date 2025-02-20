@@ -148,8 +148,11 @@ units.each do |unit_data|
       unit: unit
     )
 
+    image_url = Faker::LoremFlickr.image(size: "200x200", search_terms: [ 'cat' ])
+    file = URI.open(image_url)
+
     topic.files.attach(
-      io: File.open("#{Faker::LoremFlickr.image(size: "200x200", search_terms: [ 'cat' ])}"),
+      io: file,
       filename: "test.jpg",
       content_type: "image/jpeg",
       key: "#{Rails.env}/blog_content/intuitive_filename-#{SecureRandom.uuid}.jpg"
