@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_14_143453) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_20_151953) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -41,6 +41,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_143453) do
     t.index ["blob_id"], name: "index_active_storage_variant_records_on_blob_id"
   end
 
+  create_table "course_modules", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_modules_on_course_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.string "owner"
@@ -57,6 +66,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_143453) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "topics", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "unit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_topics_on_unit_id"
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_units_on_course_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -70,5 +97,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_143453) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "course_modules", "courses"
   add_foreign_key "sessions", "users"
+  add_foreign_key "topics", "units"
+  add_foreign_key "units", "courses"
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :topics
+  resources :units
   # Authentication
   resource :session
   resources :passwords, param: :token
@@ -23,8 +25,8 @@ Rails.application.routes.draw do
     get "/tab/timetable", to: "tabs#timetable"
   end
 
-  # Course testing against S3
-  get "/courses", to: "courses#index"
+  # Topics/Units testing
+  get "/topics", to: "topics#index"
 
   # Footer pages
   get "/sitemap" => "sitemaps#index", as: :sitemap
