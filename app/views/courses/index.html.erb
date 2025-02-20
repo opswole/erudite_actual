@@ -14,8 +14,8 @@
       <td><%= course.title %></td>
       <td>
         <% course.files.each do |file| %>
-          <p>Filename: <%= file.filename.to_s %></p>  <!-- Display filename -->
-          <%= image_tag(file) %>  <!-- Display image with a resize variant -->
+          <p>Filename: <%= file.filename.to_s %></p>
+          <%= image_tag(file) %>
         <% end %>
       </td>
     </tr>

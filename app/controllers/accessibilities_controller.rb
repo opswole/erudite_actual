@@ -1,5 +1,5 @@
 class AccessibilitiesController < ApplicationController
   allow_unauthenticated_access
-  def index
+  def accessibility
   end
 end
