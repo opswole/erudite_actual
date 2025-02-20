@@ -24,9 +24,9 @@
     <%= vite_javascript_tag 'application' %>
   </head>
 
-  <body>
+  <body class="min-h-screen flex flex-col">
     <%= render "layouts/navbar" %>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="container mx-auto flex-1 px-5 flex flex-col">
       <%= yield %>
     </main>
     <%= render "layouts/footer" %>

@@ -2,7 +2,8 @@ class User::TabsController < ApplicationController
   def overview
   end
 
-  def courses
+  def units
+    @units  = Unit.all
   end
 
   def messages
