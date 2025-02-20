@@ -62,6 +62,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem "logger", "~> 1.6.5"
+
 gem "rdoc", "~> 6.12.0"
 
 gem "faker"
