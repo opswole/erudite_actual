@@ -5,7 +5,7 @@ class TopicsControllerTest < ActionDispatch::IntegrationTest
     @topic = topics(:one)
   end
 
-  test "should get index" do
+  test "should get accessibility" do
     get topics_url
     assert_response :success
   end

@@ -1,3 +1,4 @@
 class Course < ApplicationRecord
-  has_many_attached :units, dependent: :destroy
+  has_many :units, dependent: :destroy
+  validates :title, :owner, presence: true
 end

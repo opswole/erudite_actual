@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <div class="w-full flex justify-center items-center">
+    <div class="grid grid-cols-3 grid-rows-2 gap-2 bg-amber-300 border-4 border-indigo-500 w-full">
+      <% @units.each do |unit| %>
+        <% if unit.respond_to?(:topics) && unit.topics.any? %>
+          <%= link_to user_unit_path(unit), class: "card image-full w-96 shadow-sm col-span-1 hover:scale-105 transition-transform cursor-pointer", data: { turbo_frame: "_top" } do %>
+            <figure>
+              <%= image_tag("https://robohash.org/#{rand}.png", size: "100x100", alt: "Course Image") %>
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title"><%= unit.title %></h2>
+              <p><%= unit.description %></p>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

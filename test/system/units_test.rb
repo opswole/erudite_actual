@@ -5,7 +5,7 @@ class UnitsTest < ApplicationSystemTestCase
     @unit = units(:one)
   end
 
-  test "visiting the index" do
+  test "visiting the accessibility" do
     visit units_url
     assert_selector "h1", text: "Units"
   end

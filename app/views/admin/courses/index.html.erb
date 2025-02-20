@@ -1,0 +1,30 @@
+<turbo-frame id="tab_content">
+  <div class="h-screen">
+    <% if @courses.any? %>
+      <ul class="list-none space-y-4">
+        <% @courses.each do |course| %>
+          <li class="bg-blue-100 p-4 rounded-md">
+            <div class="font-semibold text-xl"><%= course.title %></div>
+
+            <% course.units.each do |unit| %>
+              <ul class="ml-4 mt-2 list-none space-y-2">
+                <li class="bg-blue-50 p-2 rounded-md">
+                  <%# TODO - Make clickable to navigate through to unit#show %>
+                  <div class="font-medium text-lg"><%= unit.title %></div>
+
+                  <% unit.topics.each do |topic| %>
+                    <ul class="ml-4 list-none">
+                      <li class="bg-blue-200 p-2 rounded-md">
+                        <div class="text-sm"><%= topic.title %></div>
+                      </li>
+                    </ul>
+                  <% end %>
+                </li>
+              </ul>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</turbo-frame>

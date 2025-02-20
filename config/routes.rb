@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :topics
-  resources :units
   # Authentication
   resource :session
   resources :passwords, param: :token
@@ -8,32 +6,36 @@ Rails.application.routes.draw do
   # Default / behaviour
   root to: "user/home#index"
 
-  # Pages with /admin prefix
+  # /admin
   namespace :admin do
-    resources :admins_home
-    root to: "admins_home#index"
+    root to: "dashboard#index"
+    resources :dashboard
+    resources :users
+    resources :courses
+    resources :units
+    get "tab/overview", to: "dashboard#overview"
+    get "tab/courses", to: "courses#index"
+    get "tab/users", to: "users#index"
   end
 
-  # Pages with /user prefix
+  # /users
   namespace :user do
+    resources :units
     get "/profile", to: "profiles#show"
     get "/notifications", to: "notifications#index"
     get "/home", to: "home#index"
-    get "/tab/overview", to: "tabs#overview"
-    get "/tab/courses", to: "tabs#courses"
+    get "/tab/index", to: "tabs#overview"
+    get "/tab/units", to: "tabs#units"
     get "/tab/messages", to: "tabs#messages"
     get "/tab/timetable", to: "tabs#timetable"
   end
 
-  # Topics/Units testing
-  get "/topics", to: "topics#index"
-
   # Footer pages
-  get "/sitemap" => "sitemaps#index", as: :sitemap
-  get "/terms" => "terms#index", as: :terms
-  get "/privacy" => "privacies#index", as: :privacy
-  get "/accessibility" => "accessibilities#index", as: :accessibility
-  get "/contact" => "contacts#index", as: :contact
+  get "/sitemap", to: "footer#show", defaults: { page: "sitemap" }
+  get "/terms", to: "footer#show", defaults: { page: "terms" }
+  get "/privacy", to: "footer#show", defaults: { page: "privacy" }
+  get "/accessibility", to: "footer#show", defaults: { page: "accessibility" }
+  get "/contact", to: "footer#show", defaults: { page: "contact" }
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

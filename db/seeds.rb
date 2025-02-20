@@ -13,25 +13,27 @@ User.destroy_all
 Course.destroy_all
 Unit.destroy_all
 
-puts "Creating admin user..."
+puts "Creating admin"
 admin = User.create!(
   email_address: "admin@erudite.com",
+  account_type: 2,
   first_name: "Christopher",
   last_name: "Fagg",
   password: "password",
   password_confirmation: "password"
 )
 
-puts "Creating staff user..."
+puts "Creating staff"
 staff = User.create!(
   email_address: "staff@erudite.com",
+  account_type: 1,
   first_name: "Joe",
   last_name: "Bloggs",
   password: "password",
   password_confirmation: "password"
 )
 
-puts "Creating default course..."
+puts "Creating default courses..."
 course = Course.create!(
   title: "BSc Computer Science",
   owner: admin
@@ -118,8 +120,8 @@ units = [
     title: "Human-Computer Interaction",
     description: "Understand how users interact with technology to design better interfaces.",
     topics: [
-      { title: "Usability Testing", description: "Learn methods for evaluating user experience." },
-      { title: "UI/UX Design Principles", description: "Explore design principles for creating user-friendly interfaces." }
+      { title: "Usability Testing", description: "Learn methods for evaluating users experience." },
+      { title: "UI/UX Design Principles", description: "Explore design principles for creating users-friendly interfaces." }
     ]
   },
   {
@@ -136,15 +138,24 @@ units.each do |unit_data|
   unit = Unit.create!(
     title: unit_data[:title],
     description: unit_data[:description],
-    course: course
+    course_id: course.id
   )
 
   unit_data[:topics].each do |topic_data|
-    Topic.create!(
+    topic = Topic.new(
       title: topic_data[:title],
       description: topic_data[:description],
       unit: unit
     )
+
+    topic.files.attach(
+      io: File.open("/home/chris/Documents/erudite_docs/cs1_oop_principles/IMG_0969.jpg"),
+      filename: "test.jpg",
+      content_type: "image/jpeg",
+      key: "#{Rails.env}/blog_content/intuitive_filename-#{SecureRandom.uuid}.jpg"
+    )
+
+    topic.save
   end
 
   puts "Created unit: #{unit.title}"
