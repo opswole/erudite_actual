@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Units" %>
+
+<h1>Units</h1>
+
+<div id="units">
+  <ul class="menu bg-base-200 rounded-box w-56">
+    <% @units.each do |unit| %>
+      <li>
+        <a><%= unit.title %></a>
+        <ul>
+          <% if unit.respond_to?(:topics) && unit.topics.any? %>
+            <% unit.topics.each do |topic| %>
+              <li>
+                <ul>
+                  <li><a><%= topic.title %></a></li>
+                </ul>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
