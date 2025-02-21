@@ -9,13 +9,14 @@ Rails.application.routes.draw do
   # /admin
   namespace :admin do
     root to: "dashboard#index"
-    resources :dashboard
     resources :users
-    resources :courses
-    resources :units
-    get "tab/overview", to: "dashboard#overview"
-    get "tab/courses", to: "courses#index"
-    get "tab/users", to: "users#index"
+    resources :courses do
+      resources :units
+    end
+    resources :dashboard, only: [ :index ]
+    get "dashboard/overview", to: "dashboard#overview"
+    get "dashboard/courses", to: "courses#index"
+    get "dashboard/users", to: "users#index"
   end
 
   # /users
