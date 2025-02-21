@@ -2,10 +2,11 @@
 
 one:
   title: MyString
-  description: MyText
+  description: MyString
   course: one
+  course_id: 1
 
 two:
   title: MyString
-  description: MyText
+  description: MyString
   course: two

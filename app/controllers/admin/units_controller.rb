@@ -4,6 +4,7 @@ class Admin::UnitsController < ApplicationController
   end
 
   def show
+    @course = Course.find(params[:course_id])
     @unit = Unit.find(params[:id])
   end
 end
