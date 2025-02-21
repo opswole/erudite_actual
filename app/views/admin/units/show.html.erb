@@ -1,29 +1,30 @@
-<div id="<%= dom_id unit %>">
+<turbo-frame id="tab_content">
+<div id="<%= dom_id @unit %>">
   <p>
     <strong>Title:</strong>
-    <%= unit.title %>
+    <%= @unit.title %>
   </p>
 
   <p>
     <strong>Description:</strong>
-    <%= unit.description %>
+    <%= @unit.description %>
   </p>
 
   <p>
     <strong>Course:</strong>
-    <%= unit.course_id %>
+    <%= @unit.course_id %>
   </p>
 
   <p>
     <strong>Topics Covered:</strong><br>
-    <% unit.topics.each do |topic| %>
+    <% @unit.topics.each do |topic| %>
       <%= topic.title %>: <br>
       <em class="ml-4"><%= topic.description %></em><br>
     <% end %>
   </p>
 
-  <% if unit.topics.any? %>
-    <% unit.topics.each do |topic| %>
+  <% if @unit.topics.any? %>
+    <% @unit.topics.each do |topic| %>
       <%# Dump files if attached %>
       <% if topic.files.attached? %>
         <%= image_tag(topic.files.first, size: "100x100") %>
@@ -32,5 +33,5 @@
   <% else %>
     <p>No topics or images available.</p>
   <% end %>
-
 </div>
+</turbo-frame>

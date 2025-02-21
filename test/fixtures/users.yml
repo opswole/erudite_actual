@@ -4,6 +4,7 @@ one:
   first_name: one
   last_name: one
   email_address: one@example.com
+  account_type: 2
   password_digest: <%= password_digest %>
 
 

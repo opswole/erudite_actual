@@ -1,20 +1,20 @@
-<div class="w-full flex justify-center items-center">
-  <div class="grid grid-cols-1 grid-rows-4 gap-2 w-full">
-    <div class="col-span-3 bg-blue-500 flex items-center justify-center text-white w-full">
+<div class="w-full h-screen flex justify-center">
+  <div class="grid grid-rows-[auto,auto,1fr] gap-2 w-full">
+    <div class="bg-blue-500 flex items-center justify-center text-white p-4">
       Hi <%= Current.user.first_name %>,
     </div>
-    <div class="col-span-3 row-start-2 bg-green-500 flex flex-col items-center justify-center text-white w-full" data-controller="tabs">
+
+    <div class="bg-green-500 flex flex-col items-center justify-center text-white" data-controller="tabs">
       <div role="tablist" class="tabs tabs-lift tabs-xl">
-          <%= link_to "Overview", user_tab_index_path, data: { turbo_frame: "tab_content", }, class: "tab" %>
-          <%= link_to "Units", user_tab_units_path, data: { turbo_frame: "tab_content"  }, class: "tab" %>
-          <%= link_to "Messages", user_tab_messages_path, data: { turbo_frame: "tab_content" }, class: "tab" %>
-          <%= link_to "Timetable", user_tab_timetable_path, data: { turbo_frame: "tab_content" }, class: "tab" %>
+        <%= link_to "Overview", user_tab_index_path, data: { turbo_frame: "tab_content" }, class: "tab" %>
+        <%= link_to "Units", user_tab_units_path, data: { turbo_frame: "tab_content" }, class: "tab" %>
+        <%= link_to "Messages", user_tab_messages_path, data: { turbo_frame: "tab_content" }, class: "tab" %>
+        <%= link_to "Timetable", user_tab_timetable_path, data: { turbo_frame: "tab_content" }, class: "tab" %>
       </div>
     </div>
 
-    <%= turbo_frame_tag "tab_content", src: user_tab_index_path %>
-
+    <div class="overflow-auto">
+      <%= turbo_frame_tag "tab_content", src: user_tab_index_path %>
+    </div>
   </div>
 </div>
-
-
