@@ -6,12 +6,12 @@
 
     <div class="h-20col-span-3 row-start-2 bg-green-500 flex flex-col items-center justify-center text-white w-full" data-controller="tabs">
       <div role="tablist" class="tabs tabs-lift tabs-xl">
-        <%= link_to "Overview", admin_tab_overview_path, data: { turbo_frame: "tab_content", }, class: "tab" %>
+        <%= link_to "Overview", admin_dashboard_overview_path, data: { turbo_frame: "tab_content", }, class: "tab" %>
         <%= link_to "Courses", admin_courses_path, data: { turbo_frame: "tab_content"  }, class: "tab" %>
         <%= link_to "Users", admin_users_path, data: { turbo_frame: "tab_content" }, class: "tab" %>
       </div>
     </div>
 
-    <%= turbo_frame_tag "tab_content", src: admin_tab_overview_path, class: "col-span-3 row-start-3 h-64 overflow-y-auto" %>
+    <%= turbo_frame_tag "tab_content", src: admin_dashboard_overview_path, class: "col-span-3 row-start-3 h-64 overflow-y-auto" %>
   </div>
 </div>
