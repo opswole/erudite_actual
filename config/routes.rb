@@ -14,18 +14,19 @@ Rails.application.routes.draw do
       resources :units
     end
     resources :dashboard, only: [ :index ]
-    get "dashboard/overview", to: "dashboard#overview"
+    get "dashboard/index", to: "dashboard#overview"
     get "dashboard/courses", to: "courses#index"
     get "dashboard/users", to: "users#index"
   end
 
   # /users
   namespace :user do
+    root to: "home#index"
     resources :units
     get "/profile", to: "profiles#show"
     get "/notifications", to: "notifications#index"
     get "/home", to: "home#index"
-    get "/tab/index", to: "tabs#overview"
+    get "/tab/index", to: "tabs#index"
     get "/tab/units", to: "tabs#units"
     get "/tab/messages", to: "tabs#messages"
     get "/tab/timetable", to: "tabs#timetable"
