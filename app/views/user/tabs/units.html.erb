@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "tab_content" do %>
   <div class="p-4">
-    <div class="grid grid-cols-3 gap-4 bg-amber-300 border-4 border-indigo-500">
+    <div class="grid grid-cols-3 gap-4 border border-indigo-500">
       <% @units.each do |unit| %>
         <% if unit.respond_to?(:topics) && unit.topics.any? %>
           <%= link_to user_unit_path(unit), class: "card image-full shadow-sm hover:scale-105 transition-transform cursor-pointer", data: { turbo_frame: "_top" } do %>
