@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       resources :units
     end
     resources :dashboard, only: [ :index ]
-    get "dashboard/index", to: "dashboard#overview"
+    get "dashboard/overview", to: "dashboard#overview"
     get "dashboard/courses", to: "courses#index"
     get "dashboard/users", to: "users#index"
   end
