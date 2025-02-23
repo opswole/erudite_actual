@@ -1,2 +1,24 @@
 <h1>PROFILE HOMEPAGE</h1>
 <h1><%= Current.user.first_name %></h1>
+<div class="grid-rows-2 grid-cols-2">
+  <div class="avatar">
+    <div class="w-24 rounded">
+      <%= image_tag("https://robohash.org/#{rand}.png", alt: "Profile Image") %>
+    </div>
+  </div>
+  <div>
+    <label class="input input-bordered flex items-center gap-2">
+      <input type="text" class="grow" placeholder="<%= Current.user.email_address %>" />
+    </label>
+    <label class="input input-bordered flex items-center gap-2">
+      <input type="text" class="grow" disabled placeholder="<%= Current.user.first_name %>" />
+    </label>
+    <label class="input input-bordered flex items-center gap-2">
+      <input type="text" class="grow" disabled placeholder="<%= Current.user.last_name %>" />
+    </label>
+    <label class="input input-bordered flex items-center gap-2">
+      <input type="password" class="grow" value="password" />
+    </label>
+  </div>
+</div>
+
