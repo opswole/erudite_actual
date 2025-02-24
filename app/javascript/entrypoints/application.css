@@ -1,6 +1,4 @@
 @import "tailwindcss" source("../../../app");
-@plugin "daisyui"{
-    themes: caramellatte --default;
+@plugin "daisyui" {
+    themes: business --default
 }
-
-

@@ -1,31 +1,39 @@
 import { Controller } from "@hotwired/stimulus"
 
+const TAB_ACTIVE_CLASS = "tab-active"
+
 export default class extends Controller {
-    static targets = ["tab", "content"]
+    static targets = ["tab"]
 
-    change(event) {
-        event.preventDefault()
+    connect() {
+        this.validateAndInitialize()
+    }
 
-        // Get the selected tab ID
-        const selectedTabId = event.currentTarget.dataset.tabsIdParam
+    activate(event) {
+        this.deactivateAllTabs()
+        event.currentTarget.classList.add(TAB_ACTIVE_CLASS)
+    }
 
-        // Remove 'tab-active' from all tabs
-        this.tabTargets.forEach(tab => {
-            tab.classList.remove("tab-active")
-        })
+    // Private methods
+    validateAndInitialize() {
+        if (!this.hasTabTargets) {
+            return
+        }
 
-        // Hide all content sections
-        this.contentTargets.forEach(content => {
-            content.classList.add("hidden")
-        })
+        this.ensureActiveTab()
+    }
 
-        // Activate the selected tab
-        event.currentTarget.classList.add("tab-active")
+    deactivateAllTabs() {
+        this.tabTargets.forEach(tab => tab.classList.remove(TAB_ACTIVE_CLASS))
+    }
 
-        console.log("change")
+    ensureActiveTab() {
+        const hasActiveTab = this.tabTargets.some(tab =>
+            tab.classList.contains(TAB_ACTIVE_CLASS)
+        )
 
-        // Show the corresponding content
-        this.contentTargets.find(content => content.dataset.tabsIdParam === selectedTabId)
-            ?.classList.remove("hidden")
+        if (!hasActiveTab) {
+            this.tabTargets[0].classList.add(TAB_ACTIVE_CLASS)
+        }
     }
 }

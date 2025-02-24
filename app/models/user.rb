@@ -10,4 +10,8 @@ class User < ApplicationRecord
     teacher: 1,
     administrator: 2
   }
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

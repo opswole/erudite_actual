@@ -21,11 +21,12 @@ Rails.application.routes.draw do
 
   # /users
   namespace :user do
+    root to: "home#index"
     resources :units
     get "/profile", to: "profiles#show"
     get "/notifications", to: "notifications#index"
     get "/home", to: "home#index"
-    get "/tab/index", to: "tabs#overview"
+    get "/tab/index", to: "tabs#index"
     get "/tab/units", to: "tabs#units"
     get "/tab/messages", to: "tabs#messages"
     get "/tab/timetable", to: "tabs#timetable"
