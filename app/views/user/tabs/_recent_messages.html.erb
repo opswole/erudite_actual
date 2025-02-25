@@ -1,5 +1,5 @@
 <%# TODO -> Populate based on messages attached to a Unit ID %>
-<% @course.units.each_with_index do | unit, index | %>
+<% Current.user.units.each_with_index do | unit, index | %>
   <div class="collapse bg-base-200 mx-2 mt-8">
     <input type="radio" name="my-accordion-1"/>
     <div class="collapse-title text-s font-light"><%= unit.title %></div>

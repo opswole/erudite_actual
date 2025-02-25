@@ -4,7 +4,6 @@
 
 require 'faker'
 require 'open-uri'
-require 'fileutils'
 
 puts "Cleaning up storage..."
 
@@ -12,8 +11,10 @@ puts "Cleaning up database records..."
 User.destroy_all
 Course.destroy_all
 Unit.destroy_all
+Topic.destroy_all
+Enrollment.destroy_all
 
-puts "Creating admin"
+puts "Creating admin..."
 admin = User.create!(
   email_address: "admin@erudite.com",
   account_type: 2,
@@ -23,7 +24,7 @@ admin = User.create!(
   password_confirmation: "password"
 )
 
-puts "Creating staff"
+puts "Creating staff..."
 staff = User.create!(
   email_address: "staff@erudite.com",
   account_type: 1,
@@ -33,15 +34,16 @@ staff = User.create!(
   password_confirmation: "password"
 )
 
-puts "Creating default courses..."
+puts "Creating default course..."
 course = Course.create!(
   title: "BSc Computer Science",
-  owner: admin
+  owner: "Department of Computer Science"
 )
 
 puts "Creating student users..."
+students = []
 10.times do |i|
-  User.create!(
+  students << User.create!(
     email_address: "student#{i+1}@erudite.com",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -138,30 +140,36 @@ units.each do |unit_data|
   unit = Unit.create!(
     title: unit_data[:title],
     description: unit_data[:description],
-    course_id: course.id
+    course: course
   )
 
   unit_data[:topics].each do |topic_data|
-    topic = Topic.new(
+    topic = Topic.create!(
       title: topic_data[:title],
       description: topic_data[:description],
       unit: unit
     )
 
-    image_url = Faker::LoremFlickr.image(size: "200x200", search_terms: [ 'cat' ])
-    file = URI.open(image_url)
+    begin
+      image_url = Faker::LoremFlickr.image(size: "200x200", search_terms: [ "technology" ])
+      file = URI.open(image_url)
 
-    topic.files.attach(
-      io: file,
-      filename: "test.jpg",
-      content_type: "image/jpeg",
-      key: "#{Rails.env}/blog_content/intuitive_filename-#{SecureRandom.uuid}.jpg"
-    )
-
-    topic.save
+      topic.files.attach(
+        io: file,
+        filename: "topic_image.jpg",
+        content_type: "image/jpeg"
+      )
+    rescue => e
+      puts "Failed to attach image to topic: #{e.message}"
+    end
   end
+end
 
-  puts "Created unit: #{unit.title}"
+puts "Creating enrollments..."
+Enrollment.find_or_create_by!(user: admin, course: course)
+Enrollment.find_or_create_by!(user: staff, course: course)
+students.each do |student|
+  Enrollment.find_or_create_by!(user: student, course: course)
 end
 
 puts "Seed completed successfully!"
