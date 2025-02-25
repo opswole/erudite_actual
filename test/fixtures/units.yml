@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: units
+#
+#  id          :integer          not null, primary key
+#  title       :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  course_id   :integer          not null
+#
+# Indexes
+#
+#  index_units_on_course_id  (course_id)
+#
+
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

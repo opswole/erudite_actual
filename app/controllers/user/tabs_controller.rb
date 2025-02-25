@@ -1,17 +1,14 @@
 class User::TabsController < ApplicationController
   def index
-    @units = Unit.all
-    # TODO -> When course subcriptions exist for User, make this based on course subscription
-    @course = Course.find(1)
-    @course.units.includes(:topics)
+    @units = Current.user.units
 
-    @fake_messages = @course.units.map do |unit|
+    @fake_messages = @units.map do |unit|
       Faker::Lorem.sentence(word_count: 10)
     end
   end
 
   def units
-    @units  = Unit.all
+    @units  = Current.user.units
   end
 
   def messages
