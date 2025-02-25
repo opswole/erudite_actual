@@ -1,4 +1,19 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id         :integer          not null, primary key
+#  title      :string
+#  owner      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Course < ApplicationRecord
+  has_many :enrollments, dependent: :destroy
+  has_many :users, through: :enrollments
   has_many :units, dependent: :destroy
+  has_many :topics, through: :units
+
   validates :title, :owner, presence: true
 end

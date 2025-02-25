@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id         :integer          not null, primary key
+#  title      :string
+#  owner      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require "test_helper"
 
 class CourseTest < ActiveSupport::TestCase
