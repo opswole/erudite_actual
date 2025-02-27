@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "topic_content" do %>
+  <h1><%= @topic.title %></h1>
+  <p><%= @topic.description %></p>
+
+  <ul>
+  <% @topic.files.each do %>
+      <li><%= it.filename %></li>
+  <% end %>
+  </ul>
+
+<% end %>
