@@ -27,6 +27,11 @@
   <body class="min-h-screen flex flex-col">
     <%= render "layouts/navbar" %>
     <main class="container mx-auto w-11/12 max-w-none flex-1 px-5 flex flex-col">
+      <% flash.each do |name, msg| -%>
+        <%# TODO: Pull this into partial and make it pretty based on flash %>
+        <%= content_tag :div, msg, class: "#{name} #{name}-error" %>
+      <% end -%>
+
       <%= yield %>
     </main>
     <%= render "layouts/footer" %>
