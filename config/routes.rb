@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   get "/accessibility", to: "footer#show", defaults: { page: "accessibility" }
   get "/contact", to: "footer#show", defaults: { page: "contact" }
 
+  # 403 test
+  get "/access-denied", to: "errors#access_denied", as: :access_denied
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
