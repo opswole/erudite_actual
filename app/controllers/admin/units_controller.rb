@@ -1,4 +1,4 @@
-class Admin::UnitsController < ApplicationController
+class Admin::UnitsController < Admin::BaseController
   def index
     @units = Unit.includes(:topics)
   end
