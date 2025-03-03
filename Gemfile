@@ -74,4 +74,6 @@ gem "tailwindcss-ruby", "~> 4.0"
 
 gem "vite_rails"
 
-gem "aws-sdk-s3"
+gem "aws-sdk-s3", require: false
+
+gem "ruby-vips", "~> 2.2", ">= 2.2.3"

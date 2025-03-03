@@ -22,7 +22,8 @@ Rails.application.routes.draw do
   # /users
   namespace :user do
     root to: "home#index"
-    resources :units
+    resources :units, only: [ :index, :show ]
+    resources :topics, only: [ :index, :show ]
     get "/profile", to: "profiles#show"
     get "/notifications", to: "notifications#index"
     get "/home", to: "home#index"

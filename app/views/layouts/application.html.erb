@@ -19,7 +19,6 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
   </head>
@@ -29,6 +28,7 @@
     <main class="container mx-auto w-11/12 max-w-none flex-1 px-5 flex flex-col">
       <% flash.each do |name, msg| -%>
         <%# TODO: Pull this into partial and make it pretty based on flash %>
+        <%# TODO: Fix the thing where it renders diff CSS in prod.  %>
         <%= content_tag :div, msg, class: "#{name} #{name}-error" %>
       <% end -%>
 
