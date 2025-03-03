@@ -17,6 +17,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.12",
+    "@syncfusion/ej2-vue-pdfviewer": "^28.2.7",
     "@tailwindcss/vite": "^4.0.6",
     "@vitejs/plugin-vue": "^5.2.1",
     "react": "^19.0.0",

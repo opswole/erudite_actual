@@ -1,4 +1,5 @@
-@import "tailwindcss" source("../../../app");
+@import "tailwindcss";
+
 @plugin "daisyui" {
     themes: business --default
 }
