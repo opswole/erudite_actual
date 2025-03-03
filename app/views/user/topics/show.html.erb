@@ -4,14 +4,18 @@
   <p><%= @topic.description %></p>
 
   <ul>
-  <% @topic.files.each do |file| %>
+    <% @topic.files.each_with_index do |file| %>
       <% if file.filename.to_s.include? "jpg" %>
         <%= image_tag file.representation(resize_to_limit: [600, 600]) %>
-      <% end  %>
-      <% if file.filename.to_s.include? "pdf" %>
-        <div id="app" data-document-url="<%= file.url %>"></div>
+      <% elsif file.filename.to_s.include? "pdf" %>
+        <div class="collapse bg-base-100 border-base-300 border border-b-red-400">
+          <input type="checkbox" />
+          <div class="collapse-title font-semibold"><%= @topic.title %></div>
+          <div class="collapse-content text-sm">
+            <div id="app" data-document-url="<%= rails_blob_url(file) %>"></div>
+          </div>
+        </div>
       <% end %>
     <% end %>
   </ul>
-
 <% end %>

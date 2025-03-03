@@ -12,12 +12,18 @@
     <% end  %>
   </ul>
 
-
-  <div class="border-2 border-amber-200">
-    <%= turbo_frame_tag "topic_content" %>
-
+  <div class="border-2 border-amber-200 grid grid-cols-2 gap-4">
+    <div>
+      <%= turbo_frame_tag "topic_content" %>
+    </div>
+    <div>
+      <p>column</p>
+    </div>
   </div>
+
+
 </div>
+
 
   <%= link_to "Back", user_tab_units_path,
               data: {
