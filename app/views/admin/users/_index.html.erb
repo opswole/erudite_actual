@@ -6,16 +6,22 @@
         <% @users.first.attributes.keys.each do |key| %>
           <th class="border px-4 py-2 text-left"><%= key.titleize %></th>
         <% end %>
+        <th class="border px-4 py-2 text-left">Actions</th> <!-- New column for the Edit button -->
       <% end %>
     </tr>
     </thead>
     <tbody>
     <% @users.each do |user| %>
-      <tr class="hover:bg-gray-50">
-        <% user.attributes.values.each do |value| %>
-          <td class="border px-4 py-2"><%= value %></td>
-        <% end %>
-      </tr>
+      <%= link_to edit_admin_user_path(user.id), class: "block" do %>
+        <tr class="hover:bg-gray-50 cursor-pointer">
+          <% user.attributes.values.each do |value| %>
+            <td class="border px-4 py-2"><%= value %></td>
+          <% end %>
+          <td class="border px-4 py-2">
+            <%= link_to "Edit", edit_admin_user_path(user), class: "text-blue-600 hover:text-blue-800" %>
+          </td> <!-- Edit button for each user -->
+        </tr>
+      <% end %>
     <% end %>
     </tbody>
   </table>

@@ -4,6 +4,10 @@ class Admin::UsersController < Admin::BaseController
     @users = User.all
     render partial: "admin/users/index"
   end
+
+  def show
+    @user = User.find(params[:id])
+  end
   def edit
     @user = User.find(params[:id])
   end
