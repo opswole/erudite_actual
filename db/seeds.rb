@@ -53,7 +53,6 @@ students = []
 end
 
 puts "Creating units..."
-pdf_directory = "/home/chris/Documents/erudite_docs"
 units = [
   {
     title: "Software Engineering",
@@ -225,7 +224,8 @@ units.each do |unit_data|
   )
 
   pdf_filename = unit.title.downcase.gsub(" ", "_") + ".pdf"
-  pdf_path = File.join(pdf_directory, pdf_filename)
+  pdf_path = Rails.root.join('seed_pdfs', pdf_filename)
+
   puts "PDF PATH #{pdf_path}"
 
   unit_data[:topics].each do |topic_data|
@@ -242,8 +242,9 @@ units.each do |unit_data|
           filename: pdf_filename,
           content_type: "application/pdf"
         )
+        puts "PDF attached for unit: #{unit.title}"
       else
-        puts "Missing PDF for unit: #{unit.title}"
+        puts "Missing PDF for unit: #{unit.title} at #{pdf_path}"
       end
     rescue => e
       puts "Failed to attach PDF to topic #{topic.title}: #{e.message}"
