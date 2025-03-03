@@ -53,7 +53,7 @@ students = []
 end
 
 puts "Creating units..."
-pdf_url = "https://harlequin-ivory-59.tiiny.site"
+pdf_directory = "/home/chris/Documents/erudite_docs"
 units = [
   {
     title: "Software Engineering",
@@ -184,7 +184,7 @@ units = [
     ]
   },
   {
-    title: "Human-Computer Interaction",
+    title: "Human Computer Interaction",
     description: "Understand how users interact with technology to design better interfaces.",
     topics: [
       { title: "Usability Testing", description: "Learn methods for evaluating users experience." },
@@ -224,6 +224,10 @@ units.each do |unit_data|
     course: course
   )
 
+  pdf_filename = unit.title.downcase.gsub(" ", "_") + ".pdf"
+  pdf_path = File.join(pdf_directory, pdf_filename)
+  puts "PDF PATH #{pdf_path}"
+
   unit_data[:topics].each do |topic_data|
     topic = Topic.create!(
       title: topic_data[:title],
@@ -232,28 +236,17 @@ units.each do |unit_data|
     )
 
     begin
-      image_url = Faker::LoremFlickr.image(size: "200x200", search_terms: [ "technology" ])
-      file = URI.open(image_url)
-
-      topic.files.attach(
-        io: file,
-        filename: "topic_image.jpg",
-        content_type: "image/jpeg",
-        key: "#{Rails.env}/erudite/#{course.title}/test_file-#{SecureRandom.uuid}.jpg"
-      )
+      if File.exist?(pdf_path)
+        topic.files.attach(
+          io: File.open(pdf_path),
+          filename: pdf_filename,
+          content_type: "application/pdf"
+        )
+      else
+        puts "Missing PDF for unit: #{unit.title}"
+      end
     rescue => e
-      puts "Failed to attach image to topic: #{e.message}"
-    end
-
-    begin
-      topic.files.attach(
-        io: File.open("/home/chris/Documents/erudite_docs/cs1_oop_principles/test.pdf"),
-        filename: "topic_document.pdf",
-        content_type: "application/pdf",
-        key: "#{Rails.env}/erudite/#{course.title}/test_file-#{SecureRandom.uuid}.pdf"
-      )
-    rescue => e
-      puts "Failed to attach PDF to topic: #{e.message}"
+      puts "Failed to attach PDF to topic #{topic.title}: #{e.message}"
     end
   end
 end

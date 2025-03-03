@@ -1,5 +1,6 @@
 <%= turbo_frame_tag "topic_content" do %>
-  <h1><%= @topic.title %></h1>
+  <h1><%= @topic.unit.title %></h1>
+  <h3><%= @topic.title %></h3>
   <p><%= @topic.description %></p>
 
   <ul>
@@ -8,16 +9,7 @@
         <%= image_tag file.representation(resize_to_limit: [600, 600]) %>
       <% end  %>
       <% if file.filename.to_s.include? "pdf" %>
-        <div data-controller="pdf-viewer" data-pdf-viewer-url-value="<%= url_for(file) %>" class="border border-amber-100">
-          <canvas data-pdf-viewer-target="canvas"></canvas>
-          <button data-action="click->pdf-viewer#nextPage">Next Page</button>
-          <input type="number" min="1" data-pdf-viewer-target="pageNum" data-action="change->pdf-viewer#changePage">
-          <button data-action="click->pdf-viewer#prevPage">Previous Page</button>
-        </div>
-<!--        <div>-->
-<!--        <embed src="<%#= url_for(file) %>>" width="500" height="375"-->
-<!--               type="application/pdf">-->
-<!--        </div>-->
+        <div id="app" data-document-url="<%= file.url %>"></div>
       <% end %>
     <% end %>
   </ul>

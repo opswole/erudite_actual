@@ -10,12 +10,11 @@
 <script>
 import { PdfViewerComponent, Toolbar, Magnification, Navigation, LinkAnnotation,
   BookmarkView,ThumbnailView, Print,TextSelection, TextSearch,
-  Annotation, FormDesigner, FormFields, PageOrganizer } from '@syncfusion/ej2-vue-pdfviewer';
+  Annotation, PageOrganizer } from '@syncfusion/ej2-vue-pdfviewer';
 
 export default {
 
   name: 'App',
-
   components: {
     "ejs-pdfviewer": PdfViewerComponent
   },
@@ -23,13 +22,23 @@ export default {
   data () {
     return {
       resourceUrl:'https://cdn.syncfusion.com/ej2/26.2.11/dist/ej2-pdfviewer-lib',
-      documentPath:"https://cdn.syncfusion.com/content/pdf/pdf-succinctly.pdf"
+      documentPath:""
     };
+  },
+
+  created() {
+    const appElement = document.getElementById('app');
+    if (appElement && appElement.dataset.documentUrl) {
+      this.documentPath = appElement.dataset.documentUrl;
+      console.log(this.documentPath)
+    } else {
+      this.documentPath = 'https://cdn.syncfusion.com/content/pdf/pdf-succinctly.pdf';
+    }
   },
 
   provide: {
     PdfViewer: [ Toolbar, Magnification, Navigation, LinkAnnotation, BookmarkView, ThumbnailView,
-      Print, TextSelection, TextSearch, Annotation, FormDesigner, FormFields, PageOrganizer ]}
+      Print, TextSelection, TextSearch, Annotation, PageOrganizer ]}
 }
 
 </script>
