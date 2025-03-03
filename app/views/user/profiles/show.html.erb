@@ -1,6 +1,6 @@
 <div class="w-full p-6">
-  <h1 class="text-3xl font-bold mb-6">PROFILE HOMEPAGE</h1>
-  <h2 class="text-2xl font-semibold mb-4"><%= "#{Current.user.full_name}" %></h2>
+  <h1 class="text-3xl font-bold mb-6">PROFILE</h1>
+  <h2 class="text-2xl font-semibold mb-4"><%= "#{@user.first_name}" %></h2>
 
   <div class="grid grid-rows-[auto_1fr] glass gap-6 p-6 rounded-lg w-full">
     <div class="grid grid-cols-2 gap-12 justify-items-center">
@@ -12,9 +12,19 @@
 
 
       <div class="p-6 rounded-lg w-full">
-        <%# TODO Refactor this for Enrollment::Course  %>
-        <h3 class="font-semibold mb-2"><%= Course.first.title %></h3>
-        <p>Course details go here</p>
+        <div class="collapse bg-base-100 border-base-300 border">
+          <input type="checkbox" />
+          <div class="collapse-title font-semibold">Enrolled Courses</div>
+          <div class="collapse-content text-sm max-h-64 overflow-y-auto">
+            <% @course.units.each do |unit| %>
+              <h2 class="underline"><%= unit.title %>:</h2>
+              <% unit.topics.each do |topic| %>
+                <p> <%= topic.title %></p>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
       </div>
     </div>
 
