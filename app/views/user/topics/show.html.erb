@@ -3,9 +3,23 @@
   <p><%= @topic.description %></p>
 
   <ul>
-  <% @topic.files.each do %>
-      <li><%= it.filename %></li>
-  <% end %>
+  <% @topic.files.each do |file| %>
+      <% if file.filename.to_s.include? "jpg" %>
+        <%= image_tag file.representation(resize_to_limit: [600, 600]) %>
+      <% end  %>
+      <% if file.filename.to_s.include? "pdf" %>
+        <div data-controller="pdf-viewer" data-pdf-viewer-url-value="<%= url_for(file) %>" class="border border-amber-100">
+          <canvas data-pdf-viewer-target="canvas"></canvas>
+          <button data-action="click->pdf-viewer#nextPage">Next Page</button>
+          <input type="number" min="1" data-pdf-viewer-target="pageNum" data-action="change->pdf-viewer#changePage">
+          <button data-action="click->pdf-viewer#prevPage">Previous Page</button>
+        </div>
+<!--        <div>-->
+<!--        <embed src="<%#= url_for(file) %>>" width="500" height="375"-->
+<!--               type="application/pdf">-->
+<!--        </div>-->
+      <% end %>
+    <% end %>
   </ul>
 
 <% end %>

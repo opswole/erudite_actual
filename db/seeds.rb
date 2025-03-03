@@ -238,19 +238,19 @@ units.each do |unit_data|
       topic.files.attach(
         io: file,
         filename: "topic_image.jpg",
-        content_type: "image/jpeg"
+        content_type: "image/jpeg",
+        key: "#{Rails.env}/erudite/#{course.title}/test_file-#{SecureRandom.uuid}.jpg"
       )
     rescue => e
       puts "Failed to attach image to topic: #{e.message}"
     end
 
     begin
-      pdf_file = URI.open(pdf_url)
-
       topic.files.attach(
-        io: pdf_file,
+        io: File.open("/home/chris/Documents/erudite_docs/cs1_oop_principles/test.pdf"),
         filename: "topic_document.pdf",
-        content_type: "application/pdf"
+        content_type: "application/pdf",
+        key: "#{Rails.env}/erudite/#{course.title}/test_file-#{SecureRandom.uuid}.pdf"
       )
     rescue => e
       puts "Failed to attach PDF to topic: #{e.message}"

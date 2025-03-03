@@ -410,6 +410,7 @@ DEPENDENCIES
   rails (~> 8.0.1)
   rdoc (~> 6.12.0)
   rubocop-rails-omakase
+  ruby-vips (~> 2.2, >= 2.2.3)
   selenium-webdriver
   solid_cable
   solid_cache

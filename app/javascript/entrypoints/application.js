@@ -2,8 +2,11 @@ import '~/entrypoints/application.css'
 import "@hotwired/turbo-rails"
 import '../controllers'
 
-// Ensure vite-rails is connected
-// console.log('Vite ⚡️ Rails')
+// Create Vue App
+import { createApp } from "vue";
 
-// Example: Import a stylesheet in app/frontend/show.css
-// import '~/show.css'
+// Import App Component
+import App from "../components/App.vue";
+
+// Create Vue App
+const app = createApp(App).mount("#app");
