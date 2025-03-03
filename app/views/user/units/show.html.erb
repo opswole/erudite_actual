@@ -1,40 +1,29 @@
 <%= turbo_frame_tag "tab_content" do %>
+
 <div>
-  <p>
-    <strong>Title:</strong>
-    <%= @unit.title %>
-  </p>
+  <ul class="steps steps-vertical lg:steps-horizontal">
+    <% @unit.topics.each do | topic | %>
+      <li class="step step-success">
+        <%= link_to user_topic_path(topic.id),
+                    data: { turbo_frame: "topic_content" } do %>
+          <%= topic.title %>
+        <% end %>
+      </li>
+    <% end  %>
+  </ul>
 
-  <p>
-    <strong>Description:</strong>
-    <%= @unit.description %>
-  </p>
+  <div class="border-2 border-amber-200 grid grid-cols-2 gap-4">
+    <div>
+      <%= turbo_frame_tag "topic_content" %>
+    </div>
+    <div>
+      <p>column</p>
+    </div>
+  </div>
 
-  <p>
-    <strong>Course:</strong>
-    <%= @unit.course_id %>
-  </p>
-
-  <p>
-    <strong>Topics Covered:</strong><br>
-    <% @unit.topics.each do |topic| %>
-      <%= topic.title %>: <br>
-      <em class="ml-4"><%= topic.description %></em><br>
-    <% end %>
-  </p>
-
-  <% if @unit.topics.any? %>
-    <% @unit.topics.each do |topic| %>
-      <%# Dump files if attached %>
-      <% if topic.files.attached? %>
-        <%= image_tag(topic.files.first, size: "100x100") %>
-      <% end %>
-    <% end %>
-  <% else %>
-    <p>No topics or images available.</p>
-  <% end %>
 
 </div>
+
 
   <%= link_to "Back", user_tab_units_path,
               data: {
