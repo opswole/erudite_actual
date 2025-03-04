@@ -1,4 +1,9 @@
 <turbo-frame id="tab_content">
+  <% if @users.any? %>
+    <% @users.each do %>
+    <p><%= it.audits.count %></p>
+      <%end %>
+  <%end %>
   <table class="w-full table-auto bg-white">
     <thead class="sticky top-0 bg-white">
     <tr>
@@ -6,7 +11,7 @@
         <% @users.first.attributes.keys.each do |key| %>
           <th class="border px-4 py-2 text-left"><%= key.titleize %></th>
         <% end %>
-        <th class="border px-4 py-2 text-left">Actions</th> <!-- New column for the Edit button -->
+        <th class="border px-4 py-2 text-left">Actions</th>
       <% end %>
     </tr>
     </thead>
