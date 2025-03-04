@@ -1,0 +1,30 @@
+<h1>User Audit Log</h1>
+<% @user = @user_audits.first %>
+<p>User: <%= @user %></p>
+<table>
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Action</th>
+    <th>Changed Fields</th>
+    <th>Modified By</th>
+    <th>Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @user_audits.each do |audit| %>
+    <tr>
+      <td><%= audit.auditable&.full_name || "Deleted User" %></td>
+      <td><%= audit.action %></td>
+      <td>
+        <% audit.audited_changes.each do |field, values| %>
+          <strong><%= field %>:</strong>
+          <%= values[0] %> → <%= values[1] %><br>
+        <% end %>
+      </td>
+      <td><%= audit.user&.full_name || "System" %></td>
+      <td><%= audit.created_at.strftime("%d %b %Y, %H:%M") %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

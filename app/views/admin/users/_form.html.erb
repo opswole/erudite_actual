@@ -1,31 +1,83 @@
-<%= form_with(model: user, url: user.persisted? ? admin_user_path(user) : admin_users_path, method: user.persisted? ? :patch : :post) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<%= form_with(model: [:admin, @user], local: true, class: "card w-full max-w-lg mx-auto bg-base-100 shadow-xl p-6") do |f| %>
+  <div class="card-body">
+    <h2 class="card-title text-2xl mb-6 text-center">Create New User</h2>
+
+    <% if user.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+          <% user.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-control w-full">
+      <%= f.label :first_name, class: "label" do %>
+        <span class="label-text">First Name</span>
+      <% end %>
+      <%= f.text_field :first_name, class: "input input-bordered w-full", placeholder: "Enter first name" %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :email_address %>
-    <%= form.text_field :email_address %>
-  </div>
+    <div class="form-control w-full">
+      <%= f.label :last_name, class: "label" do %>
+        <span class="label-text">Last Name</span>
+      <% end %>
+      <%= f.text_field :last_name, class: "input input-bordered w-full", placeholder: "Enter last name" %>
+    </div>
 
-  <div>
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </div>
+    <div class="form-control w-full">
+      <%= f.label :email_address, class: "label" do %>
+        <span class="label-text">Email Address</span>
+      <% end %>
+      <%= f.email_field :email_address, class: "input input-bordered w-full", placeholder: "Enter email" %>
+    </div>
 
-  <div>
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
+    <div class="form-control w-full">
+      <%= f.label :password, class: "label" do %>
+        <span class="label-text">Password</span>
+      <% end %>
+      <%= f.password_field :password, class: "input input-bordered w-full", placeholder: "Enter password" %>
+    </div>
+    <div class="form-control w-full">
+      <%= f.label :password_confirmation, class: "label" do %>
+        <span class="label-text">Password Confirmation</span>
+      <% end %>
+      <%= f.password_field :password, class: "input input-bordered w-full", placeholder: "Confirm Password" %>
+    </div>
 
-  <div>
-    <%= form.submit %>
+    <div class="form-control w-full">
+      <%= f.label :account_type, class: "label" do %>
+        <span class="label-text">Account Type</span>
+      <% end %>
+      <%= f.select :account_type,
+                   User.account_types.keys.map { |type| [type.titleize, type] },
+                   { prompt: "Select Account Type" },
+                   class: "select select-bordered w-full" %>
+    </div>
+
+    <div class="form-control w-full">
+      <%= f.label :course_id, "Enroll in Course", class: "label" do %>
+        <span class="label-text">Course</span>
+      <% end %>
+      <%= f.collection_select(
+            :course_id,
+            Course.all,
+            :id,
+            :title,
+            { prompt: "Select a Course" },
+            { class: "select select-bordered w-full" }
+          ) %>
+    </div>
+
+    <div class="form-control mt-6">
+      <%= f.submit "Create User", class: "btn btn-primary w-full" %>
+    </div>
   </div>
 <% end %>
+
+<div class="text-center mt-4">
+  <%= link_to "Back to Users", admin_users_path, class: "btn btn-ghost" %>
+</div>

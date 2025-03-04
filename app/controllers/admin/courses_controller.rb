@@ -1,10 +1,7 @@
-class Admin::CoursesController < Admin::BaseController
-  def index
-    @courses = Course.includes(units: [ :topics ])
-    render  partial: "admin/courses/index"
-  end
+class Admin::CoursesController < ApplicationController
+  # Force elevated privileges
+  include Authorisation
 
-  def show
-    @course = Course.find(params[:id])
+  def index
   end
 end

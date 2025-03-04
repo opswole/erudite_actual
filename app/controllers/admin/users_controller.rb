@@ -1,19 +1,44 @@
 class Admin::UsersController < Admin::BaseController
-  before_action :set_user, only: %i[edit]
+  before_action :set_user, only: %i[ show edit update destroy ]
   def index
     @users = User.all
     render partial: "admin/users/index"
   end
 
+  def new
+    @user = User.new
+  end
+
   def show
     @user = User.find(params[:id])
+    @course = Course.where(id: @user.course&.id).includes(units: :topics).first
   end
   def edit
     @user = User.find(params[:id])
   end
 
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      create_enrollment if params[:user][:course_id].present?
+
+      respond_to do |format|
+        format.html { redirect_to admin_dashboard_index_path, notice: "User was successfully created." }
+        format.json { render :show, status: :created, location: @user }
+      end
+    else
+      respond_to do |format|
+        format.html do
+          flash.now[:alert] = @user.errors.full_messages.join(", ")
+          render :new, status: :unprocessable_entity
+        end
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to admin_user_path(@user), notice: "User was successfully updated."
     else
@@ -21,12 +46,31 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  def destroy
+    @user.destroy
+    redirect_to admin_users_url, notice: "User was successfully destroyed."
+  end
+
   private
 
     def user_params
-      params.expect(user: [ :first_name, :last_name, :email ])
+      params.require(:user).permit(
+        :first_name,
+        :last_name,
+        :email_address,
+        :password,
+        :password_confirmation,
+        :account_type)
     end
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def create_enrollment
+    enrollment = @user.create_enrollment(course_id: params[:user][:course_id])
+    unless enrollment.persisted?
+      @user.errors.add(:base, "Failed to create enrollment: #{enrollment.errors.full_messages.join(', ')}")
+      raise ActiveRecord::Rollback
+    end
   end
 end
