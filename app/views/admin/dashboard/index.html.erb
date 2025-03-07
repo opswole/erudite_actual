@@ -11,17 +11,20 @@
                   data: {
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
+                        turbo_action: "advance",
                         tabs_target: "tab" },
                         class: "tab tab-active" %>
       <%= link_to "Courses", admin_courses_path,
                   data: {
                         turbo_frame: "tab_content",
+                        turbo_action: "advance",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab" %>
       <%= link_to "Users", admin_users_path,
                   data: {
                         turbo_frame: "tab_content",
+                        turbo_action: "advance",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab" %>

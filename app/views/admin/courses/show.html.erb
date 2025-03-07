@@ -1,0 +1,42 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <% content_for :title, "View Course" %>
+  <h1 class="text-2xl">Units for <%= @course.title %></h1>
+  <span>
+    <%= link_to "Create Unit", new_admin_course_unit_path(@course.id), class: "btn btn-primary btn-sm" %>
+  </span>
+  <div class="overflow-x-auto">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th> Action </th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @course.units.each do |unit| %>
+        <tr>
+          <td><%= unit.title %></td>
+          <td><%= unit.description %></td>
+          <td>
+            <%= link_to "View", admin_course_unit_path(@course.id, unit.id), class: "btn btn-info" %>
+            <%= link_to "Delete Unit", admin_course_unit_path(@course.id, unit.id),
+                        data:{
+                          turbo_method: :delete,
+                          turbo_confirm: "You are about to delete #{unit.title}"
+                        },
+                        class: "btn btn-error" %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="flex justify-center">
+  <%= link_to "Delete Course", admin_course_path(@course),
+              data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure?",
+              },
+              class: "btn btn-error"%>
+  </div>
+<% end %>

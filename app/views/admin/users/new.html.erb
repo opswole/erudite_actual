@@ -1,9 +1,7 @@
-<% content_for :title, "Add User" %>
+<%= turbo_frame_tag "user_content" do %>
+<% content_for :title, "New Course" %>
 
 <%= render "form", user: @user %>
 
-<br>
 
-<div>
-  <%= link_to "Back to Overview", admin_users_path %>
-</div>
+<% end %>

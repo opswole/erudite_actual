@@ -1,8 +1,10 @@
 class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[ show edit update destroy ]
   def index
+  end
+
+  def list
     @users = User.all
-    render partial: "admin/users/index"
   end
 
   def new
@@ -23,24 +25,18 @@ class Admin::UsersController < Admin::BaseController
     if @user.save
       create_enrollment if params[:user][:course_id].present?
 
-      respond_to do |format|
-        format.html { redirect_to admin_dashboard_index_path, notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      end
+      redirect_to admin_users_list_path, notice: "User was successfully created."
     else
-      respond_to do |format|
-        format.html do
-          flash.now[:alert] = @user.errors.full_messages.join(", ")
-          render :new, status: :unprocessable_entity
-        end
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+      render :edit, status: :unprocessable_entity
     end
   end
 
+
+
   def update
     if @user.update(user_params)
-      redirect_to admin_user_path(@user), notice: "User was successfully updated."
+      flash.now[:success] = "User was successfully updated."
+      redirect_to admin_users_list_path, notice: "User was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -60,7 +56,8 @@ class Admin::UsersController < Admin::BaseController
         :email_address,
         :password,
         :password_confirmation,
-        :account_type)
+        :account_type,
+        )
     end
   def set_user
     @user = User.find(params[:id])

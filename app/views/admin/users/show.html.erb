@@ -1,2 +1,4 @@
-<%= render "shared/user_profile", locals: { user: @user, course: @course} %>
-<%= button_to "Delete", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+<% turbo_frame_tag "user_content" do %>
+  <%= render "shared/user_profile", locals: { user: @user, course: @course} %>
+  <%= button_to "Delete", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+<% end %>

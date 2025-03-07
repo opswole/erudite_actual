@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Load on turbo-frame
 document.addEventListener('turbo:frame-load', (event) => {
-    if (event.target.id === 'topic_content') {
+    if (event.target.id === 'tab_content') {
         mountVueApp();
     }
 });
 
 document.addEventListener('turbo:before-frame-render', (event) => {
-    if (event.target.id === 'topic_content') {
+    if (event.target.id === 'tab_content') {
         unmountVueApp();
     }
 });

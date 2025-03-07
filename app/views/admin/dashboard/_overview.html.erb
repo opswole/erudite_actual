@@ -1,19 +1,37 @@
-<turbo-frame id="tab_content">
-  <div class="grid grid-cols-2 h-screen  outline-black">
-    <div class="col col-span-2 overflow-auto p-4 border border-red-500">
-      <%=link_to "create",
-                 new_admin_user_path,
-                 class: "btn btn-primary",
-                 data: { turbo: "false" }%>
-      <button class="btn btn-primary">Primary</button>
-      <button class="btn btn-primary">Primary</button>
-      <button class="btn btn-primary">Primary</button>
-    </div>
-    <div class="col overflow-auto p-4">
-      <%= render 'admin/users/index' %>
-    </div>
-    <div class="col overflow-auto p-4">
-      <%= render 'admin/courses/index' %>
+<%= turbo_frame_tag "tab_content" do %>
+  <div class="col overflow-auto p-4 flex justify-center">
+    <div class="stats stats-vertical lg:stats-horizontal shadow">
+      <div class="stat flex flex-col items-center">
+        <div class="text-2xl font-bold mb-2">Totals:</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-title">Users:</div>
+        <div class="stat-value">
+          <%= @users.count %>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-title">Courses:</div>
+        <div class="stat-value">
+          <%= @courses.count %>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-title">Units:</div>
+        <div class="stat-value">
+          <%= @units.count %>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-title">Topics:</div>
+        <div class="stat-value">
+          <%= @topics.count %>
+        </div>
+      </div>
     </div>
   </div>
-</turbo-frame>
+<% end %>

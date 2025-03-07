@@ -1,9 +1,7 @@
-<turbo-frame id="tab_content">
+<%= turbo_frame_tag "user_content" do %>
 <% content_for :title, "Editing user" %>
-
-<h1>Edit User</h1>
 
 <%= render 'form', user: @user %>
 
 <%= link_to 'Back to Users', admin_users_path %>
-</turbo-frame>
+<% end %>

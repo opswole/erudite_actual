@@ -1,13 +1,10 @@
-<h1>User Audit Log</h1>
-<% @user = @user_audits.first %>
-<p>User: <%= @user %></p>
-<table>
+<%= turbo_frame_tag "user_content" do %>
+<table class="table">
   <thead>
   <tr>
     <th>User</th>
     <th>Action</th>
     <th>Changed Fields</th>
-    <th>Modified By</th>
     <th>Time</th>
   </tr>
   </thead>
@@ -22,9 +19,10 @@
           <%= values[0] %> → <%= values[1] %><br>
         <% end %>
       </td>
-      <td><%= audit.user&.full_name || "System" %></td>
+     <%# TODO add user-name tracking %>
       <td><%= audit.created_at.strftime("%d %b %Y, %H:%M") %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
+<% end %>
