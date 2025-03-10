@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   # Authentication
   resource :session
   resources :passwords, param: :token
@@ -6,21 +7,17 @@ Rails.application.routes.draw do
   # Default / behaviour
   root to: "user/home#index"
 
-  resources :crud
-
   # /admin
   namespace :admin do
-    get "turbo_test", to: "dashboard#turbo_test"
     root to: "dashboard#index"
     # TODO: Make this RESTFUL
     get "users/list", to: "users#list", as: "users_list"
     resources :users
     resources :audits
-    resources :courses do
-      resources :units do
-        resources :topics
-        end
-    end
+    resources :courses
+    resources :units
+    resources :topics
+    resources :messages
     resources :dashboard, only: [ :index ]
     get "dashboard/overview", to: "dashboard#overview"
     get "dashboard/courses", to: "courses#index"

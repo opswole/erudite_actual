@@ -3,19 +3,31 @@
   <h3><%= @topic.title %></h3>
   <p><%= @topic.description %></p>
 
-  <ul>
-    <% @topic.files.each_with_index do |file| %>
-      <% if file.filename.to_s.include? "jpg" %>
-        <%= image_tag file.representation(resize_to_limit: [600, 600]) %>
-      <% elsif file.filename.to_s.include? "pdf" %>
-        <div class="collapse bg-base-100 border-base-300 border border-b-red-400">
-          <input type="checkbox" />
-          <div class="collapse-title font-semibold"><%= @topic.title %></div>
-          <div class="collapse-content text-sm">
-            <div id="app" data-document-url="<%= rails_blob_url(file) %>"></div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </ul>
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <ul>
+        <% @topic.files.each do |file| %>
+          <% if file.filename.to_s.end_with?(".jpg") %>
+            <%= image_tag file.representation(resize_to_limit: [600, 600]), class: "mb-4" %>
+          <% elsif file.filename.to_s.end_with?(".pdf") %>
+            <div class="collapse bg-base-100 border-base-300 border mb-4">
+              <input type="checkbox" />
+              <div class="collapse-title font-semibold"><%= file.filename %></div>
+              <div class="collapse-content text-sm">
+                <div id="app" data-document-url="<%= rails_blob_url(file) %>"></div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-3xl">Messages for <%= @topic.title %>:</p>
+      <%= link_to "New Message", new_message_path, class: "btn btn-primary mb-4" %>
+      <div id="messages">
+        <%= render @topic.messages %>
+      </div>
+    </div>
+  </div>
 <% end %>

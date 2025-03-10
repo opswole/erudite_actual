@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_one :course, through: :enrollment
   has_many :units, through: :course
   has_many :topics, through: :units
+  has_many :messages, dependent: :destroy
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   validates :email_address, presence: true, uniqueness: true

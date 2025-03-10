@@ -1,0 +1,4 @@
+<div class="message">
+  <p><%= message.content %></p>
+  <small>Posted by <%= message.user&.name || "Unknown" %> on <%= message.created_at.strftime("%B %d, %Y") %></small>
+</div>

@@ -1,7 +1,7 @@
   <%= turbo_frame_tag "tab_content" do %>
     <h1 class="text-2xl">Topics for <%= @unit.title %></h1>
     <%= link_to "Create Topic",
-                new_admin_course_unit_topic_path(@unit.course_id, @unit.id),
+                new_admin_topic_path(unit_id: @unit.id),
                 class: "btn btn-primary btn-sm" %>
     <div class="overflow-x-auto">
       <table class="table">
@@ -18,8 +18,8 @@
             <td><%= topic.title %></td>
             <td><%=  %></td>
             <td>
-              <%= link_to "View", admin_course_unit_topic_path(topic.course.id, topic.unit.id, topic.id), class: "btn btn-info" %>
-              <%= link_to admin_course_unit_topic_path(topic.course.id, topic.unit.id, topic.id),
+              <%= link_to "View", admin_topic_path(topic), class: "btn btn-info" %>
+              <%= link_to admin_topic_path(topic),
                           data: {
                             turbo_method: :delete,
                             turbo_confirm: "Deleting #{topic.title}"

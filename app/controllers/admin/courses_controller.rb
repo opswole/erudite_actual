@@ -47,6 +47,6 @@ class Admin::CoursesController < ApplicationController
     )
 end
 def set_course
-  @course = Course.find(params[:id])
+  @course = Current.user.course
 end
 end
