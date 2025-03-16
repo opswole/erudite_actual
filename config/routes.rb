@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :mentions
   resources :messages
   # Authentication
   resource :session
@@ -37,6 +38,8 @@ Rails.application.routes.draw do
     get "/tab/messages", to: "tabs#messages"
     get "/tab/timetable", to: "tabs#timetable"
   end
+
+  resources :test
 
   # Footer pages
   get "/sitemap", to: "footer#show", defaults: { page: "sitemap" }

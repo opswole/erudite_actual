@@ -1,27 +1,26 @@
 # == Schema Information
 #
-# Table name: messages
+# Table name: mentions
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer          not null
-#  topic_id   :integer          not null
+#  message_id :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  content    :text
-#  title      :string
 #
 # Indexes
 #
-#  index_messages_on_topic_id  (topic_id)
-#  index_messages_on_user_id   (user_id)
+#  index_mentions_on_message_id              (message_id)
+#  index_mentions_on_user_id                 (user_id)
+#  index_mentions_on_user_id_and_message_id  (user_id,message_id) UNIQUE
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: MyString
-  topic_id: MyString
+  user: one
+  message: one
 
 two:
-  user_id: MyString
-  topic_id: MyString
+  user: two
+  message: two

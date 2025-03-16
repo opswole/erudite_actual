@@ -1,0 +1,26 @@
+<%= form_with(model: Message.new,
+              url: messages_path,
+              class: "card w-full bg-base-100 shadow-xl p-6 mt-4 rounded-lg",
+              id: "new-message-form",
+              data: { turbo_frame: "messages" }) do |f| %>
+
+  <div class="form-control">
+    <%= f.label :content, "Enter your message:",
+                class: "label font-medium text-gray-700" %>
+    <%= f.text_area :content,
+                    autofocus: true,
+                    required: true,
+                    class: "textarea textarea-bordered h-24 w-full",
+                    data: {
+                      conversation_target: "textArea",
+                      action: "keydown->message#submitForm"
+                    } %>
+
+    <%= f.label :tagged_user, "Notify:",
+                class: "label font-medium text-gray-700" %>
+    <%= f.select :tagged_user, taggable_users.map { |u| [u.full_name, u.id] }, prompt: "Select a user" %>
+  </div>
+
+  <%= f.hidden_field :topic_id, value: topic.id %>
+  <%= f.submit nil, class: "hidden" %>
+<% end %>

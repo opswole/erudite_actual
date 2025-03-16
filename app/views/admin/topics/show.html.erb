@@ -23,11 +23,14 @@
     </div>
 
     <div>
-      <p class="text-3xl">Messages for <%= @topic.title %>:</p>
-      <%= link_to "New Message", new_message_path, class: "btn btn-primary mb-4" %>
-      <div id="messages">
-        <%= render @topic.messages %>
-      </div>
+      <%= turbo_frame_tag "messages" do %>
+        <p class="text-3xl">Messages for <%= @topic.title %>:</p>
+        <%= turbo_stream_from @topic, :messages %>
+        <div id="messages" class="overflow-auto" data-conversation-target="messages">
+          <%= render @topic.messages %>
+        </div>
+      <% end %>
+      <%#= render "admin/messages/form", topic: @topic %>
     </div>
   </div>
 <% end %>

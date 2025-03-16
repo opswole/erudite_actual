@@ -1,16 +1,22 @@
 class User < ApplicationRecord
+  # Security
   audited
   has_secure_password
   has_many :sessions, dependent: :destroy
+  # Content Enrollment(s)
   has_one :enrollment, dependent: :destroy
   has_one :course, through: :enrollment
   has_many :units, through: :course
   has_many :topics, through: :units
+  # Messaging/Notifications
   has_many :messages, dependent: :destroy
+  has_many :mentions, dependent: :destroy
+  has_many :mentioned_messages, through: :mentions, source: :message
+
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   validates :email_address, presence: true, uniqueness: true
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :email_address, presence: true
 
   enum :account_type, {
     student: 0,

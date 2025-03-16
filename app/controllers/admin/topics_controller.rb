@@ -1,7 +1,5 @@
 class Admin::TopicsController < ApplicationController
-  before_action :set_topic, only: [ :show, :edit, :update, :destroy ]
-  # before_action :set_unit, only: [ :show, :edit, :update, :destroy ]
-  # before_action :set_course, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_topic, only: [ :show, :update, :destroy ]
 
   def index
   end
@@ -11,8 +9,7 @@ class Admin::TopicsController < ApplicationController
   end
   def show
   end
-  def edit
-  end
+
   def create
     @unit = Unit.find(params[:topic][:unit_id])
     @topic = @unit.topics.build(topic_params)
