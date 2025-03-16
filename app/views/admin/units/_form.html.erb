@@ -1,0 +1,39 @@
+<%= form_with(model: [:admin, @unit],
+              class: "card w-full max-w-lg mx-auto bg-base-100 shadow-xl p-6") do |f| %>
+  <div class="card-body">
+    <h2 class="card-title text-2xl mb-6 text-center">
+      Create new unit for <%= @course.title %>
+    </h2>
+
+    <% if @unit.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
+        <ul>
+          <% @unit.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-control w-full">
+      <%= f.label :title, class: "label" do %>
+        <span class="label-text">Unit Title</span>
+      <% end %>
+      <%= f.text_field :title, class: "input input-bordered w-full", placeholder: "Enter unit title" %>
+    </div>
+
+    <div class="form-control w-full">
+      <%= f.label :description, class: "label" do %>
+        <span class="label-text">Description</span>
+      <% end %>
+      <%= f.text_area :description, class: "textarea textarea-bordered w-full", placeholder: "Enter unit description" %>
+    </div>
+
+    <%= f.hidden_field :course_id, value: @course.id %>
+
+    <div class="form-control mt-6">
+      <%= f.submit "Create Unit", class: "btn btn-primary w-full" %>
+    </div>
+  </div>
+<% end %>

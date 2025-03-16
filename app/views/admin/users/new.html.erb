@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "user_content" do %>
+<% content_for :title, "New Course" %>
+
+<%= render "form", user: @user %>
+
+
+<% end %>

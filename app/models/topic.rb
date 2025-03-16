@@ -16,7 +16,9 @@
 
 class Topic < ApplicationRecord
   belongs_to :unit
+  has_one :course, through: :unit
   has_many_attached :files, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   validates :title, :description, presence: true
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :mentions
+  resources :messages
   # Authentication
   resource :session
   resources :passwords, param: :token
@@ -9,10 +11,14 @@ Rails.application.routes.draw do
   # /admin
   namespace :admin do
     root to: "dashboard#index"
+    # TODO: Make this RESTFUL
+    get "users/list", to: "users#list", as: "users_list"
     resources :users
-    resources :courses do
-      resources :units
-    end
+    resources :audits
+    resources :courses
+    resources :units
+    resources :topics
+    resources :messages
     resources :dashboard, only: [ :index ]
     get "dashboard/overview", to: "dashboard#overview"
     get "dashboard/courses", to: "courses#index"
@@ -32,6 +38,8 @@ Rails.application.routes.draw do
     get "/tab/messages", to: "tabs#messages"
     get "/tab/timetable", to: "tabs#timetable"
   end
+
+  resources :test
 
   # Footer pages
   get "/sitemap", to: "footer#show", defaults: { page: "sitemap" }

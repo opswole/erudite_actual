@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "user_content" do %>
+<% content_for :title, "Editing user" %>
+
+<%= render 'form', user: @user %>
+
+<%= link_to 'Back to Users', admin_users_path %>
+<% end %>

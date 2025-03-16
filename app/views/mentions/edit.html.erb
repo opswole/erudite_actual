@@ -1,0 +1,12 @@
+<% content_for :title, "Editing mention" %>
+
+<h1>Editing mention</h1>
+
+<%= render "form", mention: @mention %>
+
+<br>
+
+<div>
+  <%= link_to "Show this mention", @mention %> |
+  <%= link_to "Back to mentions", mentions_path %>
+</div>

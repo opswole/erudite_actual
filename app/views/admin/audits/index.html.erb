@@ -1,0 +1,28 @@
+<%= turbo_frame_tag "user_content" do %>
+<table class="table">
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Action</th>
+    <th>Changed Fields</th>
+    <th>Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @user_audits.each do |audit| %>
+    <tr>
+      <td><%= audit.auditable&.full_name || "Deleted User" %></td>
+      <td><%= audit.action %></td>
+      <td>
+        <% audit.audited_changes.each do |field, values| %>
+          <strong><%= field %>:</strong>
+          <%= values[0] %> → <%= values[1] %><br>
+        <% end %>
+      </td>
+     <%# TODO add user-name tracking %>
+      <td><%= audit.created_at.strftime("%d %b %Y, %H:%M") %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
