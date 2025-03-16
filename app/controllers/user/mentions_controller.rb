@@ -1,4 +1,4 @@
-class User::MentionsController < ApplicationController
+class MentionsController < ApplicationController
   before_action :set_mention, only: %i[ show edit update destroy ]
 
   # GET /mentions or /mentions.json
