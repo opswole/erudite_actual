@@ -1,0 +1,11 @@
+<% content_for :title, "New mention" %>
+
+<h1>New mention</h1>
+
+<%= render "form", mention: @mention %>
+
+<br>
+
+<div>
+  <%= link_to "Back to mentions", mentions_path %>
+</div>

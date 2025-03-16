@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <% content_for :title, "Edit Course" %>
+
+  <%= render "form", course: @course %>
+
+
+<% end %>

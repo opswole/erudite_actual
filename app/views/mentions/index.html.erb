@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Mentions" %>
+
+<h1>Mentions</h1>
+
+<div id="mentions">
+  <% @mentions.each do |mention| %>
+    <%= render mention %>
+    <p>
+      <%= link_to "Show this mention", mention %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New mention", new_mention_path %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @mention %>
+
+<div>
+  <%= link_to "Edit this mention", edit_mention_path(@mention) %> |
+  <%= link_to "Back to mentions", mentions_path %>
+
+  <%= button_to "Destroy this mention", @mention, method: :delete %>
+</div>

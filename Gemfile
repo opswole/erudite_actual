@@ -77,3 +77,5 @@ gem "vite_rails"
 gem "aws-sdk-s3", require: false
 
 gem "ruby-vips", "~> 2.2", ">= 2.2.3"
+
+gem "audited"

@@ -1,0 +1,18 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <div class="flex justify-center items-center">
+    <ul class="menu bg-base-200 lg:menu-horizontal rounded-box flex justify-center">
+    <li>
+      <%= link_to "View Audit", admin_audits_path,  data: { turbo_frame: "user_content" }%>
+    </li>
+    <li>
+      <%= link_to "Create Users", new_admin_user_path,  data: { turbo_frame: "user_content" }%>
+    </li>
+    <li>
+      <%= link_to "Edit User", admin_users_list_path,  data: { turbo_frame: "user_content" }%>
+    </li>
+    </ul>
+    </div>
+
+  <%= turbo_frame_tag "user_content", src: admin_audits_path, class: "col-span-3 row-start-3 h-64 overflow-y-auto" %>
+
+<% end %>
