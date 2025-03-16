@@ -1,4 +1,4 @@
-class MessagesController < ApplicationController
+class Admin::MessagesController < Admin::BaseController
   def index
   end
 
@@ -10,6 +10,8 @@ class MessagesController < ApplicationController
   def create
     @topic = Topic.find(params[:message][:topic_id])
     @message = @topic.messages.create(message_params)
+
+    redirect_to admin_topic_path(@topic), status: :see_other
   end
 
   private
