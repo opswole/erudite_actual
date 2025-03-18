@@ -1,26 +1,49 @@
 <%= form_with(model: Message.new,
-              url: messages_path,
+              url: user_messages_path,
               class: "card w-full bg-base-100 shadow-xl p-6 mt-4 rounded-lg",
               id: "new-message-form",
               data: { turbo_frame: "messages" }) do |f| %>
 
   <div class="form-control">
-    <%= f.label :content, "Enter your message:",
-                class: "label font-medium text-gray-700" %>
+    <%= f.label :content, "Enter your message:", class: "label font-medium text-gray-700" %>
     <%= f.text_area :content,
-                    autofocus: true,
                     required: true,
                     class: "textarea textarea-bordered h-24 w-full",
                     data: {
                       conversation_target: "textArea",
                       action: "keydown->message#submitForm"
                     } %>
+  </div>
 
-    <%= f.label :tagged_user, "Notify:",
-                class: "label font-medium text-gray-700" %>
-    <%= f.select :tagged_user, taggable_users.map { |u| [u.full_name, u.id] }, prompt: "Select a user" %>
+  <div class="form-control" data-controller="message-tag-selector">
+    <!-- Tag Users section, subtle and compact -->
+    <div class="relative">
+      <%= f.label :taggable_users, "Tag Users:", class: "label font-medium text-gray-700" %>
+      <div class="max-h-32 overflow-y-auto border rounded bg-gray-50 p-2 text-sm" data-message-tag-selector-target="userList">
+        <% taggable_users.each do |user| %>
+          <div class="p-1 hover:bg-gray-200 cursor-pointer rounded"
+               data-action="click->message-tag-selector#toggleUser"
+               data-user-id="<%= user.id %>"
+               data-user-name="<%= user.full_name %>">
+            <%= user.full_name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Tagged Users display, unobtrusive -->
+    <div class="mt-2">
+      <span class="text-sm font-medium text-gray-700">Tagged Users:</span>
+      <div class="flex flex-wrap gap-1 mt-1" data-message-tag-selector-target="taggedUsers">
+        <!-- Tagged users appear as small badges -->
+      </div>
+    </div>
+
+    <div data-message-tag-selector-target="hiddenInput"></div>
   </div>
 
   <%= f.hidden_field :topic_id, value: topic.id %>
   <%= f.submit nil, class: "hidden" %>
 <% end %>
+
+<div id="search_results"></div>

@@ -21,14 +21,40 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
+
+    <% if Current.user %>
+      <%= turbo_stream_from "user_#{Current.user.id}_notifications" %>
+    <% end %>
   </head>
 
   <body class="min-h-screen flex flex-col">
     <%= render "layouts/navbar" %>
+
+    <dialog
+      class="modal"
+      data-controller="modal"
+      data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close"
+    >
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">Notifications</h3>
+        <div class="py-4">
+          <%= turbo_frame_tag "notifications" %>
+        </div>
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
     <main class="container mx-auto w-11/12 max-w-none flex-1 px-5 flex flex-col">
       <%= render 'shared/flash' %>
       <%= yield %>
     </main>
+
+
+
     <%= render "layouts/footer" %>
   </body>
 </html>

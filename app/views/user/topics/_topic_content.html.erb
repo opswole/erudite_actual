@@ -1,9 +1,8 @@
-<%= turbo_frame_tag "tab_content" do %>
-  <div class="grid grid-cols-2 gap-6 p-4">
+ <div class="grid grid-cols-2 gap-6 p-4">
     <!-- Media Files Section -->
     <div class="space-y-4">
       <ul class="list-none">
-        <% @topic.files.each do |file| %>
+        <% topic.files.each do |file| %>
           <% case file.filename.to_s %>
         <% when /\.jpg$/ %>
             <%= image_tag file.representation(resize_to_limit: [600, 600]),
@@ -25,23 +24,22 @@
 
     <!-- Messages Section -->
     <div class="space-y-4">
-      <h2 class="text-3xl font-bold mb-4">Messages for <%= @topic.title %>:</h2>
+      <h2 class="text-3xl font-bold mb-4">Messages for <%= topic.title %>:</h2>
 
       <article class="border rounded-lg p-4 shadow-sm" data-controller="message">
-        <%= turbo_stream_from @topic, :messages %>
+        <%= turbo_stream_from topic, :messages %>
 
-        <% if @topic.messages.empty? %>
+        <% if topic.messages.empty? %>
           <p class="italic text-gray-500 text-center py-4">No messages yet</p>
         <% else %>
           <article id="messages"
                    class="overflow-auto max-h-[400px] space-y-4 p-2"
                    data-message-target="messages">
-            <%= render @topic.messages %>
+            <%= render topic.messages %>
           </article>
         <% end %>
 
-        <%= render "user/messages/form", topic: @topic, taggable_users: @taggable_users %>
+        <%= render "user/messages/form", topic: topic, taggable_users: @taggable_users %>
       </article>
     </div>
   </div>
-<% end %>

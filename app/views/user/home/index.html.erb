@@ -3,27 +3,33 @@
       <span>Hi <%= Current.user.first_name %>,  </span>
   </div>
     <div class="border-1 border-amber-200 p-6">
-      <div class="flex flex-col items-center justify-center text-white" data-controller="tabs">
+      <div class="flex flex-col items-center justify-center text-white"
+           data-controller="tabs modal"
+           data-action="modal:mentionClicked@window->tabs#activateUnits">
         <div role="tablist" class="tabs tabs-lift tabs-xl">
           <%= link_to "Overview", user_tab_index_path,
+                      id: "overview_tab",
                       data: {
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab tab-active" %>
           <%= link_to "Units", user_tab_units_path,
+                      id: "units_tab",
                       data: {
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab" %>
           <%= link_to "Messages", user_tab_messages_path,
+                      id: "messages_tab",
                       data: {
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab" %>
           <%= link_to "Timetable", user_tab_timetable_path,
+                      id: "timetable_tab",
                       data: {
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",

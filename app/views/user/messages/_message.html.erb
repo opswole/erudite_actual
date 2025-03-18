@@ -4,6 +4,9 @@
 
     </span>
     <span class="font-medium"><%= message.user.first_name.capitalize %></span>
+    <% if message.tagged_users.any? %>
+      <span class="italic"><%= message.tagged_users.map(&:full_name).join(' | ') %></span>
+    <% end %>
   </div>
   <div class="flex-1">
     <%= simple_format(message.content, class: "text-gray-800") %>

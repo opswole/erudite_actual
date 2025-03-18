@@ -1,0 +1,36 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <h1><%= @topic.unit.title %></h1>
+  <h3><%= @topic.title %></h3>
+  <p><%= @topic.description %></p>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <ul>
+        <% @topic.files.each do |file| %>
+          <% if file.filename.to_s.end_with?(".jpg") %>
+            <%= image_tag file.representation(resize_to_limit: [600, 600]), class: "mb-4" %>
+          <% elsif file.filename.to_s.end_with?(".pdf") %>
+            <div class="collapse bg-base-100 border-base-300 border mb-4">
+              <input type="checkbox" />
+              <div class="collapse-title font-semibold"><%= file.filename %></div>
+              <div class="collapse-content text-sm">
+                <div id="app" data-document-url="<%= rails_blob_url(file) %>"></div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+
+    <div>
+      <%= turbo_frame_tag "messages" do %>
+        <p class="text-3xl">Messages for <%= @topic.title %>:</p>
+        <%= turbo_stream_from @topic, :messages %>
+        <div id="messages" class="overflow-auto" data-conversation-target="messages">
+          <%= render @topic.messages %>
+        </div>
+      <% end %>
+      <%#= render "admin/messages/form", topic: @topic %>
+    </div>
+  </div>
+<% end %>

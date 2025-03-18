@@ -10,8 +10,17 @@ export default class extends Controller {
     }
 
     activate(event) {
+        console.log("running")
         this.deactivateAllTabs()
         event.currentTarget.classList.add(TAB_ACTIVE_CLASS)
+    }
+
+    activateUnits(event) {
+        this.deactivateAllTabs()
+        const unitsTab = this.tabTargets.find(tab => tab.id === "units_tab")
+        if (unitsTab) {
+            unitsTab.classList.add(TAB_ACTIVE_CLASS)
+        }
     }
 
     // Private methods

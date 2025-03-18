@@ -9,6 +9,7 @@ import { registerLicense } from "@syncfusion/ej2-base";
 import App from "../components/App.vue";
 
 // Syncfusion license
+// TODO: Make this work in prod
 const licenseKey = import.meta.env.VITE_SYNCFUSION_KEY;
 registerLicense(licenseKey);
 
