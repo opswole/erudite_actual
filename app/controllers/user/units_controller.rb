@@ -1,6 +1,6 @@
 class User::UnitsController < ApplicationController
   def index
-    @units = Unit.all
+    @units = Current.user.units
   end
 
   def all

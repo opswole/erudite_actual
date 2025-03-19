@@ -1,4 +1,4 @@
-class User::TabsController < ApplicationController
+class User::OverviewsController < ApplicationController
   def index
     @units = Current.user.units
 
@@ -7,15 +7,5 @@ class User::TabsController < ApplicationController
     @fake_messages = @units.map do |unit|
       Faker::Lorem.sentence(word_count: 10)
     end
-  end
-
-  def units
-    @units  = Current.user.units
-  end
-
-  def messages
-  end
-
-  def timetable
   end
 end

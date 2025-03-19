@@ -1,0 +1,2 @@
+module User::TimetableHelper
+end

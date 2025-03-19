@@ -31,13 +31,11 @@ Rails.application.routes.draw do
     resources :topics, only: [ :index, :show ]
     resources :messages
     resources :notifications
+    resources :timetables
+    resources :overviews
     post "/search", to: "users#search", as: :search
     get "/profile", to: "profiles#show"
     get "/home", to: "home#index"
-    get "/tab/index", to: "tabs#index"
-    get "/tab/units", to: "tabs#units"
-    get "/tab/messages", to: "tabs#messages"
-    get "/tab/timetable", to: "tabs#timetable"
   end
 
   resources :messages
