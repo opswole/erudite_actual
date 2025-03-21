@@ -1,10 +1,10 @@
 <% Admin %>
 <div class="grid grid-rows-[auto_auto_1fr] gap-3 w-full">
-  <div class="border-2 border-amber-200 text-center p-8">
+  <div class="border-2  text-center p-8">
     Hi <%= Current.user.account_type %>,
   </div>
 
-  <div class="border-1 border-amber-200 p-6">
+  <div class="border-1  p-6">
     <div class="flex flex-col items-center justify-center text-white" data-controller="tabs">
       <div role="tablist" class="tabs tabs-lift tabs-xl">
       <%= link_to "Overview", admin_dashboard_overview_path,
@@ -28,6 +28,13 @@
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab" %>
+        <%= link_to "Profile", user_profile_path,
+                    data: {
+                      turbo_frame: "tab_content",
+                      turbo_action: "advance",
+                      action: "click->tabs#activate",
+                      tabs_target: "tab" },
+                    class: "tab" %>
     </div>
   </div>
 

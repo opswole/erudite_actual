@@ -1,23 +1,7 @@
 <%= turbo_frame_tag "tab_content" do %>
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Messages" %>
-  <div class="grid grid-cols-2 text-center">
-    <div>
-      <% @users.each do |user|  %>
-        <p><%= "N: #{user.full_name} | AT: #{user.account_type}"  %></p>
-      <% end %>
-    </div>
-    <div>
-      <% @sorted_users.each do |user|  %>
-      <p><%= "N: #{user.full_name} | AT: #{user.account_type}"  %></p>
-      <% end %>
-    </div>
-  </div>
-
-
 <h1>Messages</h1>
-
   <div class="overflow-x-auto" data-controller="tabs">
     <table class="table">
       <thead>

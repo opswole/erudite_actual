@@ -3,7 +3,7 @@ class User::MessagesController < ApplicationController
     @mentions = Current.user.mentioned_messages.sort_by(&:created_at).reverse
 
     @users = User.all
-    @sorted_users = @users.sort_by(&:account_type)
+    @sorted_users = User.where(account_type: %w[student teacher]).sort_by(&:account_type).reverse
   end
 
   def new

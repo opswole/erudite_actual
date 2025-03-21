@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= content_for(:title) || "Erudite" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,9 +10,6 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -21,6 +18,8 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
+
+    <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 
     <% if Current.user %>
       <%= turbo_stream_from "user_#{Current.user.id}_notifications" %>
@@ -49,7 +48,7 @@
     </dialog>
 
     <main class="container mx-auto w-11/12 max-w-none flex-1 px-5 flex flex-col">
-      <%= render 'shared/flash' %>
+      <%#= render 'shared/flash' %>
       <%= yield %>
     </main>
 

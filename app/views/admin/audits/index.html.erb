@@ -9,7 +9,7 @@
   </tr>
   </thead>
   <tbody>
-  <% @user_audits.each do |audit| %>
+  <% @user_audits&.each do |audit| %>
     <tr>
       <td><%= audit.auditable&.full_name || "Deleted User" %></td>
       <td><%= audit.action %></td>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_19_160700) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_20_083935) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -63,9 +63,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_19_160700) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
+  create_table "course_ownerships", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id", "user_id"], name: "index_course_ownerships_on_course_id_and_user_id", unique: true
+    t.index ["course_id"], name: "index_course_ownerships_on_course_id"
+    t.index ["user_id"], name: "index_course_ownerships_on_user_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
-    t.string "owner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -262,6 +271,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_19_160700) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "course_ownerships", "courses"
+  add_foreign_key "course_ownerships", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
   add_foreign_key "mentions", "messages"

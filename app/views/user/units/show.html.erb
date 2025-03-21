@@ -1,4 +1,3 @@
-# app/views/user/units/show.html.erb
 <%= turbo_frame_tag "tab_content" do %>
   <div class="p-4">
     <h1><%= @unit.title %></h1>
@@ -8,6 +7,7 @@
           <%= link_to user_unit_path(@unit, topic_id: topic.id),
                       data: { turbo_frame: "tab_content" } do %>
             <%= topic.title %>
+            <%= topic.id %>
           <% end %>
         </li>
       <% end %>

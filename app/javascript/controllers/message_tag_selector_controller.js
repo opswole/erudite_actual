@@ -19,7 +19,14 @@ export default class extends Controller {
         }
 
         this.updateTaggedUsers()
-        this.updateHiddenInputs() // Changed from updateHiddenInput
+        this.updateHiddenInputs()
+    }
+
+    removeUser(event) {
+        const userId = event.currentTarget.dataset.userId
+        this.selectedIds.delete(userId)
+        this.updateTaggedUsers()
+        this.updateHiddenInputs()
     }
 
     updateTaggedUsers() {
@@ -28,7 +35,9 @@ export default class extends Controller {
             const userName = this.element.querySelector(`[data-user-id="${userId}"]`)?.dataset.userName
             if (userName) {
                 const badge = document.createElement("span")
-                badge.classList.add("badge", "badge-primary", "badge-sm")
+                badge.classList.add("badge", "badge-primary", "badge-sm", "cursor-pointer")
+                badge.dataset.userId = userId
+                badge.dataset.action = "click->message-tag-selector#removeUser"
                 badge.textContent = userName
                 this.taggedUsersTarget.appendChild(badge)
             }
@@ -47,7 +56,5 @@ export default class extends Controller {
             input.value = userId
             this.hiddenInputTarget.parentElement.appendChild(input)
         })
-
-        console.log("Hidden Inputs:", this.hiddenInputTarget.parentElement.querySelectorAll('input[name="message[tagged_user_ids][]"]'));
     }
 }
