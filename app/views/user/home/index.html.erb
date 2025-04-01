@@ -1,7 +1,7 @@
 <div class="grid grid-rows-[auto_auto_1fr] gap-3 w-full">
  <div class="border-2
   text-center p-8">
-      <span>Hi <%= Current.user.first_name %>,  </span>
+      <span>Hi <%= @user.first_name %>,  </span>
   </div>
     <div class="border-1
      p-6">
@@ -12,7 +12,6 @@
           <%= link_to "Overview", user_overviews_path,
                       id: "overview_tab",
                       data: {
-                        turbo_action: "advance",
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
@@ -20,7 +19,6 @@
           <%= link_to "Units", user_units_path,
                       id: "units_tab",
                       data: {
-                        turbo_action: "advance",
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
@@ -28,7 +26,6 @@
           <%= link_to "Messages", user_messages_path,
                       id: "messages_tab",
                       data: {
-                        turbo_action: "advance",
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
@@ -36,15 +33,13 @@
           <%= link_to "Timetable", user_timetables_path,
                       id: "timetable_tab",
                       data: {
-                        turbo_action: "advance",
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab" %>
-          <%= link_to "Profile", user_profile_path,
+          <%= link_to "Profile", user_path(@user),
                       id: "profile_tab",
                       data: {
-                        turbo_action: "advance",
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },

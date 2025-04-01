@@ -1,9 +1,61 @@
-<h1>Update your password</h1>
+<%= turbo_frame_tag "tab_content" do %>
+  <div class="w-full p-6">
+    <h1 class="text-3xl font-bold mb-6">PROFILE</h1>
+    <h2 class="text-2xl font-semibold mb-4"><%= "#{@user&.first_name} | #{@user&.taggable_by_students}" %></h2>
 
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+    <div class="glass gap-6 p-6 rounded-lg w-full flex flex-col items-center">
+      <div class="avatar">
+        <div class="rounded ring ring-cyan-600 ring-offset-2">
+          <%= image_tag("https://robohash.org/#{rand}.png?size=150x150", alt: "Profile Image") %>
+        </div>
+      </div>
 
-<%= form_with url: password_path(params[:token]), method: :put do |form| %>
-  <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Enter new password", maxlength: 72 %><br>
-  <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Repeat new password", maxlength: 72 %><br>
-  <%= form.submit "Save" %>
+      <fieldset class="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+        <legend class="fieldset-legend text-center w-full font-semibold">Immutable (Contact Support)</legend>
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <label class="fieldset-label text-sm font-medium text-base-content">Full Name</label>
+            <input type="text" class="input w-full bg-base-100 border-base-300 text-base-content" disabled placeholder="<%= @user.full_name %>" />
+          </div>
+          <div>
+            <label class="fieldset-label text-sm font-medium text-base-content">Email Address</label>
+            <input type="text" class="input w-full bg-base-100 border-base-300 text-base-content" disabled placeholder="<%= @user.email_address %>" />
+          </div>
+        </div>
+      </fieldset>
+
+      <%= form_with(model: @user, url: password_path(params[:token]), method: :put, class: "w-full mt-6", data: { controller: "password-match" }) do |f| %>
+        <fieldset class="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+          <legend class="fieldset-legend text-center w-full font-semibold">Update Your Password</legend>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <label class="fieldset-label text-sm font-medium text-base-content">New Password</label>
+              <%= f.password_field :password, required: true, autocomplete: "new-password", maxlength: 72, class: "input w-full bg-base-100 border-base-300 text-base-content focus:border-cyan-600 focus:ring focus:ring-cyan-600 focus:ring-opacity-50", placeholder: "Enter new password", data: { "password-match-target" => "password" } %>
+            </div>
+            <div>
+              <label class="fieldset-label text-sm font-medium text-base-content">Confirm Password</label>
+              <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", maxlength: 72, class: "input w-full bg-base-100 border-base-300 text-base-content focus:border-cyan-600 focus:ring focus:ring-cyan-600 focus:ring-opacity-50", placeholder: "Repeat new password", data: { "password-match-target" => "confirmation" } %>
+              <span class="text-red-500 text-sm hidden mt-1" data-password-match-target="error">Passwords do not match</span>
+            </div>
+          </div>
+          <div class="flex justify-end mt-6">
+            <%= f.submit "Save Password", class: "btn btn-primary bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg", data: { action: "click->password-match#validate" } %>
+          </div>
+        </fieldset>
+      <% end %>
+
+      <%= form_with(model: @user, class: "w-full mt-6") do |f| %>
+        <fieldset class="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+          <legend class="fieldset-legend text-center w-full font-semibold">Visibility</legend>
+          <div class="flex items-center gap-4">
+            <label class="fieldset-label text-sm font-medium text-base-content">Taggable by students?</label>
+            <%= f.check_box :taggable_by_students, class: "checkbox checkbox-primary border-base-300 focus:ring-cyan-600" %>
+          </div>
+          <div class="flex justify-end mt-6">
+            <%= f.submit "Update Preference", class: "btn btn-primary bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg" %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
 <% end %>

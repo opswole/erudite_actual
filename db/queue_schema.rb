@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_20_083935) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_25_174943) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_083935) do
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
     t.index ["blob_id"], name: "index_active_storage_variant_records_on_blob_id"
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "deadline"
+    t.integer "unit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_assignments_on_unit_id"
   end
 
   create_table "audits", force: :cascade do |t|
@@ -271,6 +281,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_083935) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "assignments", "units"
   add_foreign_key "course_ownerships", "courses"
   add_foreign_key "course_ownerships", "users"
   add_foreign_key "enrollments", "courses"

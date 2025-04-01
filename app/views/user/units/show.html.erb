@@ -7,7 +7,6 @@
           <%= link_to user_unit_path(@unit, topic_id: topic.id),
                       data: { turbo_frame: "tab_content" } do %>
             <%= topic.title %>
-            <%= topic.id %>
           <% end %>
         </li>
       <% end %>

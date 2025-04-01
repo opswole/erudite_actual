@@ -28,7 +28,7 @@
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab" %>
-        <%= link_to "Profile", user_profile_path,
+        <%= link_to "Profile", user_path(Current.user),
                     data: {
                       turbo_frame: "tab_content",
                       turbo_action: "advance",

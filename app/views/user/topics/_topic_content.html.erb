@@ -1,23 +1,29 @@
  <div class="grid grid-cols-2 gap-6 p-4">
     <div class="space-y-4">
       <ul class="list-none">
-        <% topic.files.each do |file| %>
-          <% case file.filename.to_s %>
-        <% when /\.jpg$/ %>
-            <%= image_tag file.representation(resize_to_limit: [600, 600]),
-                          class: "mb-4 rounded-lg shadow-md max-w-full h-auto" %>
-          <% when /\.pdf$/ %>
-            <div class="collapse bg-base-100 border border-base-300 rounded-lg mb-4 shadow-sm">
-              <input type="checkbox" class="peer" />
-              <div class="collapse-title font-semibold text-lg cursor-pointer p-4">
-                <%= file.filename %>
-              </div>
-              <div class="collapse-content text-sm p-4">
-                <div id="app" data-document-url="<%= rails_blob_url(file) %>"></div>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
+        <div class="space-y-4">
+          <ul class="list-none">
+            <% unless topic.files.empty? %>
+              <% topic.files.each do |file| %>
+                <div class="collapse bg-base-100 border border-base-300 rounded-lg mb-4 shadow-sm">
+                  <input type="checkbox" class="peer" />
+                  <div class="collapse-title font-semibold text-lg cursor-pointer p-4">
+                    <%= file.filename %>
+                  </div>
+                  <div class="collapse-content text-sm p-4">
+                    <div id="pdf-viewer" data-document-url="<%= rails_blob_url(file) %>"></div>
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+    <%# TODO: Center this %>
+      <span>
+        <%= "No files found for #{topic.title}, please contact your teacher." %>
+      </span>
+            <% end %>
+          </ul>
+        </div>
+
       </ul>
     </div>
 

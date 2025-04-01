@@ -1,10 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<%= turbo_frame_tag "tab_content" do %>
+  <div id="<%= dom_id @user %>">
+  <div class="w-full p-6">
+    <h2 class="text-2xl font-semibold mb-4"><%= "#{@user&.first_name}" %></h2>
 
-<%= render @user %>
+    <div class="glass gap-6 p-6 rounded-lg w-full flex flex-col items-center">
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+      <%= render partial: "user", locals: { user: @user } %>
+      <%= render partial: "passwords/form", locals: { user: @user } %>
+      <%= render partial: "form", locals: { user: @user } %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
-</div>
+    </div>
+  </div>
+  </div>
+<% end %>

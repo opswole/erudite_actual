@@ -9,7 +9,7 @@ class User::UnitsController < ApplicationController
 
   def show
     @unit = Unit.find(params[:id])
-    @selected_topic = @unit.topics.find_by(id: params[:topic_id]) || @unit.topics.first
+    @selected_topic = @unit.topics.find_by(id: params[:topic_id])
 
     @taggable_users = User
                         .joins(:topics)

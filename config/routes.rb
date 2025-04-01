@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  resources :assignments
   resources :mentions
   resources :messages
   # Authentication
   resource :session
   resources :passwords, param: :token
+
+  resources :users
 
   # Default / behaviour
   root to: "user/home#index"
@@ -17,7 +20,11 @@ Rails.application.routes.draw do
     resources :audits
     resources :courses
     resources :units
-    resources :topics
+    resources :topics do
+      member do
+        delete :remove_attachment
+      end
+    end
     resources :dashboard, only: [ :index ]
     get "dashboard/overview", to: "dashboard#overview"
     get "dashboard/courses", to: "courses#index"

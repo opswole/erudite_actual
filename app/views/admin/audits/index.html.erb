@@ -16,7 +16,7 @@
       <td>
         <% audit.audited_changes.each do |field, values| %>
           <strong><%= field %>:</strong>
-          <%= values[0] %> → <%= values[1] %><br>
+          <%= values %><br>
         <% end %>
       </td>
      <%# TODO add user-name tracking %>
