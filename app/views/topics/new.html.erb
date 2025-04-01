@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "tab_content" do %>
+<% content_for :title, "Add Topic" %>
+
+
+<%= render "form", locals: { course: @course, unit: @unit } %>
+
+
+<% end %>

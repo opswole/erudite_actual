@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: assignments
+#
+#  id          :integer          not null, primary key
+#  title       :string
+#  description :string
+#  deadline    :string
+#  unit_id     :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_assignments_on_unit_id  (unit_id)
+#
+
+class Assignment < ApplicationRecord
+  belongs_to :unit
+  has_one :course, through: :unit
+end

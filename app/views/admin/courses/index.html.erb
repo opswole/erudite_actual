@@ -15,7 +15,7 @@
           <thead>
           <tr>
             <th>Title</th>
-            <th>Owner</th>
+            <th>Owners</th>
             <th> Action </th>
           </tr>
           </thead>
@@ -23,7 +23,7 @@
             <% @courses.each do |course| %>
             <tr>
               <td><%= course.title %></td>
-              <td><%= course.owner %></td>
+              <td><span class="italic"><%= course.owners.map(&:full_name).join(' | ') %></span></td>
               <td>
                 <%= link_to "View", admin_course_path(course.id), class: "btn btn-info" %>
                 <%= link_to admin_course_path(course.id),
@@ -42,12 +42,6 @@
             <% end %>
           </tbody>
         </table>
-      </div>
-      <div>
-        <h1 class="text-2xl"> Course Directory:</h1>
-        <ul class="menu bg-base-200 rounded-box max-w-xs w-full">
-          <%= render partial: "course", collection: @courses, as: :course %>
-        </ul>
       </div>
     </div>
   <% end %>

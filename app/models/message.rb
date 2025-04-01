@@ -22,6 +22,7 @@ class Message < ApplicationRecord
 
   has_many :mentions, dependent: :destroy
   has_many :tagged_users, through: :mentions, source: :user
+  has_one :unit, through: :topic
 
   validates :content, presence: true
 

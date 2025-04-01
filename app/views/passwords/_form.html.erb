@@ -1,0 +1,19 @@
+<%= form_with(url: password_path(user.password_reset_token), method: :put, class: "w-full mt-6", data: { controller: "password-match" }) do |f| %>
+  <fieldset class="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+    <legend class="fieldset-legend text-center w-full font-semibold">Update Your Password</legend>
+    <div class="grid grid-cols-2 gap-6">
+      <div>
+        <label class="fieldset-label text-sm font-medium text-base-content">New Password</label>
+        <%= f.password_field :password, required: true, autocomplete: "new-password", maxlength: 72, class: "input w-full bg-base-100 border-base-300 text-base-content focus:border-cyan-600 focus:ring focus:ring-cyan-600 focus:ring-opacity-50", placeholder: "Enter new password", data: { "password-match-target" => "password" } %>
+      </div>
+      <div>
+        <label class="fieldset-label text-sm font-medium text-base-content">Confirm Password</label>
+        <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", maxlength: 72, class: "input w-full bg-base-100 border-base-300 text-base-content focus:border-cyan-600 focus:ring focus:ring-cyan-600 focus:ring-opacity-50", placeholder: "Repeat new password", data: { "password-match-target" => "confirmation" } %>
+        <span class="text-red-500 text-sm hidden mt-1" data-password-match-target="error">Passwords do not match</span>
+      </div>
+    </div>
+    <div class="flex justify-end mt-6">
+      <%= f.submit "Save Password", class: "btn btn-primary bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg", data: { action: "click->password-match#validate" } %>
+    </div>
+  </fieldset>
+<% end %>

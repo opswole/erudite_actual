@@ -37,7 +37,7 @@ staff = User.create!(
 puts "Creating default course..."
 course = Course.create!(
   title: "BSc Computer Science",
-  owner: "Department of Computer Science"
+  owner: admin
 )
 
 puts "Creating student users..."

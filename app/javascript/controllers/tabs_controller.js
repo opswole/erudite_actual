@@ -7,14 +7,40 @@ export default class extends Controller {
 
     connect() {
         this.validateAndInitialize()
+
+        this.setActiveTabFromUrl()
+
+        document.addEventListener("turbo:load", this.setActiveTabFromUrl.bind(this))
+    }
+
+    disconnect() {
+        document.removeEventListener("turbo:load", this.setActiveTabFromUrl.bind(this))
     }
 
     activate(event) {
+        console.log(event)
         this.deactivateAllTabs()
         event.currentTarget.classList.add(TAB_ACTIVE_CLASS)
     }
 
-    // Private methods
+    setActiveTabFromUrl() {
+        const pathSegments = window.location.pathname.split('/')
+
+        if (pathSegments.length >= 2) {
+            const resourceName = pathSegments[2]
+
+            const matchingTab = this.tabTargets.find(tab => {
+                const tabId = tab.id.replace("_tab", "")
+                return tabId === resourceName
+            })
+
+            if (matchingTab) {
+                this.deactivateAllTabs()
+                matchingTab.classList.add(TAB_ACTIVE_CLASS)
+            }
+        }
+    }
+
     validateAndInitialize() {
         if (!this.hasTabTargets) {
             return

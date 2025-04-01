@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_16_212732) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_25_174943) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -41,6 +41,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_16_212732) do
     t.index ["blob_id"], name: "index_active_storage_variant_records_on_blob_id"
   end
 
+  create_table "assignments", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "deadline"
+    t.integer "unit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_assignments_on_unit_id"
+  end
+
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
@@ -63,9 +73,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_16_212732) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
+  create_table "course_ownerships", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id", "user_id"], name: "index_course_ownerships_on_course_id_and_user_id", unique: true
+    t.index ["course_id"], name: "index_course_ownerships_on_course_id"
+    t.index ["user_id"], name: "index_course_ownerships_on_user_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
-    t.string "owner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -256,11 +275,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_16_212732) do
     t.string "first_name"
     t.string "last_name"
     t.integer "account_type", default: 0
+    t.boolean "taggable_by_students"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "assignments", "units"
+  add_foreign_key "course_ownerships", "courses"
+  add_foreign_key "course_ownerships", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
   add_foreign_key "mentions", "messages"

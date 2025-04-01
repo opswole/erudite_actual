@@ -4,12 +4,13 @@
 #
 #  id         :integer          not null, primary key
 #  title      :string
-#  owner      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class Course < ApplicationRecord
+  has_many :course_ownerships, dependent: :destroy
+  has_many :owners, through: :course_ownerships, source: :user
   has_many :enrollments, dependent: :destroy
   has_many :users, through: :enrollments
   has_many :units, dependent: :destroy

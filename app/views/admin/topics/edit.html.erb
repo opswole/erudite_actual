@@ -1,0 +1,46 @@
+<%= turbo_frame_tag "tab_content" do %>
+
+  <%= form_with(model: [:admin, @topic], local: true, class: "space-y-4") do |form| %>
+    <div class="field">
+      <%= form.label :title, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :title, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_area :description, rows: 4, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :unit_id, "Unit", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.collection_select :unit_id, Unit.all, :id, :title, {}, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div class="field">
+      <h3 class="text-lg font-medium text-gray-900">Existing Files</h3>
+      <% if @topic.files.attached? %>
+        <ul class="mt-2 space-y-2">
+          <% @topic.files.each_with_index do |file, index| %>
+            <li class="flex items-center space-x-2">
+              <%= form.hidden_field :files, multiple: true, value: file.signed_id %>
+              <%= link_to file.filename.to_s, rails_blob_path(file, disposition: "attachment"), class: "text-blue-600 hover:underline" %>
+              <%= link_to "Delete", remove_attachment_admin_topic_path(id: file.id, topic_id: @topic.id), class: "btn btn-xs btn-outline btn-error", data: {
+                turbo_method: :delete,
+                turbo_confirm: "Deleting #{file.filename.to_s}" } %>
+            </li>
+
+
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-sm text-gray-500">No files attached yet.</p>
+      <% end %>
+      <%= form.file_field :files, multiple: true %>
+    </div>
+    <div class="actions">
+      <%= form.submit "Update Topic", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700" %>
+      <%= link_to "Cancel", admin_topic_path(@topic), class: "ml-2 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50" %>
+    </div>
+
+  <% end %>
+<% end  %>

@@ -1,0 +1,37 @@
+<%= form_with(model: assignment) do |form| %>
+  <% if assignment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
+
+      <ul>
+        <% assignment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :deadline, style: "display: block" %>
+    <%= form.date_field :deadline, class:"input" %>
+  </div>
+
+  <div>
+    <%= form.label :unit_id, style: "display: block" %>
+    <%= form.text_field :unit_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

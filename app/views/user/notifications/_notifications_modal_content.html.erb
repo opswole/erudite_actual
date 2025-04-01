@@ -1,0 +1,28 @@
+<%= turbo_frame_tag "notifications_modal" do %>
+  <div id="notifications_modal" class="modal"
+       data-modal-target="notifications"
+       data-controller="modal"
+       data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close">
+
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">Notifications</h3>
+      <% if @mentions.any? %>
+        <div class="py-4">
+          <% @mentioned_messages.each do |message| %>
+            <div class="mb-2 p-2 border-b">
+              <%= message.content %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="py-4">You have no new notifications</p>
+      <% end %>
+      <div class="modal-action">
+        <%= link_to "Cancel", "#", data: {
+          controller: "modals",
+          action: "modals#close"
+        }, class: "cancel-button" %>
+      </div>
+    </div>
+  </div>
+<% end %>

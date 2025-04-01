@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  resources :assignments
   resources :mentions
   resources :messages
   # Authentication
   resource :session
   resources :passwords, param: :token
+
+  resources :users
 
   # Default / behaviour
   root to: "user/home#index"
@@ -17,8 +20,11 @@ Rails.application.routes.draw do
     resources :audits
     resources :courses
     resources :units
-    resources :topics
-    resources :messages
+    resources :topics do
+      member do
+        delete :remove_attachment
+      end
+    end
     resources :dashboard, only: [ :index ]
     get "dashboard/overview", to: "dashboard#overview"
     get "dashboard/courses", to: "courses#index"
@@ -30,16 +36,16 @@ Rails.application.routes.draw do
     root to: "home#index"
     resources :units, only: [ :index, :show ]
     resources :topics, only: [ :index, :show ]
+    resources :messages
+    resources :notifications
+    resources :timetables
+    resources :overviews
+    post "/search", to: "users#search", as: :search
     get "/profile", to: "profiles#show"
-    get "/notifications", to: "notifications#index"
     get "/home", to: "home#index"
-    get "/tab/index", to: "tabs#index"
-    get "/tab/units", to: "tabs#units"
-    get "/tab/messages", to: "tabs#messages"
-    get "/tab/timetable", to: "tabs#timetable"
   end
 
-  resources :test
+  resources :messages
 
   # Footer pages
   get "/sitemap", to: "footer#show", defaults: { page: "sitemap" }

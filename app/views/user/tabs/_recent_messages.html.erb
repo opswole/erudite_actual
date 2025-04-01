@@ -1,13 +1,26 @@
 <%# TODO -> Populate based on messages attached to a Unit ID %>
-<% units.each_with_index do | unit, index | %>
+<%# units.each_with_index do | unit, index | %>
+<!--  <div class="collapse bg-base-200 mx-2 mt-8">-->
+<!--    <input type="radio" name="my-accordion-1"/>-->
+<!--    <div class="collapse-title text-s font-light"><%#= unit.title %></div>-->
+<!--    <div class="collapse-content">-->
+      <%# TODO -> Render a message partial here %>
+<!--      <p class="text-xs"><%#= @fake_messages[index] %></p>-->
+<!--    </div>-->
+<!--  </div>-->
+<%# end %>
+
+<% @recent_mentions.group_by { |message| message.topic.unit }.each do |unit, messages| %>
   <div class="collapse bg-base-200 mx-2 mt-8">
     <input type="radio" name="my-accordion-1"/>
     <div class="collapse-title text-s font-light"><%= unit.title %></div>
     <div class="collapse-content">
-      <%# TODO -> Render a message partial here %>
-      <p class="text-xs"><%= @fake_messages[index] %></p>
+      <% messages.group_by(&:topic).each do |topic, topic_messages| %>
+        <% topic_messages.each do |message| %>
+          <p class="text-xs"><%= message.content %> | <%= topic.title %></p>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>
-
 
