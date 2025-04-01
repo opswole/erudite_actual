@@ -1,0 +1,27 @@
+<% if mentions.any? %>
+  <div class="py-4">
+    <% mentions.each do |mention| %>
+      <%= link_to user_unit_path(mention.message.topic.unit.id, topic_id: mention.message.topic.id),
+                  data: {
+                    turbo_frame: "tab_content",
+                    turbo_action: "advance",
+                    action: "click->modal#close",
+                      "modal-target": "mention-link"
+                  },
+                  class: "block mb-2 p-2 border-b hover:bg-gray-100" do %>
+        <div>
+          <span class="font-semibold"><%= mention.message.user.full_name %></span> mentioned you in:
+          <span class="italic"><%= mention.message.topic.title %></span>
+        </div>
+        <div class="mt-1">
+          <%= mention.message.content %>
+        </div>
+        <div class="text-sm text-gray-500">
+          - <%= mention.created_at.strftime("%b %d, %Y %H:%M") %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <p class="py-4">You have no new notifications</p>
+<% end %>

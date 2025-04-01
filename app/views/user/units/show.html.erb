@@ -1,31 +1,29 @@
 <%= turbo_frame_tag "tab_content" do %>
+  <div class="p-4">
+    <h1><%= @unit.title %></h1>
+    <ul class="steps steps-vertical lg:steps-horizontal mb-4">
+      <% @unit.topics.each do |topic| %>
+        <li class="step">
+          <%= link_to user_unit_path(@unit, topic_id: topic.id),
+                      data: { turbo_frame: "tab_content" } do %>
+            <%= topic.title %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
 
-<div>
-  <ul class="steps steps-vertical lg:steps-horizontal">
-    <% @unit.topics.each do | topic | %>
-      <li class="step step-success">
-        <%= link_to user_topic_path(topic.id),
-                    data: { turbo_frame: "topic_content" } do %>
-          <%= topic.title %>
-        <% end %>
-      </li>
-    <% end  %>
-  </ul>
+    <% if @selected_topic %>
+      <%= render "user/topics/topic_content", topic: @selected_topic %>
+    <% else %>
+      <p class="italic text-gray-500">Select a topic to view details.</p>
+    <% end %>
 
-  <div class="border-2 border-amber-200 gap-4">
-    <%= turbo_frame_tag "topic_content" %>
+    <%= link_to "Back", user_units_path,
+                data: {
+                  turbo_frame: "tab_content",
+                  action: "click->tabs#activate",
+                  tabs_target: "tab"
+                },
+                class: "tab mt-4" %>
   </div>
-
-  <div class="border-2 border-amber-200 gap-4">
-    <%= turbo_frame_tag "topic_content" %>
-  </div>
-</div>
-
-
-  <%= link_to "Back", user_tab_units_path,
-              data: {
-                turbo_frame: "tab_content",
-                action: "click->tabs#activate",
-                tabs_target: "tab" },
-              class: "tab" %>
 <% end %>

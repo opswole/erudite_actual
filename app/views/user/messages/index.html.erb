@@ -1,16 +1,43 @@
+<%= turbo_frame_tag "tab_content" do %>
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Messages" %>
 
-<h1>Messages</h1>
+  <div class="overflow-x-auto" data-controller="tabs">
+    <table class="table">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Unit/Topic</th>
+        <th>Message Body</th>
+        <th></th>
 
-<div id="messages">
-  <% @messages.each do |message| %>
-    <%= render message %>
-    <p>
-      <%= link_to "Show this message", message %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New message", new_message_path %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @mentions.each do | mention | %>
+      <tr>
+        <th>
+          <%= mention.user.full_name %> <br> @ <%= mention.created_at %>
+        </th>
+        <td>
+          <%= mention.unit.title %>: <br>
+          <%= content_tag :span, mention.topic.title, class: "italic" %>
+        </td>
+        <td>
+          <%= mention.content %>
+        </td>
+        <td>
+          <%= link_to "Go to message", user_unit_path(mention.unit.id, topic_id: mention.topic.id),
+                      class: "btn btn-ghost",
+                      data: {
+                        turbo_action: "advance",
+                        action: "click->tabs#activateTabById",
+                        tabs_target: "tab"
+                      }%>
+        </td>
+      </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

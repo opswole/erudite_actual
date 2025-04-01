@@ -1,42 +1,12 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= form_with(model: @user, class: "w-full mt-6") do |f| %>
+  <fieldset class="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+    <legend class="fieldset-legend text-center w-full font-semibold">Visibility</legend>
+    <div class="flex items-center gap-4">
+      <label class="fieldset-label text-sm font-medium text-base-content">Taggable by students?</label>
+      <%= f.check_box :taggable_by_students, class: "checkbox checkbox-primary border-base-300 focus:ring-cyan-600" %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :email_address, style: "display: block" %>
-    <%= form.text_field :email_address %>
-  </div>
-
-  <div>
-    <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name %>
-  </div>
-
-  <div>
-    <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name %>
-  </div>
-
-  <div>
-    <%= form.label :password_digest, style: "display: block" %>
-    <%= form.text_field :password_digest %>
-  </div>
-
-  <div>
-    <%= form.label :account_type, style: "display: block" %>
-    <%= form.number_field :account_type %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+    <div class="flex justify-end mt-6">
+      <%= f.submit "Update Preference", class: "btn btn-primary bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg" %>
+    </div>
+  </fieldset>
 <% end %>

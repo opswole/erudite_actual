@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "Subject": "Team Meeting",
+    "StartTime": "2025-03-26T09:00:00Z",
+    "EndTime": "2025-03-26T10:00:00Z",
+    "CategoryColor": "#1aaa55",
+    "Location": "Conference Room A",
+    "Description": "Weekly team sync-up"
+  },
+  {
+    "Id": 2,
+    "Subject": "Project Deadline",
+    "StartTime": "2025-03-28T00:00:00Z",
+    "EndTime": "2025-03-28T23:59:59Z",
+    "CategoryColor": "#ffaa00",
+    "Location": "Remote",
+    "Description": "Submit project deliverables"
+  },
+  {
+    "Id": 3,
+    "Subject": "Client Review",
+    "StartTime": "2025-04-01T14:00:00Z",
+    "EndTime": "2025-04-01T15:30:00Z",
+    "CategoryColor": "#357cd2",
+    "Location": "Zoom",
+    "Description": "Review project progress with client"
+  },
+  {
+    "Id": 4,
+    "Subject": "Training Session",
+    "StartTime": "2025-03-30T10:00:00Z",
+    "EndTime": "2025-03-30T12:00:00Z",
+    "CategoryColor": "#7fa900",
+    "Location": "Training Room B",
+    "Description": "New employee onboarding"
+  }
+]

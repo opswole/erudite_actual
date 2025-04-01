@@ -19,6 +19,7 @@
             <td><%=  %></td>
             <td>
               <%= link_to "View", admin_topic_path(topic), class: "btn btn-info" %>
+              <%= link_to "Edit", edit_admin_topic_path(topic), class: "btn btn-info" %>
               <%= link_to admin_topic_path(topic),
                           data: {
                             turbo_method: :delete,

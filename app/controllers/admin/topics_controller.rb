@@ -1,51 +1,43 @@
-class Admin::TopicsController < ApplicationController
-  before_action :set_topic, only: [ :show, :update, :destroy ]
-
+class Admin::TopicsController < Admin::BaseController
+  before_action :set_topic, only: [ :show, :edit, :update ]
   def index
   end
-  def new
-    @unit = Unit.find(params[:unit_id])
-    @topic = @unit.topics.build
-  end
+
   def show
+    @topic = Topic.find(params[:id])
+    @taggable_users = User.limit(5)
   end
 
-  def create
-    @unit = Unit.find(params[:topic][:unit_id])
-    @topic = @unit.topics.build(topic_params)
-    if @topic.save
-      redirect_to admin_course_path(@unit.course.id), notice: "Topic created successfully"
-    else
-      render :new
-    end
+  def edit
   end
 
   def update
+    if params[:file_deletions].present?
+      # @topic.files.where(id: params[:topic][:file_deletions]).each(&:purge)
+    end
+
+    puts "OLD: #{@topic.files.count}"
     if @topic.update(topic_params)
-      redirect_to admin_course_path(@unit.course.id), notice: "Unit updated successfully"
+      render "edit"
+      puts "NEW: #{@topic.files.count}"
     else
-      render :edit
+      render "edit"
     end
   end
 
-  def destroy
-    @topic.destroy
-    redirect_to admin_course_path, notice: "Unit deleted successfully"
+  def remove_attachment
+    @attachment = ActiveStorage::Attachment.find(params[:id])
+    @attachment.purge
+    @topic = Topic.find(params[:topic_id])
+
+    render "edit"
   end
 
   private
-
   def set_topic
     @topic = Topic.find(params[:id])
   end
-  def set_unit
-    @unit = @topic.unit
-  end
-  def set_course
-    @course = @topic.course
-  end
-
   def topic_params
-    params.require(:topic).permit(:title, :description, :unit_id, files: [])
+    topic_params = params.require(:topic).permit(:title, :description, :unit_id, files: [])
   end
 end

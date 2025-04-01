@@ -1,0 +1,13 @@
+<%= turbo_stream.update "notifications" do %>
+  <% if @mentions.any? %>
+    <div class="py-4">
+      <% @mentioned_messages.each do |message| %>
+        <div class="mb-2 p-2 border-b">
+          <%= message.content %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="py-4">You have no new notifications</p>
+  <% end %>
+<% end %>

@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_one :course, through: :enrollment
   has_many :units, through: :course
   has_many :topics, through: :units
+  has_many :course_ownerships, dependent: :destroy
+  has_many :owned_courses, through: :course_ownerships, source: :course
   # Messaging/Notifications
   has_many :messages, dependent: :destroy
   has_many :mentions, dependent: :destroy
@@ -16,7 +18,7 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   validates :email_address, presence: true, uniqueness: true
-  validates :first_name, :last_name, :email_address, presence: true
+  validates :first_name, :last_name, presence: true
 
   enum :account_type, {
     student: 0,

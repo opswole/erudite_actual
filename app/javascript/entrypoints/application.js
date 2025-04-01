@@ -1,48 +1,67 @@
-// Stimulus & Turbo imports
 import '~/entrypoints/application.css';
 import "@hotwired/turbo-rails";
 import '../controllers';
 
-// Vue imports
 import { createApp } from "vue";
 import { registerLicense } from "@syncfusion/ej2-base";
-import App from "../components/App.vue";
+import PdfViewer from "../components/PdfViewer.vue";
+import Scheduler from "../components/Scheduler.vue";
 
-// Syncfusion license
 const licenseKey = import.meta.env.VITE_SYNCFUSION_KEY;
-registerLicense(licenseKey);
 
+function ensureLicenseRegistered() {
+    if (!licenseKey) {
+        console.error("Syncfusion license key is missing! Check VITE_SYNCFUSION_KEY in your environment.");
+        return;
+    }
 
-function mountVueApp() {
-    const el = document.querySelector("#app");
-    if (el) {
-        if (!el.__vue_app__) {
-            createApp(App).mount("#app");
-        }
+    try {
+        registerLicense(licenseKey);
+        console.log("Syncfusion license registered successfully.");
+    } catch (error) {
+        console.error("Failed to register Syncfusion license:", error);
     }
 }
 
-function unmountVueApp() {
-    const el = document.querySelector("#app");
+ensureLicenseRegistered();
+
+function mountComponent(selector, component) {
+    const el = document.querySelector(selector);
+    if (el && !el.__vue_app__) {
+        const app = createApp(component, el.dataset);
+        app.mount(el);
+        el.__vue_app__ = app;
+        console.log(`Mounted ${selector}`);
+    }
+}
+
+function unmountComponent(selector) {
+    const el = document.querySelector(selector);
     if (el && el.__vue_app__) {
         el.__vue_app__.unmount();
+        delete el.__vue_app__;
+        console.log(`Unmounted ${selector}`);
     }
 }
 
-// Initial load
 document.addEventListener('DOMContentLoaded', () => {
-    mountVueApp();
+    mountComponent("#pdf-viewer", PdfViewer);
+    mountComponent("#scheduler", Scheduler);
 });
 
-// Load on turbo-frame
-document.addEventListener('turbo:frame-load', (event) => {
-    if (event.target.id === 'tab_content' || event.target.id === 'topic_content') {
-        mountVueApp();
-    }
+document.addEventListener('turbo:frame-load', () => {
+    ensureLicenseRegistered();
+    mountComponent("#pdf-viewer", PdfViewer);
+    mountComponent("#scheduler", Scheduler);
 });
 
-document.addEventListener('turbo:before-frame-render', (event) => {
-    if (event.target.id === 'tab_content' || event.target.id === 'topic_content') {
-        unmountVueApp();
-    }
+document.addEventListener('turbo:before-frame-render', () => {
+    unmountComponent("#pdf-viewer");
+    unmountComponent("#scheduler");
+});
+
+document.addEventListener('turbo:load', () => {
+    ensureLicenseRegistered();
+    mountComponent("#pdf-viewer", PdfViewer);
+    mountComponent("#scheduler", Scheduler);
 });

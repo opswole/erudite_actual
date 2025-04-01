@@ -1,29 +1,44 @@
 <div class="grid grid-rows-[auto_auto_1fr] gap-3 w-full">
- <div class="border-2 border-amber-200 text-center p-8">
-      <span>Hi <%= Current.user.first_name %>,  </span>
+ <div class="border-2
+  text-center p-8">
+      <span>Hi <%= @user.first_name %>,  </span>
   </div>
-    <div class="border-1 border-amber-200 p-6">
-      <div class="flex flex-col items-center justify-center text-white" data-controller="tabs">
+    <div class="border-1
+     p-6">
+      <div class="flex flex-col items-center justify-center text-white"
+           data-controller="tabs modal"
+           data-action="">
         <div role="tablist" class="tabs tabs-lift tabs-xl">
-          <%= link_to "Overview", user_tab_index_path,
+          <%= link_to "Overview", user_overviews_path,
+                      id: "overview_tab",
                       data: {
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab tab-active" %>
-          <%= link_to "Units", user_tab_units_path,
+          <%= link_to "Units", user_units_path,
+                      id: "units_tab",
                       data: {
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab" %>
-          <%= link_to "Messages", user_tab_messages_path,
+          <%= link_to "Messages", user_messages_path,
+                      id: "messages_tab",
                       data: {
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
                         tabs_target: "tab" },
                         class: "tab" %>
-          <%= link_to "Timetable", user_tab_timetable_path,
+          <%= link_to "Timetable", user_timetables_path,
+                      id: "timetable_tab",
+                      data: {
+                        turbo_frame: "tab_content",
+                        action: "click->tabs#activate",
+                        tabs_target: "tab" },
+                        class: "tab" %>
+          <%= link_to "Profile", user_path(@user),
+                      id: "profile_tab",
                       data: {
                         turbo_frame: "tab_content",
                         action: "click->tabs#activate",
@@ -32,7 +47,8 @@
         </div>
       </div>
     </div>
-    <div class="border-2 border-amber-200">
-      <%= turbo_frame_tag "tab_content", src: user_tab_index_path %>
+    <div class="border-2
+">
+      <%= turbo_frame_tag "tab_content", src: user_overviews_path %>
     </div>
   </div>
