@@ -33,7 +33,6 @@ class Admin::TopicsController < Admin::BaseController
     render "edit"
   end
 
-
   private
   def set_topic
     @topic = Topic.find(params[:id])
