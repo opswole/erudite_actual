@@ -79,5 +79,3 @@ gem "aws-sdk-s3", require: false
 gem "ruby-vips", "~> 2.2", ">= 2.2.3"
 
 gem "audited"
-
-gem "simple_calendar", "~> 2.0"
