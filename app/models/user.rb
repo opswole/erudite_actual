@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_one :course, through: :enrollment
   has_many :units, through: :course
   has_many :topics, through: :units
+  has_many :assignments, through: :units
   has_many :course_ownerships, dependent: :destroy
   has_many :owned_courses, through: :course_ownerships, source: :course
   # Messaging/Notifications

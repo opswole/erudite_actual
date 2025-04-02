@@ -1,0 +1,16 @@
+<ul class="steps steps-vertical lg:steps-horizontal mb-4">
+  <% unit.topics.each do |topic| %>
+    <li class="step">
+      <%= link_to user_unit_path(unit, topic_id: topic.id),
+                  data: { turbo_frame: "tab_content" } do %>
+        <%= topic.title %>
+      <% end %>
+    </li>
+  <% end %>
+  <li class="step step-info">
+    <%= link_to user_assignments_path(unit_id: unit.id),
+                data: { turbo_frame: "tab_content" } do %>
+      Assignments
+    <% end %>
+  </li>
+</ul>

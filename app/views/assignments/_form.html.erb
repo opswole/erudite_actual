@@ -26,7 +26,10 @@
     <%= form.date_field :deadline,
                         class: "input",
                         value: (assignment.deadline || Time.current + 28.days) %>
-    <h4><%=assignment.deadline %></h4>
+    <p>
+      <em>Deadline will be set to 6:00 PM (18:00) on the selected date. <br>
+        Consistency permits performance. </em>
+    </p>
   </div>
 
   <div>

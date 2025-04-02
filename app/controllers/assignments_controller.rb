@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
-  before_action :set_assignment, only: %i[ show edit update destroy ]
-  before_action :set_unit, only: %i[ new edit ]
+  before_action :set_assignment, only: %i[show edit update destroy]
+  before_action :set_unit, only: %i[new edit]
 
   # GET /assignments or /assignments.json
   def index
@@ -23,16 +23,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments or /assignments.json
   def create
     @assignment = Assignment.new(assignment_params)
-
-    date_str = assignment_params[:deadline]
-    # d = Date.new($1.to_i, $2.to_i, $3.to_i) if date_str =~ /(\d\d\d\d)-(\d\d)-(\d\d)/
-    if date_str.present?
-      time = Time.current
-      is_bst = time.dst?
-
-      date_str += is_bst ? "T18:00:00+01:00" : "T18:00:00+00:00"
-      @assignment.deadline = date_str
-    end
+    set_deadline_with_time if assignment_params[:deadline].present?
 
     respond_to do |format|
       if @assignment.save
@@ -47,6 +38,8 @@ class AssignmentsController < ApplicationController
 
   # PATCH/PUT /assignments/1 or /assignments/1.json
   def update
+    set_deadline_with_time if assignment_params[:deadline].present?
+
     respond_to do |format|
       if @assignment.update(assignment_params)
         format.html { redirect_to @assignment, notice: "Assignment was successfully updated." }
@@ -74,21 +67,28 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params.expect(:assignment_id))
     @unit = @assignment.unit
 
-    render @assignment
+    render "edit", locals: { assignment: @assignment, unit: @unit }
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_assignment
-      @assignment = Assignment.find(params.expect(:id))
-    end
 
-    def set_unit
-      @unit = Unit.find(params.expect(:unit_id))
-    end
+  def set_assignment
+    @assignment = Assignment.find(params.expect(:id))
+  end
 
-    # Only allow a list of trusted parameters through.
-    def assignment_params
-      params.expect(assignment: [ :title, :description, :deadline, :unit_id, files: [] ])
-    end
+  def set_unit
+    @unit = Unit.find(params.expect(:unit_id))
+  end
+
+  def assignment_params
+    params.expect(assignment: [ :title, :description, :deadline, :unit_id, files: [] ])
+  end
+
+  def set_deadline_with_time
+    date_str = assignment_params[:deadline]
+    time = Time.current
+    is_bst = time.dst?
+    full_date_str = "#{date_str}T18:00:00#{is_bst ? '+01:00' : '+00:00'}"
+    @assignment.deadline = DateTime.parse(full_date_str)
+  end
 end

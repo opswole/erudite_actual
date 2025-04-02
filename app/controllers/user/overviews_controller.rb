@@ -10,6 +10,7 @@ class User::OverviewsController < ApplicationController
     end
 
     @recent_mentions = @user.mentioned_messages.includes(topic: :unit)
+    @assignments = @user.assignments
   end
 
   private

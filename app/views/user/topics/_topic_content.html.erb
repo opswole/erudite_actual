@@ -1,16 +1,15 @@
  <div class="grid grid-cols-2 gap-6 p-4">
     <div class="space-y-4">
+      <h2 class="text-3xl font-bold mb-4">Files for <%= topic.title %>:</h2>
       <ul class="list-none">
         <div class="space-y-4">
           <ul class="list-none">
             <% unless topic.files.empty? %>
               <% topic.files.each do |file| %>
-                <div class="collapse bg-base-100 border border-base-300 rounded-lg mb-4 shadow-sm">
-                  <input type="checkbox" class="peer" />
-                  <div class="collapse-title font-semibold text-lg cursor-pointer p-4">
-                    <%= file.filename %>
-                  </div>
-                  <div class="collapse-content text-sm p-4">
+                <div class="collapse bg-base-100 border-base-300 border">
+                  <input type="checkbox" />
+                  <div class="collapse-title font-semibold"><%= file.filename %></div>
+                  <div class="collapse-content text-sm">
                     <div id="pdf-viewer" data-document-url="<%= rails_blob_url(file) %>"></div>
                   </div>
                 </div>

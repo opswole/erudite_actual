@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <h1><%= @unit.title %></h1>
+  <%= render "user/units/unit_topics", unit: @unit %>
+
+  <% @assignments.each do %>
+    <strong><%= it.title %></strong>
+    <%= it.deadline %> <br>
+  <% end %>
+<% end %>
