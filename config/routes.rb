@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :assignments
+  resources :assignments do
+    member do
+      delete :remove_attachment
+    end
+  end
+
   resources :mentions
   resources :messages
   # Authentication

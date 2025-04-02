@@ -1,4 +1,4 @@
-<div class="chat chat-start">
+<div class="chat <%= Current.user == message.user ? 'chat-end' : 'chat-start' %>">
   <div class="chat-header">
     <%= message.user.full_name %>
     <time class="text-xs opacity-50"><%= message.created_at.to_fs(:short) %></time>

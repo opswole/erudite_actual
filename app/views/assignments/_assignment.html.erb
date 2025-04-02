@@ -1,9 +1,11 @@
+<%= turbo_frame_tag "tab_content" do %>
 <div id="<%= dom_id assignment %>">
   <p>
     <strong>Title:</strong>
     <%= assignment.title %>
   </p>
 
+  <%# TODO: Markdown Support? %>
   <p>
     <strong>Description:</strong>
     <%= assignment.description %>
@@ -19,4 +21,23 @@
     <%= assignment.unit_id %>
   </p>
 
+  <strong>Attachments:</strong>
+  <% if assignment.files.attached? %>
+    <ul class="mt-2 space-y-2">
+      <% assignment.files.each do |file| %>
+        <li class="flex items-center space-x-2">
+          <%= link_to file.filename.to_s, rails_blob_path(file, disposition: "attachment"), class: "text-blue-600 hover:underline" %>
+          <%= link_to "Delete", remove_attachment_assignment_path(id: file.id, assignment_id: assignment.id), class: "btn btn-xs btn-outline btn-error", data: {
+            turbo_method: :delete,
+            turbo_confirm: "Deleting #{file.filename.to_s}" } %>
+        </li>
+      <% end %>
+    </ul>
+    <% else %>
+    <p class="italic">
+      None
+    </p>
+  <% end %>
+
 </div>
+<% end %>

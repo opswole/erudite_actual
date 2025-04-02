@@ -14,7 +14,10 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :mentions, dependent: :destroy
   has_many :mentioned_messages, through: :mentions, source: :message
-
+  # Avatar Stuff ('ake Sulleyyy')
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [ 100, 100 ]
+  end
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   validates :email_address, presence: true, uniqueness: true

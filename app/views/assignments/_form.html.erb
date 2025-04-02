@@ -23,12 +23,19 @@
 
   <div>
     <%= form.label :deadline, style: "display: block" %>
-    <%= form.date_field :deadline, class:"input" %>
+    <%= form.date_field :deadline,
+                        class: "input",
+                        value: (assignment.deadline || Time.current + 28.days) %>
+    <h4><%=assignment.deadline %></h4>
   </div>
 
   <div>
-    <%= form.label :unit_id, style: "display: block" %>
-    <%= form.text_field :unit_id %>
+    <%= form.label :files, style: "display: block" %>
+    <%= form.file_field :files, multiple: true, class: "file-input" %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :unit_id, value: @unit.id%>
   </div>
 
   <div>

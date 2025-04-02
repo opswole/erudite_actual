@@ -16,5 +16,5 @@ class Course < ApplicationRecord
   has_many :units, dependent: :destroy
   has_many :topics, through: :units
 
-  validates :title, :owner, presence: true
+  validates :title, :owners, presence: true
 end

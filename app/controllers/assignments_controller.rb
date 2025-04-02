@@ -1,5 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: %i[ show edit update destroy ]
+  before_action :set_unit, only: %i[ new edit ]
 
   # GET /assignments or /assignments.json
   def index
@@ -67,14 +68,27 @@ class AssignmentsController < ApplicationController
     end
   end
 
+  def remove_attachment
+    @attachment = ActiveStorage::Attachment.find(params[:id])
+    @attachment.purge
+    @assignment = Assignment.find(params.expect(:assignment_id))
+    @unit = @assignment.unit
+
+    render @assignment
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_assignment
       @assignment = Assignment.find(params.expect(:id))
     end
 
+    def set_unit
+      @unit = Unit.find(params.expect(:unit_id))
+    end
+
     # Only allow a list of trusted parameters through.
     def assignment_params
-      params.expect(assignment: [ :title, :description, :deadline, :unit_id ])
+      params.expect(assignment: [ :title, :description, :deadline, :unit_id, files: [] ])
     end
 end

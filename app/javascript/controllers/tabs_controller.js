@@ -41,6 +41,15 @@ export default class extends Controller {
         }
     }
 
+    activateFromNav(event) {
+        const url = event.currentTarget.href
+        const tab = this.tabTargets.find(t => t.href === url)
+        if (tab) {
+            this.deactivateAllTabs()
+            tab.classList.add(TAB_ACTIVE_CLASS)
+        }
+    }
+
     validateAndInitialize() {
         if (!this.hasTabTargets) {
             return
