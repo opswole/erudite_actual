@@ -20,7 +20,7 @@ servers:
 
 proxy:
   ssl: true
-  host: christopherfagg.me
+  host: chrisfagg.tech
 
 # Credentials for your image host.
 registry:
