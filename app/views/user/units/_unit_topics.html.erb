@@ -8,7 +8,7 @@
     </li>
   <% end %>
   <li class="step step-info">
-    <%= link_to user_assignments_path(unit_id: unit.id),
+    <%= link_to assignment_path(unit.assignment.id),
                 data: { turbo_frame: "tab_content" } do %>
       Assignments
     <% end %>

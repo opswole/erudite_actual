@@ -1,15 +1,9 @@
 <%= turbo_frame_tag "tab_content" do %>
-  <p style="color: green"><%= notice %></p>
+  <div class="p-4">
+    <p style="color: green"><%= notice %></p>
 
-  <%= render @assignment %>
+    <%= render "user/units/unit_topics", unit: @assignment.unit%>
+    <%= render @assignment %>
 
-  <div class="divider"></div>
-
-  <div>
-    <%= link_to "Edit this assignment", edit_assignment_path(@assignment, unit_id: @assignment.unit_id) %> |
-    <%= link_to "Back to assignments", admin_unit_path(@assignment.unit.id) %>
-
-    <%= button_to "Destroy this assignment", @assignment, method: :delete %>
   </div>
-
 <% end %>

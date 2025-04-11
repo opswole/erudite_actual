@@ -51,6 +51,8 @@ Rails.application.routes.draw do
     get "/home", to: "home#index"
   end
 
+  resource :assignments
+
   resources :messages
 
   # Footer pages

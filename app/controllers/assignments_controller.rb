@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: %i[show edit update destroy]
-  before_action :set_unit, only: %i[new edit]
+  # before_action :set_unit, only: %i[new edit]
 
   # GET /assignments or /assignments.json
   def index
@@ -9,6 +9,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1 or /assignments/1.json
   def show
+    @unit_title = Unit.find(@assignment.unit_id).title
   end
 
   # GET /assignments/new
@@ -18,6 +19,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1/edit
   def edit
+    @deadline = Date.parse(@assignment.deadline)
   end
 
   # POST /assignments or /assignments.json
