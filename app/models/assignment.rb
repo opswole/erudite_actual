@@ -18,5 +18,6 @@
 class Assignment < ApplicationRecord
   belongs_to :unit
   has_one :course, through: :unit
+  has_many :messages, as: :messageable, dependent: :destroy
   has_many_attached :files, dependent: :destroy
 end

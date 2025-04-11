@@ -8,10 +8,15 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @topic = Topic.find(params[:message][:topic_id])
-    @message = @topic.messages.create(message_params)
+    @message = Message.new(message_params)
 
-    redirect_to admin_topic_path(@topic), status: :see_other
+    if @message.save
+      respond_to do |format|
+        format.turbo_stream
+      end
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
@@ -21,6 +26,6 @@ class MessagesController < ApplicationController
 
   private
   def message_params
-    params.expect(message: [ :title, :content, :topic_id ]).with_defaults(user: Current.user)
+    params.expect(message: [ :title, :content, :messageable_type, :messageable_id ]).with_defaults(user: Current.user)
   end
 end
