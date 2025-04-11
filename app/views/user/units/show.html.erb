@@ -1,16 +1,8 @@
 <%= turbo_frame_tag "tab_content" do %>
   <div class="p-4">
     <h1><%= @unit.title %></h1>
-    <ul class="steps steps-vertical lg:steps-horizontal mb-4">
-      <% @unit.topics.each do |topic| %>
-        <li class="step">
-          <%= link_to user_unit_path(@unit, topic_id: topic.id),
-                      data: { turbo_frame: "tab_content" } do %>
-            <%= topic.title %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+
+    <%= render "user/units/unit_topics", unit: @unit %>
 
     <% if @selected_topic %>
       <%= render "user/topics/topic_content", topic: @selected_topic %>
@@ -27,3 +19,5 @@
                 class: "tab mt-4" %>
   </div>
 <% end %>
+
+

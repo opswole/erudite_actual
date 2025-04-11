@@ -1,9 +1,10 @@
 <turbo-frame id="tab_content" class="col-span-3 row-start-3 w-full">
   <div class="h-full w-full p-4">
     <div class="grid grid-cols-3 grid-rows-2 gap-4 h-full border-1 border-indigo-500">
-      <div class="flex flex-col items-center justify-start border border-dashed">
+      <div class="flex flex-col justify-start border border-dashed">
         Deadlines
-        <%= render "user/tabs/deadlines" %>
+
+        <%= render "user/tabs/deadlines", assignments: @assignments%>
       </div>
       <div class="row-span-2 flex flex-col items-center justify-start border border-dashed">
         <h1>Recent Messages by Module:</h1>

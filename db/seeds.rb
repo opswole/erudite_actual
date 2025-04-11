@@ -37,19 +37,21 @@ staff = User.create!(
 puts "Creating default course..."
 course = Course.create!(
   title: "BSc Computer Science",
-  owner: admin
+  owners: [ admin ]
 )
 
 puts "Creating student users..."
 students = []
-10.times do |i|
-  students << User.create!(
+students = 10.times.map do |i|
+  user = User.create!(
     email_address: "student#{i+1}@erudite.com",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     password: "password",
     password_confirmation: "password"
   )
+
+  user
 end
 
 puts "Creating units..."

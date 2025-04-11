@@ -1,3 +1,4 @@
+<%= turbo_frame_tag "tab_content" do %>
 <% content_for :title, "Editing assignment" %>
 
 <h1>Editing assignment</h1>
@@ -10,3 +11,5 @@
   <%= link_to "Show this assignment", @assignment %> |
   <%= link_to "Back to assignments", assignments_path %>
 </div>
+
+<% end %>

@@ -2,7 +2,7 @@
   <ul class="overflow-y-auto list bg-base-100 rounded-box shadow-md">
     <% @users.each do |user| %>
       <li class="list-row">
-        <div><img class="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp"/></div>
+<!--        <div><%#= image_tag user.avatar.variant(:thumb) %></div>-->
         <div>
           <div><%= user.full_name %></div>
           <div class="text-xs uppercase font-semibold opacity-60"><%= user.course&.title %></div>

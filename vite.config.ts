@@ -12,7 +12,7 @@ export default defineConfig({
     RubyPlugin(),
     FullReload(['config/routes.rb', 'app/views/**/*'], { delay: 200 }),
     StimulusHMR(),
-    vue()
+    vue(),
   ],
   envDir: '../',
 })

@@ -1,49 +1,28 @@
  <div class="grid grid-cols-2 gap-6 p-4">
     <div class="space-y-4">
-      <ul class="list-none">
-        <div class="space-y-4">
-          <ul class="list-none">
-            <% unless topic.files.empty? %>
-              <% topic.files.each do |file| %>
-                <div class="collapse bg-base-100 border border-base-300 rounded-lg mb-4 shadow-sm">
-                  <input type="checkbox" class="peer" />
-                  <div class="collapse-title font-semibold text-lg cursor-pointer p-4">
-                    <%= file.filename %>
-                  </div>
-                  <div class="collapse-content text-sm p-4">
-                    <div id="pdf-viewer" data-document-url="<%= rails_blob_url(file) %>"></div>
-                  </div>
-                </div>
-              <% end %>
-            <% else %>
-    <%# TODO: Center this %>
-      <span>
-        <%= "No files found for #{topic.title}, please contact your teacher." %>
-      </span>
-            <% end %>
-          </ul>
-        </div>
-
-      </ul>
+      <h2 class="text-3xl font-bold mb-4">Files for <%= topic.title %>:</h2>
+        <%= render "shared/file_dropdown", obj: topic  %>
     </div>
 
-    <div class="space-y-4">
-      <h2 class="text-3xl font-bold mb-4">Messages for <%= topic.title %>:</h2>
+   <div class="space-y-4">
+     <h2 class="text-3xl font-bold mb-4">Messages for <%= topic.title %>:</h2>
 
-      <article class="border rounded-lg p-4 shadow-sm" data-controller="message">
-        <%= turbo_stream_from topic, :messages %>
+     <article class="border rounded-lg p-4 shadow-sm" data-controller="message">
+       <%= turbo_stream_from topic, :messages %>
 
-        <% if topic.messages.empty? %>
-          <p class="italic text-gray-500 text-center py-4">No messages yet</p>
-        <% else %>
-          <article id="messages"
-                   class="overflow-auto max-h-[400px] space-y-4 p-2"
-                   data-message-target="messages">
-            <%= render topic.messages %>
-          </article>
-        <% end %>
+       <% if topic.messages.empty? %>
+         <p class="italic text-gray-500 text-center py-4">No messages yet</p>
+       <% else %>
+         <article id="messages"
+                  class="overflow-auto max-h-[400px] space-y-4 p-2"
+                  data-message-target="messages">
+           <div id="<%= dom_id(topic, :messages) %>">
+             <%= render partial: "user/messages/message", collection: topic.messages %>
+           </div>
+         </article>
+       <% end %>
 
-        <%= render "user/messages/form", topic: topic, taggable_users: @taggable_users %>
-      </article>
-    </div>
+       <%= render "user/messages/form", topic: topic, taggable_users: @taggable_users %>
+     </article>
+   </div>
   </div>

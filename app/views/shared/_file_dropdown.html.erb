@@ -1,0 +1,19 @@
+<div class="space-y-4 border rounded-lg p-4 shadow-sm">
+  <ul class="list-none">
+    <% if obj.files.empty? %>
+        <span>
+            <%=  "No files found. Please contact your teacher."  %>
+        </span>
+    <%  else  %>
+    <%  obj.files.each do  %>
+    <div class="collapse bg-base-100 border-base-300 border">
+      <input type="checkbox"/>
+      <div class="collapse-title font-semibold"><%=  it.filename  %></div>
+      <div class="collapse-content text-sm">
+        <div id="pdf-container" data-pdf-url="<%=  rails_blob_url(it)  %>"></div>
+      </div>
+    </div>
+    <%  end  %>
+    <%  end %>
+  </ul>
+</div>

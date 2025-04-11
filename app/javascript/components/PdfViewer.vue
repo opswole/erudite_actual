@@ -1,50 +1,46 @@
 <template>
-  <div>
-    <ejs-pdfviewer
-        id="pdfViewer"
-        :resourceUrl="resourceUrl"
-        :documentPath="documentPath">
-    </ejs-pdfviewer>
+  <div class="pdf-viewer-container border-2 text-center p-8">
+    <div class="pdf-controls mb-4">
+      <button
+          class="btn btn-primary mr-2"
+          @click="page = Math.max(1, page - 1)"
+          :disabled="page <= 1"
+      >
+        Prev
+      </button>
+      <span class="mx-4">{{ page }} / {{ totalPages }}</span>
+      <button
+          class="btn btn-primary"
+          @click="page = Math.min(totalPages, page + 1)"
+          :disabled="page >= totalPages"
+      >
+        Next
+      </button>
+    </div>
+
+    <VuePDF
+        :pdf="pdf"
+        :page="page"
+        class="pdf-display"
+        v-if="pdf"
+    />
   </div>
 </template>
 
-<script>
-import { PdfViewerComponent, Toolbar, Magnification, Navigation, LinkAnnotation,
-  BookmarkView, ThumbnailView, Print, TextSelection, TextSearch,
-  Annotation, PageOrganizer } from '@syncfusion/ej2-vue-pdfviewer';
+<script setup>
+import { ref, onMounted } from 'vue'
+import { VuePDF, usePDF } from '@tato30/vue-pdf'
 
-export default {
-  name: "PdfViewer",
-  components: {
-    "ejs-pdfviewer": PdfViewerComponent
-  },
-  props: {
-    documentUrl: {
-      type: String,
-      default: 'https://cdn.syncfusion.com/content/pdf/pdf-succinctly.pdf'
-    }
-  },
-  data() {
-    return {
-      resourceUrl: 'https://cdn.syncfusion.com/ej2/26.2.11/dist/ej2-pdfviewer-lib',
-      documentPath: this.documentUrl
-    };
-  },
-  provide: {
-    PdfViewer: [Toolbar, Magnification, Navigation, LinkAnnotation, BookmarkView, ThumbnailView,
-      Print, TextSelection, TextSearch, Annotation, PageOrganizer]
-  }
-};
+const pdfContainer = document.getElementById('pdf-container')
+const pdfUrl = pdfContainer.getAttribute('data-pdf-url')
+
+const page = ref(1)
+const { pdf, pages: totalPages } = usePDF(pdfUrl)
+console.log(`PDF URL ${pdfUrl}`)
 </script>
 
-<style>
-@import '@syncfusion/ej2-base/styles/material.css';
-@import '@syncfusion/ej2-buttons/styles/material.css';
-@import '@syncfusion/ej2-dropdowns/styles/material.css';
-@import '@syncfusion/ej2-inputs/styles/material.css';
-@import '@syncfusion/ej2-navigations/styles/material.css';
-@import '@syncfusion/ej2-popups/styles/material.css';
-@import '@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '@syncfusion/ej2-lists/styles/material.css';
-@import '@syncfusion/ej2-pdfviewer/styles/material.css';
+<style scoped>
+.pdf-display {
+  width: 100%;
+}
 </style>
