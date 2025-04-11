@@ -26,6 +26,6 @@ class MessagesController < ApplicationController
 
   private
   def message_params
-    params.expect(message: [ :title, :content, :messageable_type, :messageable_id ]).with_defaults(user: Current.user)
+    params.expect(message: [ :title, :content, :messageable_type, :messageable_id, tagged_user_ids: [] ]).with_defaults(user: Current.user)
   end
 end

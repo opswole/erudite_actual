@@ -25,5 +25,6 @@ class Message < ApplicationRecord
 
   validates :content, presence: true
 
-  broadcasts_to ->(message) { [ message.messageable, :messages ] }, partial: "user/messages/message"
+  broadcasts_to ->(message) { [ message.messageable, :messages ] }, partial: "user/messages/message",
+                locals: { user: Current.user }
 end

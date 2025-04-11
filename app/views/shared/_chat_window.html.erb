@@ -11,7 +11,7 @@
                class="overflow-auto max-h-[400px] space-y-4 p-2"
                data-message-target="messages">
         <div id="<%= dom_id(messageable, :messages) %>">
-          <%= render partial: "user/messages/message", collection: messageable.messages %>
+          <%= render partial: "user/messages/message", locals: {user: Current.user}, collection: messageable.messages %>
         </div>
       </article>
     <% end %>

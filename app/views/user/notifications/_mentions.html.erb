@@ -1,7 +1,7 @@
 <% if mentions.any? %>
   <div class="py-4">
     <% mentions.each do |mention| %>
-      <%= link_to user_unit_path(mention.message.topic.unit.id, topic_id: mention.message.topic.id),
+      <%= link_to "",
                   data: {
                     turbo_frame: "tab_content",
                     action: "click->modal#close",
@@ -10,7 +10,7 @@
                   class: "block mb-2 p-2 border-b hover:bg-gray-100" do %>
         <div>
           <span class="font-semibold"><%= mention.message.user.full_name %></span> mentioned you in:
-          <span class="italic"><%= mention.message.topic.title %></span>
+          <span class="italic"><%#= mention.message.topic.title %></span>
         </div>
         <div class="mt-1">
           <%= mention.message.content %>

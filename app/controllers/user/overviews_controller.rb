@@ -9,7 +9,10 @@ class User::OverviewsController < ApplicationController
       Faker::Lorem.sentence(word_count: 10)
     end
 
-    @recent_mentions = @user.mentioned_messages.includes(topic: :unit)
+    @recent_mentions = @user.mentions
+                            .includes(message: [ :user, messageable: [ :unit ] ])
+                            .order(created_at: :desc)
+                            .limit(20)
     @assignments = @user.assignments
   end
 
