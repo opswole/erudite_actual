@@ -6,7 +6,7 @@
     <div class="grid grid-cols-2 gap-12 justify-items-center">
       <div class="avatar">
         <div class="w-82 rounded ring ring-cyan-600 ring-offset-2">
-          <%= image_tag("https://robohash.org/#{rand}.png?size=400x400", alt: "Profile Image") %>
+          <%= image_tag user.avatar.variant(:thumb) %>
         </div>
       </div>
 

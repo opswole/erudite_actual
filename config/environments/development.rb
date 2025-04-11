@@ -33,10 +33,6 @@ Rails.application.configure do
     config.action_controller.perform_caching = false
   end
 
-  Rails.application.default_url_options = {
-    host: "front-end-app", protocol: "https"
-  }
-
   # Change to :null_store to avoid any caching.
   config.cache_store = :memory_store
 

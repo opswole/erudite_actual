@@ -1,11 +1,14 @@
+<%= turbo_frame_tag "tab_content" do %>
 <% content_for :title, "New assignment" %>
 
-<h1>New assignment</h1>
+<h1>New assignment for <%= @unit.title %></h1>
 
-<%= render "form", assignment: @assignment %>
+<%= render "form", assignment: @assignment, unit: @unit %>
 
 <br>
 
 <div>
   <%= link_to "Back to assignments", assignments_path %>
 </div>
+
+<% end %>

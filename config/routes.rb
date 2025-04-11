@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :assignments
+  resources :assignments do
+    member do
+      delete :remove_attachment
+    end
+  end
+
   resources :mentions
   resources :messages
   # Authentication
@@ -40,10 +45,13 @@ Rails.application.routes.draw do
     resources :notifications
     resources :timetables
     resources :overviews
+    resources :assignments
     post "/search", to: "users#search", as: :search
     get "/profile", to: "profiles#show"
     get "/home", to: "home#index"
   end
+
+  resource :assignments
 
   resources :messages
 

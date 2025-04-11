@@ -21,6 +21,10 @@ class User::UnitsController < ApplicationController
                         .reverse
   end
 
+  def show_assignments
+    @unit = Unit.find(params[:id])
+  end
+
   def edit
     @unit = Unit.find(params[:id])
   end

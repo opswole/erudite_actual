@@ -4,7 +4,6 @@
       <%= link_to user_unit_path(mention.message.topic.unit.id, topic_id: mention.message.topic.id),
                   data: {
                     turbo_frame: "tab_content",
-                    turbo_action: "advance",
                     action: "click->modal#close",
                       "modal-target": "mention-link"
                   },

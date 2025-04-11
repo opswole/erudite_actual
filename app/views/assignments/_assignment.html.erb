@@ -1,22 +1,44 @@
-<div id="<%= dom_id assignment %>">
-  <p>
-    <strong>Title:</strong>
-    <%= assignment.title %>
-  </p>
+<%= turbo_frame_tag "tab_content" do %>
 
+  <div class="text-center mb-4">
+    <h1 class="text-3xl font-bold mb-4">
+      <%= assignment.title %> for <%= @unit_title %>
+      <% if Current.user.authorised? %>
+      <%= link_to "Edit", edit_assignment_path(assignment), class: "btn btn-xs btn-outline btn-info" %>
+      <%= link_to "Delete", assignment_path(assignment), class: "btn btn-xs btn-outline btn-error", data: {
+        turbo_method: :delete,
+        turbo_confirm: "Deleting #{}" } %>
+        <% end %>
+    </h1>
+  </div>
+<div id="<%= dom_id assignment %>">
+  <%# TODO: Markdown Support? %>
   <p>
-    <strong>Description:</strong>
+    <strong>Description:</strong> <br>
     <%= assignment.description %>
   </p>
 
   <p>
-    <strong>Deadline:</strong>
+    <strong>Deadline:</strong><br>
     <%= assignment.deadline %>
   </p>
+  <div class="grid grid-cols-2 gap-6 p-4">
 
-  <p>
-    <strong>Unit:</strong>
-    <%= assignment.unit_id %>
-  </p>
+    <div>
+      <h2 class="text-3xl font-bold mb-4">Attachments for <%= assignment.title %>:</h2>
+      <% if assignment.files.attached? %>
+        <%= render "shared/file_dropdown", obj: assignment %>
+      <% end %>
+    </div>
 
+    <div><h2 class="text-3xl font-bold mb-4">Messages:</h2></div>
+    <article id="messages"
+             class="overflow-auto max-h-[400px] space-y-4 p-2"
+             data-message-target="messages">
+      <div id="<%= dom_id(assignment, :messages) %>">
+        <%#= render partial: "user/messages/message", collection: assignment.messages %>
+      </div>
+    </article>
+  </div>
 </div>
+<% end %>
