@@ -1,13 +1,9 @@
-<div class="chat <%#= user == message.user ? 'chat-end' : 'chat-start' %>">
+<div class="chat <%= user == message.user ? 'chat-end' : 'chat-start' %>">
   <div class="chat-header">
     <%= message.user.full_name %>
     <time class="text-xs opacity-50"><%= message.created_at.to_fs(:short) %></time>
   </div>
   <div class="chat-bubble">
-    <%= "SESSION ID: #{Current.session&.id}" %>
-    <%= "In code as Current.user: #{Current.user}" %> <br>
-    <%= "In code as user, updated by broadcast: #{user}" %>
-  <p><%#= user %></p>
     <%= simple_format(message.content) %>
   </div>
   <div class="chat-footer opacity-50">

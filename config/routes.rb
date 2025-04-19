@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     get "dashboard/users", to: "users#index"
   end
 
+  resources :courses
+
   # /users
   namespace :user do
     root to: "home#index"
