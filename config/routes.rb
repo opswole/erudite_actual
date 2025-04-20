@@ -37,7 +37,8 @@ Rails.application.routes.draw do
   end
 
   resources :courses
-
+  resources :users
+  resources :mentions
   # /users
   namespace :user do
     root to: "home#index"
