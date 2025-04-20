@@ -1,4 +1,4 @@
-class AssignmentsController < ApplicationController
+class Admin::AssignmentsController < ApplicationController
   before_action :set_assignment, only: %i[show edit update destroy]
   # before_action :set_unit, only: %i[new edit]
 
@@ -9,10 +9,6 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1 or /assignments/1.json
   def show
-    @taggable_users = User
-                        .joins(:enrollment)
-                        .where(enrollments: { course_id: 1 })
-
     @unit_title = Unit.find(@assignment.unit_id).title
   end
 

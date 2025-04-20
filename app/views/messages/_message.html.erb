@@ -1,9 +1,11 @@
-<div class="chat <%= Current.user == message.user ? 'chat-end' : 'chat-start' %>">
+<div class="chat <%= user == message.user ? 'chat-end' : 'chat-start' %>">
   <div class="chat-header">
     <%= message.user.full_name %>
     <time class="text-xs opacity-50"><%= message.created_at.to_fs(:short) %></time>
   </div>
-  <div class="chat-bubble"> <%= simple_format(message.content) %></div>
+  <div class="chat-bubble">
+    <%= simple_format(message.content) %>
+  </div>
   <div class="chat-footer opacity-50">
     <% if message.tagged_users.any? %>
       <span class="italic"><%= message.tagged_users.map(&:full_name).join(' | ') %></span>

@@ -1,5 +1,5 @@
 <%= form_with(model: Message.new,
-              url: user_messages_path,
+              url: messages_path,
               class: "card w-full bg-base-100 shadow-xl p-6 mt-4 rounded-lg",
               id: "new-message-form",
               data: { turbo_frame: "messages" }) do |f| %>
@@ -40,8 +40,8 @@
     <div data-message-tag-selector-target="hiddenInput"></div>
   </div>
 
-  <%= f.hidden_field :topic_id, value: topic.id %>
+  <%= f.hidden_field :messageable_id, value: messageable.id %>
+  <%= f.hidden_field :messageable_type, value: messageable.class %>
   <%= f.submit nil, class: "hidden" %>
 <% end %>
 
-<div id="search_results"></div>

@@ -20,7 +20,7 @@ servers:
 
 proxy:
   ssl: true
-  host: chrisfagg.tech
+  host: erudite.christopherfagg.me
 
 # Credentials for your image host.
 registry:
