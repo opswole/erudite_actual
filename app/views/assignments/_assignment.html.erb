@@ -31,14 +31,11 @@
       <% end %>
     </div>
 
-    <div><h2 class="text-3xl font-bold mb-4">Messages:</h2></div>
-    <article id="messages"
-             class="overflow-auto max-h-[400px] space-y-4 p-2"
-             data-message-target="messages">
-      <div id="<%= dom_id(assignment, :messages) %>">
-        <%#= render partial: "user/messages/message", collection: assignment.messages %>
-      </div>
-    </article>
+    <div>
+        <div id="<%= dom_id(assignment, :messages) %>">
+          <%= render "shared/chat_window", messageable: assignment %>
+        </div>
+    </div>
   </div>
 </div>
 <% end %>

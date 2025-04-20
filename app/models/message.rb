@@ -18,13 +18,13 @@
 
 class Message < ApplicationRecord
   belongs_to :user
-  belongs_to :topic
+  belongs_to :messageable, polymorphic: true
 
   has_many :mentions, dependent: :destroy
   has_many :tagged_users, through: :mentions, source: :user
-  has_one :unit, through: :topic
 
   validates :content, presence: true
 
-  broadcasts_to ->(message) { [ message.topic, :messages ] }, partial: "user/messages/message"
+  broadcasts_to ->(message) { [ message.messageable, :messages ] }, partial: "/messages/message",
+                locals: { user: Current.user }
 end

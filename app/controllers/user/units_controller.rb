@@ -3,10 +3,6 @@ class User::UnitsController < ApplicationController
     @units = Current.user.units
   end
 
-  def all
-    @units = Unit.all
-  end
-
   def show
     @unit = Unit.find(params[:id])
     @selected_topic = @unit.topics.find_by(id: params[:topic_id])
@@ -14,19 +10,11 @@ class User::UnitsController < ApplicationController
     @taggable_users = User
                         .joins(:topics)
                         .where(topics: { id: params[:topic_id] })
-                        .where(account_type: %w[student teacher])
+                        .where(account_type: %w[student teacher administrator])
                         .where(taggable_by_students: true)
                         .distinct
                         .sort_by(&:account_type)
                         .reverse
-  end
-
-  def show_assignments
-    @unit = Unit.find(params[:id])
-  end
-
-  def edit
-    @unit = Unit.find(params[:id])
   end
 
   private

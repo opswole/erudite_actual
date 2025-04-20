@@ -4,6 +4,7 @@
     "port": 3036,
     "sourceCodeDir": "app/javascript",
     "watchAdditionalPaths": []
+
   },
   "development": {
     "autoBuild": true,

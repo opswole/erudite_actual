@@ -11,8 +11,8 @@ class Admin::CoursesController < ApplicationController
   def show
     @course = Course.where(id: @course.id).includes(units: :topics).first
   end
+
   def edit
-    @course = Course.find(params[:id])
   end
 
   def create
@@ -45,8 +45,8 @@ class Admin::CoursesController < ApplicationController
     :title,
     :owner,
     )
-end
-def set_course
-  @course = Current.user.course
-end
+  end
+  def set_course
+    @course = Current.user.course
+  end
 end

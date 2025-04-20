@@ -7,10 +7,14 @@
       <% end %>
     </li>
   <% end %>
-  <li class="step step-info">
-    <%= link_to assignment_path(unit.assignment.id),
-                data: { turbo_frame: "tab_content" } do %>
-      Assignments
-    <% end %>
-  </li>
+  <% if unit.assignment %>
+    <li class="step step-info">
+      <%= link_to assignment_path(unit.assignment.id),
+                  data: { turbo_frame: "tab_content" } do %>
+        Assignments
+      <% end %>
+    </li>
+  <% end %>
 </ul>
+
+<div class="divider"></div>

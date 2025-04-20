@@ -3,7 +3,7 @@ class User::TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find(params[:id])
+    @messageable = Topic.find(params[:id])
     @taggable_users = User
                         .joins(:topics)
                         .where(topics: { id: @topic.id })

@@ -6,6 +6,7 @@ export default class extends Controller {
     static targets = ["tab"]
 
     connect() {
+        console.log("Connected")
         this.validateAndInitialize()
 
         this.setActiveTabFromUrl()
