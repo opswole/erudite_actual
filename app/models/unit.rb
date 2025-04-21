@@ -19,6 +19,7 @@ class Unit < ApplicationRecord
   belongs_to :course
   has_many :topics, dependent: :destroy
   has_one :assignment
+  has_many :notebooks, as: :notebookable, dependent: :destroy
 
   validates :title, :description, presence: true
 end

@@ -20,5 +20,6 @@ class Topic < ApplicationRecord
   has_many_attached :files, dependent: :destroy
   has_many :messages, as: :messageable, dependent: :destroy
 
+
   validates :title, :description, presence: true
 end

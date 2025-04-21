@@ -20,4 +20,13 @@ class Enrollment < ApplicationRecord
 
   # Account can only have one degree programme
   validates :user_id, uniqueness: true
+
+  after_commit :create_user_notebooks, on: :create
+
+  private
+  def create_user_notebooks
+    user.units.each do |unit|
+      Notebook.create!(title: "#{unit.title} Notebook", notebookable: unit, user: user)
+    end
+  end
 end

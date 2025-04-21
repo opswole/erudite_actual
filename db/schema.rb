@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_20_160859) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_21_114453) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -133,6 +133,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_20_160859) do
   create_table "notebooks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "notebookable_type", null: false
+    t.integer "notebookable_id", null: false
+    t.integer "user_id", null: false
+    t.string "title"
+    t.index ["notebookable_type", "notebookable_id"], name: "index_notebooks_on_notebookable"
+    t.index ["user_id"], name: "index_notebooks_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -184,6 +190,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_20_160859) do
   add_foreign_key "mentions", "messages"
   add_foreign_key "mentions", "users"
   add_foreign_key "messages", "users"
+  add_foreign_key "notebooks", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "topics", "units"
   add_foreign_key "units", "courses"
