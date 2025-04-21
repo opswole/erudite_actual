@@ -1,0 +1,19 @@
+<%= form_with(model: notebook) do |form| %>
+  <% if notebook.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(notebook.errors.count, "error") %> prohibited this notebook from being saved:</h2>
+
+      <ul>
+        <% notebook.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h1 id="test">test trix</h1>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.rich_textarea :content %>
+  </div>
+  <%= form.submit %>
+<% end %>

@@ -1,0 +1,12 @@
+<% content_for :title, "Editing notebook" %>
+
+<h1>Editing notebook</h1>
+
+<%= render "form", notebook: @notebook %>
+
+<br>
+
+<div>
+  <%= link_to "Show this notebook", @notebook %> |
+  <%= link_to "Back to notebooks", notebooks_path %>
+</div>

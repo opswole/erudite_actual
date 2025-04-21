@@ -1,5 +1,11 @@
 @import "tailwindcss"  source("../../../app");
+@import "../../assets/stylesheets/actiontext.css";
 
 @plugin "daisyui" {
     themes: wireframe --default
+}
+
+/* hide attach button on editor */
+.trix-button.trix-button--icon.trix-button--icon-attach {
+    display: none;
 }

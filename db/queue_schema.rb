@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_25_174943) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_20_160859) do
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -110,13 +120,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_25_174943) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "topic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "content"
     t.string "title"
-    t.index ["topic_id"], name: "index_messages_on_topic_id"
+    t.string "messageable_type"
+    t.integer "messageable_id"
+    t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notebooks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -288,7 +304,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_25_174943) do
   add_foreign_key "enrollments", "users"
   add_foreign_key "mentions", "messages"
   add_foreign_key "mentions", "users"
-  add_foreign_key "messages", "topics"
   add_foreign_key "messages", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

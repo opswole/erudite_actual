@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notebooks
   resources :assignments do
     member do
       delete :remove_attachment

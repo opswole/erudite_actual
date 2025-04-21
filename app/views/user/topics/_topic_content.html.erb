@@ -1,11 +1,17 @@
- <div class="grid grid-cols-2 gap-6 p-4">
-    <div class="space-y-4">
-      <h2 class="text-3xl font-bold mb-4">Files for <%= topic.title %>:</h2>
-        <%= render "shared/file_dropdown", obj: topic  %>
-    </div>
-
-   <div id="<%= dom_id(topic, :messages) %>">
-     <%= render "shared/chat_window", messageable: topic %>
-   </div>
-
+<div class="grid grid-cols-2 gap-6 p-4">
+  <div class="space-y-4">
+    <h2 class="text-3xl font-bold mb-4">Files for <%= topic.title %>:</h2>
+    <%= render "shared/file_dropdown", obj: topic %>
   </div>
+
+  <div class="grid grid-rows-2 gap-6">
+    <div>
+      <div class="bg-gray-100 p-4 rounded-lg">
+        <p>Additional content (e.g., message input or metadata)</p>
+      </div>
+    </div>
+    <div id="<%= dom_id(topic, :messages) %>">
+      <%= render "shared/chat_window", messageable: topic %>
+    </div>
+  </div>
+</div>
