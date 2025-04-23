@@ -22,15 +22,19 @@
         <span class="label-text">Course Title</span>
       <% end %>
       <%= f.text_field :title, class: "input input-bordered w-full", placeholder: "Enter course title" %>
-    </div>
 
-    <div class="form-control w-full">
-      <%= f.label :owner, class: "label" do %>
-        <span class="label-text">Owner</span>
-      <% end %>
-      <%= f.text_field :owner, class: "input input-bordered w-full", placeholder: "Enter owner name" %>
-    </div>
+    <%= f.fields_for :course_ownerships do |owners| %>
+      <fieldset>
+        <div>
+          <%= owners.label :user_id, "Owner" %>
+          <%= owners.select :user_id, @staff.map { |user| [user.full_name, user.id] } %>
+        </div>
+      </fieldset>
 
+    <% end %>
+
+
+    </div>
 
     <div class="form-control mt-6">
       <%= f.submit @course.persisted? ? "Update Course" : "Create Course", class: "btn btn-primary w-full" %>

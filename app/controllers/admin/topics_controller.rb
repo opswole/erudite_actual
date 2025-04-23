@@ -3,6 +3,18 @@ class Admin::TopicsController < Admin::BaseController
   def index
   end
 
+  def new
+    @topic = Topic.new
+  end
+  def create
+    @topic = Topic.new(topic_params)
+
+    if @topic.save
+      redirect_to admin_courses_path, notice: "Topic was successfully created."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
   def show
     @topic = Topic.find(params[:id])
     @taggable_users = User.limit(5)

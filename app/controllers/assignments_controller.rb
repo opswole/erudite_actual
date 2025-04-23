@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: %i[show edit update destroy]
-  # before_action :set_unit, only: %i[new edit]
+  before_action :set_unit, only: %i[ new ]
 
   # GET /assignments or /assignments.json
   def index

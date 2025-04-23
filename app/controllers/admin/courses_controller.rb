@@ -6,6 +6,9 @@ class Admin::CoursesController < ApplicationController
   end
   def new
     @course = Course.new
+    @course.course_ownerships.new
+
+    @staff = User.where(account_type: "teacher")
   end
 
   def show
@@ -41,12 +44,9 @@ class Admin::CoursesController < ApplicationController
 
   private
   def course_params
-  params.require(:course).permit(
-    :title,
-    :owner,
-    )
+    params.require(:course).permit(:title, course_ownerships_attributes: [ :user_id ])
   end
   def set_course
-    @course = Current.user.course
+    @course = Course.find(params[:id])
   end
 end
