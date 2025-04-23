@@ -1,4 +1,9 @@
-<div id="<%= dom_id notebook %>">
-  <%= notebook.content %>
-</div>
-yeah
+<%= turbo_frame_tag "notebook_content" do %>
+  <div class="border rounded-lg p-4 shadow-sm overflow-auto" id="<%= dom_id notebook %>">
+    <%= notebook.content %>
+  </div>
+
+  <div>
+    <%= link_to "Edit this notebook", edit_notebook_path(@notebook) %>
+  </div>
+<% end %>

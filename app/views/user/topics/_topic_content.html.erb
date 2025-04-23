@@ -1,17 +1,22 @@
-<div class="grid grid-cols-2 gap-6 p-4">
-  <div class="space-y-4">
-    <h2 class="text-3xl font-bold mb-4">Files for <%= topic.title %>:</h2>
+<div class="grid grid-cols-2 grid-rows-2 gap-6 p-4 glass border border-dashed" id="topic_content">
+  <div class="row-span-2">
+<!--    space-y-4 border rounded-lg p-4 shadow-sm-->
+    <h2 class="text-3xl font-bold mb-4">Files </h2>
     <%= render "shared/file_dropdown", obj: topic %>
   </div>
 
-  <div class="grid grid-rows-2 gap-6">
-    <div>
-      <div class="bg-gray-100 p-4 rounded-lg">
-        <p>Additional content (e.g., message input or metadata)</p>
-      </div>
-    </div>
-    <div id="<%= dom_id(topic, :messages) %>">
-      <%= render "shared/chat_window", messageable: topic %>
-    </div>
+  <div id="notebook-box" class=" border-amber-100 rounded-lg p-4 shadow-sm ">
+    <h2 class="text-3xl font-bold mb-4">Notebook</h2>
+      <%= turbo_frame_tag "notebook_content" do %>
+
+        <h2 class="text-3xl font-bold mb-4"><%= @notebook.title %>:</h2>
+        <%= render "notebooks/notebook", notebook: @notebook %>
+
+      <% end %>
   </div>
+
+  <div id="<%= dom_id(topic, :messages) %>" class="border rounded-lg p-4 shadow-sm  overflow-y-auto">
+  <%= render "shared/chat_window", messageable: topic %>
+  </div>
+
 </div>

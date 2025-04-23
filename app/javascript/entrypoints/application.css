@@ -9,3 +9,16 @@
 .trix-button.trix-button--icon.trix-button--icon-attach {
     display: none;
 }
+
+#topic_content > div {
+    border: 1px dashed #000;
+}
+
+.trix-content {
+    max-height: 400px !important;
+    overflow-y: auto;
+}
+
+div.test {
+    background-color: red;
+}
