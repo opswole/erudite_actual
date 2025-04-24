@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: "user/home#index"
+
   resources :notebooks
   resources :assignments do
     member do
@@ -14,9 +16,6 @@ Rails.application.routes.draw do
 
   resources :users
 
-  # Default / behaviour
-  root to: "user/home#index"
-
   # /admin
   namespace :admin do
     root to: "dashboard#index"
@@ -24,13 +23,16 @@ Rails.application.routes.draw do
     get "users/list", to: "users#list", as: "users_list"
     resources :users
     resources :audits
-    resources :courses
+    resources :courses do
+      resources :course_ownerships
+    end
     resources :units
     resources :topics do
       member do
         delete :remove_attachment
       end
     end
+
     resources :dashboard, only: [ :index ]
     get "dashboard/overview", to: "dashboard#overview"
     get "dashboard/courses", to: "courses#index"

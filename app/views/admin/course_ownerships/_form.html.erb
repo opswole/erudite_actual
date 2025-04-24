@@ -1,0 +1,6 @@
+
+<%= form_with(model: [:admin, @course, @course.course_ownerships.new], class: "card w-full max-w-lg mx-auto bg-base-100 shadow-xl p-6") do |f| %>
+  <%= f.label :email_address %>
+  <%= f.email_field :email_address, class: "input input-bordered w-full", required: true %>
+  <%= f.submit "Add Owner", class: "btn btn-primary mt-4" %>
+<% end %>

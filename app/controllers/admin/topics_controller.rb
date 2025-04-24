@@ -1,5 +1,5 @@
 class Admin::TopicsController < Admin::BaseController
-  before_action :set_topic, only: [ :show, :edit, :update ]
+  before_action :set_topic, only: [ :show, :edit, :update, :destroy ]
   def index
   end
 
@@ -35,6 +35,11 @@ class Admin::TopicsController < Admin::BaseController
     else
       render "edit"
     end
+  end
+
+  def destroy
+    @topic.destroy
+    redirect_to admin_courses_path, notice: "Topic was successfully deleted."
   end
 
   def remove_attachment

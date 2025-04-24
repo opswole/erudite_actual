@@ -11,7 +11,7 @@ class AssignmentsController < ApplicationController
   def show
     @taggable_users = User
                         .joins(:enrollment)
-                        .where(enrollments: { course_id: 1 })
+                        .where(enrollments: { course_id: Current.user.course.id })
 
     @unit_title = Unit.find(@assignment.unit_id).title
   end

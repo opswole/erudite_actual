@@ -18,7 +18,7 @@ class Unit < ApplicationRecord
   audited
   belongs_to :course
   has_many :topics, dependent: :destroy
-  has_one :assignment
+  has_one :assignment,  dependent: :destroy
   has_many :notebooks, as: :notebookable, dependent: :destroy
 
   validates :title, :description, presence: true

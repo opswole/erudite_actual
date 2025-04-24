@@ -9,9 +9,7 @@ class User::UnitsController < ApplicationController
 
     @notebook = Current.user.notebooks.find_by(notebookable_type: "Unit", notebookable_id: @unit.id)
 
-    @taggable_users = User
-                        .joins(:enrollment)
-                        .where(enrollments: { course_id: 1 })
+    @taggable_users = User.joins(:enrollment).where(enrollments: { course_id: Current.user.course.id })
   end
 
   private

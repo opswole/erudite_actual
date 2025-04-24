@@ -32,12 +32,9 @@ class User < ApplicationRecord
     administrator: 2
   }
 
-
-
   def full_name
     "#{first_name} #{last_name}"
   end
-
 
   def authorised?(course = nil)
     administrator? || (course.present? && course.owners.include?(self))
