@@ -20,6 +20,7 @@
           <td><%= unit.description %></td>
           <td>
             <%= link_to "View", admin_unit_path(unit), class: "btn btn-info" %>
+            <%= link_to "Edit", edit_admin_unit_path(unit), class: "btn btn-info" %>
             <%= link_to "Delete Unit", admin_unit_path(unit.id),
                         data:{
                           turbo_method: :delete,
