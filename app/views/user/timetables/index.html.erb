@@ -1,6 +1,14 @@
 <%= turbo_frame_tag "tab_content" do %>
-  <div id="calendar-container">
+<!--  <div id="calendar-container">-->
+  <%= month_calendar(events: @assignments) do |date, assignments| %>
+    <%= date %>
 
-  </div>
+    <% assignments.each do |assignment| %>
+      <div>
+        <%= assignment.title %>
+      </div>
+    <% end %>
+  <% end %>
+<!--  </div>-->
 <% end %>
 

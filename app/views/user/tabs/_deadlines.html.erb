@@ -16,7 +16,7 @@
         <div>
           <%# TODO: Make this 'days until' %>
           <div>
-            <%= ((DateTime.parse(assignment.deadline) - DateTime.now) / 1.day).to_i %>
+            <%= assignment.deadline %>
           </div>
         </div>
       </li>

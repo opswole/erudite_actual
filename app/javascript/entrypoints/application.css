@@ -1,9 +1,12 @@
 @import "tailwindcss"  source("../../../app");
 @import "../../assets/stylesheets/actiontext.css";
+@import "../../assets/stylesheets/simple_calendar.css";
+
 
 @plugin "daisyui" {
-    themes: wireframe --default
+    themes: nord --default
 }
+
 
 /* hide attach button on editor */
 .trix-button.trix-button--icon.trix-button--icon-attach {

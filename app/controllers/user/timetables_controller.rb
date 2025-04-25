@@ -3,17 +3,10 @@ class User::TimetablesController < ApplicationController
   def index
     @assignments = Assignment.all
 
-    @assignments_f = {
-      assignments: @assignments.map do |assignment|
-        {
-          Id: assignment.id,
-          Subject: assignment.title || "Assignment #{assignment.id}",
-          StartTime: assignment.deadline.to_time.iso8601,
-          EndTime: assignment.deadline.to_time.iso8601,
-          CategoryColor: "#1aaa55"
-        }
-      end
-    }.to_json
+    start_date = params.fetch(:start_date, Date.today).to_date
+    @assignments = Assignment.where(
+      deadline: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week
+    )
   end
 
   def show

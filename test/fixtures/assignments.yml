@@ -5,7 +5,7 @@
 #  id          :integer          not null, primary key
 #  title       :string
 #  description :string
-#  deadline    :string
+#  deadline    :datetime
 #  unit_id     :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
