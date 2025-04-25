@@ -15,8 +15,14 @@ amazon:
   service: S3
   access_key_id: <%= Rails.application.credentials.dig(:aws, :aws_access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :aws_secret_access_key) %>
-  region: eu-west-2
-  bucket: erudite-cms
+  region: us-east-1
+  bucket: 210189160-fyp
+
+#azure:
+#  service: AzureStorage
+#  storage_account_name: erudite1
+#  storage_access_key: <%#= Rails.application.credentials.dig(:azure_storage, :storage_access_key) %>
+#  container: erudite-<%#= Rails.env %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

@@ -22,14 +22,14 @@
               <%= mention.user.full_name %> <br> @ <%= mention.created_at %>
             </th>
             <td>
-              <%= mention.unit.title %>: <br>
-              <%= content_tag :span, mention.topic.title, class: "italic" %>
+              <%= Topic.find(mention.messageable_id).title %>: <br>
+              <%#= content_tag :span, mention.topic.title, class: "italic" %>
             </td>
             <td>
               <%= mention.content %>
             </td>
             <td>
-              <%= link_to "Go to message", user_unit_path(mention.unit.id, topic_id: mention.topic.id),
+              <%#= link_to "Go to message", user_unit_path(mention.unit.id, topic_id: mention.topic.id),
                           class: "btn btn-ghost",
                           data: {
                             action: "click->tabs#activateTabById",

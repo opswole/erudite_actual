@@ -3,12 +3,18 @@
     <%= message.user.full_name %>
     <time class="text-xs opacity-50"><%= message.created_at.to_fs(:short) %></time>
   </div>
-  <div class="chat-bubble">
+  <div class="chat-bubble <%= Current.user && message.tagged_users.include?(Current.user) ? 'bg-yellow-200 text-gray-800' : 'bg-blue-500 text-white' %>">
     <%= simple_format(message.content) %>
   </div>
   <div class="chat-footer opacity-50">
     <% if message.tagged_users.any? %>
-      <span class="italic"><%= message.tagged_users.map(&:full_name).join(' | ') %></span>
+      <span class="italic">
+        <%= message.tagged_users.map do |tagged_user| %>
+          <span class="<%= Current.user == tagged_user ? 'text-yellow-600 font-bold' : 'text-gray-600' %>">
+            <%= tagged_user.full_name %>
+          </span>
+        <% end.join(' | ').html_safe %>
+      </span>
     <% end %>
   </div>
 </div>

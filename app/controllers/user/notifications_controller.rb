@@ -1,7 +1,15 @@
 class User::NotificationsController < ApplicationController
   def index
-    @mentions = Current.user.mentions.includes(:message).order(created_at: :desc)
-    @mentioned_messages = Current.user.mentioned_messages.order(created_at: :desc)
+    @mentions = Mention
+                  .where(user_id: Current.user.id)
+                  .includes(message: { messageable: :unit }, user: {})
+                  .order(created_at: :desc)
+                  .limit(15).order(created_at: :desc)
+    @mentioned_messages = Mention
+                            .where(user_id: Current.user.id)
+                            .includes(message: { messageable: :unit }, user: {})
+                            .order(created_at: :desc)
+                            .limit(15).order(created_at: :desc)
 
     respond_to do |format|
       format.html

@@ -8,6 +8,7 @@ require 'open-uri'
 require_relative 'seed_courses/computer_science'
 require_relative 'seed_courses/environmental'
 require_relative 'seed_courses/biomedical'
+require_relative 'seed_notebook/notebook'
 
 puts "Cleaning up storage..."
 
@@ -212,8 +213,6 @@ cs_units = cs.units.limit(3)
 env_units = env.units.limit(3)
 bio_units = bio.units.limit(3)
 
-
-
 cs_units.each_with_index do |u, i|
   u.create_assignment(
     title: "Assignment #{i}",
@@ -236,4 +235,71 @@ bio_units.each_with_index do |u, i|
     description: "Assignment #{i} for #{u.title}",
     deadline: "2025-05-22T18:00:00+00:00",
     )
+end
+
+@cs_taggable = User
+                    .joins(:enrollment)
+                    .where(enrollments: { course_id: Course.find_or_create_by!(title: "BSc Computer Science").id })
+@bio_taggable = User
+                 .joins(:enrollment)
+                 .where(enrollments: { course_id: Course.find_or_create_by!(title: "BSc Biomedical Science").id })
+
+@env_taggable = User
+                 .joins(:enrollment)
+                 .where(enrollments: { course_id: Course.find_or_create_by!(title: "BSc Environmental Science").id })
+
+cs.topics.each do |topic|
+  10.times do
+    topic.messages.create(
+      user_id: @cs_taggable.sample.id,
+      content: Faker::Quote.famous_last_words
+    )
+  end
+end
+
+bio.topics.each do |topic|
+  10.times do
+    topic.messages.create(
+      user_id: @bio_taggable.sample.id,
+      content: Faker::Quote.famous_last_words
+    )
+  end
+end
+
+env.topics.each do |topic|
+  10.times do
+    topic.messages.create(
+      user_id: @env_taggable.sample.id,
+      content: Faker::Quote.famous_last_words
+    )
+  end
+end
+
+cs.topics.each do |topic|
+  topic.messages.sample(3).each do |message|
+    message.mentions.create(
+      user_id:  @cs_taggable.sample.id,
+    )
+  end
+end
+
+bio.topics.each do |topic|
+  topic.messages.sample(3).each do |message|
+    message.mentions.create(
+      user_id:  @bio_taggable.sample.id,
+      )
+  end
+end
+
+env.topics.each do |topic|
+  topic.messages.sample(3).each do |message|
+    message.mentions.create(
+    user_id:  @env_taggable.sample.id,
+    )
+  end
+end
+
+Notebook.all.each do |notebook|
+  notebook.content.body = NOTEBOOK
+  notebook.save
 end

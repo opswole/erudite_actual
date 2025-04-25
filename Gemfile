@@ -76,6 +76,9 @@ gem "vite_rails"
 
 gem "aws-sdk-s3", require: false
 
+# gem "azure-storage-blob", "~> 2.0", require: false
+
+
 gem "ruby-vips", "~> 2.2", ">= 2.2.3"
 
 gem "audited"
