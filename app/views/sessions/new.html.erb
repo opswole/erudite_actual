@@ -1,7 +1,6 @@
 <div class="grid grid-cols-2 min-h-screen w-screen">
   <div class="bg-blueviolet flex items-center justify-center min-h-screen">
     <div class="flex items-center justify-center min-h-screen">
-      <%# TODO Not this forever %>
       <%= image_tag("https://robohash.org/#{rand}.png?set=set2&size=500x500", alt: "Sign-in placeholder") %>
     </div>
   </div>
@@ -24,9 +23,35 @@
         </div>
 
         <div class="mb-4">
-          <%= form.submit "Sign in", class: "w-full text-white py-2 px-4 rounded-lg hover:bg-blue-600" %>
+          <%= form.submit "Sign in", class: "w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" %>
         </div>
       <% end %>
+
+      <!-- Test Login Button -->
+      <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+        <%= form.hidden_field :email_address, value: "admin@erudite.com" %>
+        <%= form.hidden_field :password, value: "password" %>
+        <%= form.submit "Admin", class: "w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+      <% end %>
+
+      <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+        <%= form.hidden_field :email_address, value: "staff@erudite.com" %>
+        <%= form.hidden_field :password, value: "password" %>
+        <%= form.submit "Staff", class: "w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+      <% end %>
+
+      <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+        <%= form.hidden_field :email_address, value: "student6@erudite.com" %>
+        <%= form.hidden_field :password, value: "password" %>
+        <%= form.submit "Bio", class: "w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+      <% end %>
+
+      <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+        <%= form.hidden_field :email_address, value: "student14@erudite.com" %>
+        <%= form.hidden_field :password, value: "password" %>
+        <%= form.submit "Env", class: "w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+      <% end %>
+
 
       <div class="text-center">
         <%= link_to "Forgot password?", new_password_path, class: "text-blue-500 hover:underline" %>
