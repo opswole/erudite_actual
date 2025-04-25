@@ -94,7 +94,7 @@ pdfs = [ "artificial_intelligence.pdf",
         "web_development.pdf" ]
 
 
-
+puts "Creating CompSci"
 COMPUTER_SCIENCE.each_with_index do |unit_data, i|
   unit = Unit.create!(
     title: unit_data[:title],
@@ -128,6 +128,7 @@ COMPUTER_SCIENCE.each_with_index do |unit_data, i|
   end
 end
 
+puts "Creating Environmental Sci"
 ENVIRONMENTAL.each_with_index do |unit_data, i|
   unit = Unit.create!(
     title: unit_data[:title],
@@ -161,6 +162,7 @@ ENVIRONMENTAL.each_with_index do |unit_data, i|
   end
 end
 
+puts "Creating Biomedical"
 BIOMEDICAL.each_with_index do |unit_data, i|
   unit = Unit.create!(
     title: unit_data[:title],
@@ -213,6 +215,7 @@ cs_units = cs.units.limit(3)
 env_units = env.units.limit(3)
 bio_units = bio.units.limit(3)
 
+puts "Creating Assignments"
 cs_units.each_with_index do |u, i|
   u.create_assignment(
     title: "Assignment #{i}",
@@ -248,6 +251,7 @@ end
                  .joins(:enrollment)
                  .where(enrollments: { course_id: Course.find_or_create_by!(title: "BSc Environmental Science").id })
 
+puts "Creating Messages"
 cs.topics.each do |topic|
   10.times do
     topic.messages.create(
@@ -275,6 +279,7 @@ env.topics.each do |topic|
   end
 end
 
+puts "creating mentions"
 cs.topics.each do |topic|
   topic.messages.sample(3).each do |message|
     message.mentions.create(
@@ -299,6 +304,7 @@ env.topics.each do |topic|
   end
 end
 
+puts "creating notebooks"
 Notebook.all.each do |notebook|
   notebook.content.body = NOTEBOOK
   notebook.save

@@ -5,28 +5,55 @@ import 'trix';
 import '../controllers';
 import { createApp } from 'vue';
 import PdfViewer from '~/components/PdfViewer.vue';
+import Calendar from '~/components/Calendar.vue';
+import vuetify from "~/components/vuetify.js";
+
 
 let app = null;
 
-function mountPdfViewer() {
+
+function mountCalendar() {
     if (app) {
+        console.log("unmounted");
         app.unmount();
+        app = null;
     }
 
-    const el = document.getElementById('pdf-container');
+    const el = document.getElementById('calendar-container');
     if (el) {
-        app = createApp(PdfViewer);
+        app = createApp(Calendar);
+        app.use(vuetify);
         app.mount(el);
-        console.log('PDF Viewer mounted');
+        console.log('Calendar mounted');
     }
 }
 
-// document.addEventListener('DOMContentLoaded', mountPdfViewer);
+function mountPdfViewer() {
+    const el = document.getElementById('pdf-container');
 
+    if (!el) {
+        console.log('No PDF container found');
+        return;
+    }
 
-document.addEventListener('turbo:load', mountPdfViewer);
-document.addEventListener('turbo:frame-render', mountPdfViewer);
-document.addEventListener('turbo:frame-load', mountPdfViewer);
+    if (app) {
+        console.log('Unmounted existing app');
+        app.unmount();
+    }
+
+    app = createApp(PdfViewer);
+    app.mount(el);
+    console.log('PDF Viewer mounted');
+}
+
+function mountComponents(){
+    mountPdfViewer();
+    mountCalendar()
+}
+
+document.addEventListener('turbo:load', mountComponents);
+document.addEventListener('turbo:frame-render', mountComponents);
+// document.addEventListener('turbo:frame-load', mountComponents);
 
 document.addEventListener('turbo:before-frame-render', () => {
     if (app) {

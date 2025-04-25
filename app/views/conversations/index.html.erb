@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "tab_content" do %>
+
+  <div class="min-h-64 grid grid-cols-2">
+    <div>
+    <ul class="menu bg-base-200 rounded-box w-56">
+      <li class="menu-title">Users <%= link_to "new", new_conversation_path, data: { turbo_frame: "conversation"} %></li>
+      <% @conversations.each do |conversation| %>
+        <% @author = conversation.users.find { it != Current.user }&.full_name || "Unknown" %>
+        <li>
+        <%= link_to @author, conversation_path(conversation),
+                    data: {
+                      turbo_frame: "conversation",
+                    }%>
+        </li>
+          <%= link_to "delete",
+                      conversation_path(conversation),
+                      data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure you want to delete this conversation",
+                        turbo_frame: "tab_content"
+                      } %>
+      <% end %>
+      </ul>
+    </div>
+
+    <div>
+      <%= turbo_frame_tag "conversation"  %>
+    </div>
+  </div>
+<% end %>

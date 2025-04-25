@@ -15,6 +15,7 @@
                     } %>
   </div>
 
+<% if @taggable_users %>
   <div class="form-control" data-controller="message-tag-selector">
     <div class="relative">
       <%= f.label :taggable_users, "Tag Users:", class: "label font-medium text-gray-700" %>
@@ -39,6 +40,8 @@
 
     <div data-message-tag-selector-target="hiddenInput"></div>
   </div>
+    <% end %>
+
 
   <%= f.hidden_field :messageable_id, value: messageable.id %>
   <%= f.hidden_field :messageable_type, value: messageable.class %>

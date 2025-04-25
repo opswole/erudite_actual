@@ -19,7 +19,6 @@ export default class extends Controller {
     }
 
     activate(event) {
-        console.log(event)
         this.deactivateAllTabs()
         event.currentTarget.classList.add(TAB_ACTIVE_CLASS)
     }

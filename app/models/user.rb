@@ -15,6 +15,10 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :mentions, dependent: :destroy
   has_many :mentioned_messages, through: :mentions, source: :message
+  # Private convo stuff
+  has_many :conversation_users, dependent: :destroy
+  has_many :conversations, through: :conversation_users
+
   # Avatar Stuff ('ake Sulleyyy')
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_limit: [ 100, 100 ]

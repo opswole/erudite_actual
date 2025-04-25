@@ -8,8 +8,10 @@ Rails.application.routes.draw do
     end
   end
 
+
   resources :mentions
   resources :messages
+  resources :conversations
   # Authentication
   resource :session
   resources :passwords, param: :token

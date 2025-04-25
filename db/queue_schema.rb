@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[8.0].define(version: 2025_04_25_123036) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_25_141028) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -84,13 +83,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_25_123036) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
+  create_table "conversation_users", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "conversation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_conversation_users_on_conversation_id"
+    t.index ["user_id"], name: "index_conversation_users_on_user_id"
+  end
+
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "sender_id", null: false
-    t.integer "recipient_id", null: false
-    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
-    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+    t.string "name"
   end
 
   create_table "course_ownerships", force: :cascade do |t|
@@ -314,8 +319,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_25_123036) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assignments", "units"
-  add_foreign_key "conversations", "users", column: "recipient_id"
-  add_foreign_key "conversations", "users", column: "sender_id"
+  add_foreign_key "conversation_users", "conversations"
+  add_foreign_key "conversation_users", "users"
   add_foreign_key "course_ownerships", "courses"
   add_foreign_key "course_ownerships", "users"
   add_foreign_key "enrollments", "courses"
