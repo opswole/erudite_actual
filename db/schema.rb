@@ -9,8 +9,8 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
+ActiveRecord::Schema[8.0].define(version: 2025_04_25_123036) do
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_21_114453) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -81,6 +81,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_21_114453) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "sender_id", null: false
+    t.integer "recipient_id", null: false
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+    t.index ["sender_id"], name: "index_conversations_on_sender_id"
   end
 
   create_table "course_ownerships", force: :cascade do |t|
@@ -183,6 +192,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_21_114453) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assignments", "units"
+  add_foreign_key "conversations", "users", column: "recipient_id"
+  add_foreign_key "conversations", "users", column: "sender_id"
   add_foreign_key "course_ownerships", "courses"
   add_foreign_key "course_ownerships", "users"
   add_foreign_key "enrollments", "courses"

@@ -3,7 +3,11 @@ class MentionsController < ApplicationController
 
   # GET /mentions or /mentions.json
   def index
-    @mentions = Mention.all
+    @mentions = Mention
+                  .where(user_id: current_user.id)
+                  .includes(message: { messageable: :unit }, user: {})
+                  .order(created_at: :desc)
+                  .limit(15)
   end
 
   # GET /mentions/1 or /mentions/1.json
