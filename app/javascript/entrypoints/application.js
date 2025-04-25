@@ -1,7 +1,9 @@
 import '~/entrypoints/application.css';
 import "@hotwired/turbo-rails";
+import '@rails/actiontext';
+import 'trix';
 import '../controllers';
-import { createApp } from "vue";
+import { createApp } from 'vue';
 import PdfViewer from '~/components/PdfViewer.vue';
 
 let app = null;

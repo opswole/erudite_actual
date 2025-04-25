@@ -7,14 +7,9 @@ class User::UnitsController < ApplicationController
     @unit = Unit.find(params[:id])
     @selected_topic = @unit.topics.find_by(id: params[:topic_id])
 
-    @taggable_users = User
-                        .joins(:topics)
-                        .where(topics: { id: params[:topic_id] })
-                        .where(account_type: %w[student teacher administrator])
-                        .where(taggable_by_students: true)
-                        .distinct
-                        .sort_by(&:account_type)
-                        .reverse
+    @notebook = Current.user.notebooks.find_by(notebookable_type: "Unit", notebookable_id: @unit.id)
+
+    @taggable_users = User.joins(:enrollment).where(enrollments: { course_id: Current.user.course.id })
   end
 
   private

@@ -20,6 +20,8 @@ class User < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [ 100, 100 ]
   end
 
+  has_many :notebooks, dependent: :destroy
+
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   validates :email_address, presence: true, uniqueness: true
   validates :first_name, :last_name, presence: true

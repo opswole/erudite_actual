@@ -55,9 +55,16 @@
       <%= form.file_field :files, multiple: true, class: "file-input" %>
     </div>
 
-    <div class="field">
-      <%= form.hidden_field :unit_id, value: assignment.unit.id %>
-    </div>
+    <% if assignment.persisted? %>
+      <div class="field">
+        <%= form.hidden_field :unit_id, value: assignment.unit.id %>
+      </div>
+    <% else %>
+      <div class="field">
+        <%= form.hidden_field :unit_id, value: unit.id %>
+      </div>
+    <% end %>
+
 
     <div class="actions">
       <%= form.submit class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700" %>

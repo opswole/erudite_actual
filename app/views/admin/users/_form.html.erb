@@ -78,21 +78,21 @@
     <div class="form-control mt-6">
       <%= f.submit @user.persisted? ? "Update User" : "Create User", class: "btn btn-primary w-full" %>
     </div>
-
+<% end %>
     <% if @user.persisted? %>
-      <div class="form-control mt-6">
+      <div class="mt-6 w-full max-w-lg mx-auto">
         <%= button_to "Delete User",
                       admin_user_path(@user),
                       method: :delete,
+                      class: 'btn btn-error w-full',
                       data: {
-                        turbo_confirm: "Are you sure you want to delete this user?",
-                        turbo_frame: "user_content"
-                      },
-                      class: "btn btn-error w-full" %>
+                        turbo_confirm: "Are you sure?"
+                      }
+        %>
       </div>
     <% end %>
   </div>
-<% end %>
+
 
 <div class="text-center mt-4">
   <%= link_to "Back to Users", admin_users_list_path, class: "btn btn-ghost" %>

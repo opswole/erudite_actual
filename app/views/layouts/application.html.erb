@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%#= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
 
@@ -27,7 +27,9 @@
   </head>
 
   <body class="min-h-screen flex flex-col">
+  <% unless controller_name == "sessions" && action_name == "new" %>
     <%= render "layouts/navbar" %>
+  <% end %>
 
     <dialog
       class="modal"
@@ -47,8 +49,8 @@
       </div>
     </dialog>
 
-    <main class="container mx-auto w-11/12 max-w-none flex-1 px-5 flex flex-col">
-      <%#= render 'shared/flash' %>
+    <main class="container mx-auto w-11/12 max-w-none flex-1 px-5 flex flex-col min-h-screen">
+      <%= render 'shared/flash' %>
       <%= yield %>
     </main>
 

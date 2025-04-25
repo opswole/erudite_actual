@@ -9,12 +9,17 @@
 #
 
 class Course < ApplicationRecord
+  # Users
   has_many :course_ownerships, dependent: :destroy
   has_many :owners, through: :course_ownerships, source: :user
   has_many :enrollments, dependent: :destroy
-  has_many :users, through: :enrollments
+  has_many :users, through: :enrollments, dependent: :destroy
+  # Content
   has_many :units, dependent: :destroy
   has_many :topics, through: :units
+  validates :title, presence: true
 
-  validates :title, :owners, presence: true
+  accepts_nested_attributes_for :course_ownerships, reject_if: :all_blank
+
+  private
 end
