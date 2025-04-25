@@ -5,6 +5,10 @@
       <%= @course.persisted? ? "Edit Course" : "Create New Course" %>
     </h2>
 
+    <% if course.persisted? %>
+      <%= link_to "Update Owners", edit_admin_course_course_ownership_path(@course)  %>
+    <% end %>
+
     <% if course.errors.any? %>
       <div style="color: red">
         <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
@@ -23,14 +27,6 @@
       <% end %>
       <%= f.text_field :title, class: "input input-bordered w-full", placeholder: "Enter course title" %>
     </div>
-
-    <div class="form-control w-full">
-      <%= f.label :owner, class: "label" do %>
-        <span class="label-text">Owner</span>
-      <% end %>
-      <%= f.text_field :owner, class: "input input-bordered w-full", placeholder: "Enter owner name" %>
-    </div>
-
 
     <div class="form-control mt-6">
       <%= f.submit @course.persisted? ? "Update Course" : "Create Course", class: "btn btn-primary w-full" %>

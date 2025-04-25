@@ -1,8 +1,20 @@
 class Admin::TopicsController < Admin::BaseController
-  before_action :set_topic, only: [ :show, :edit, :update ]
+  before_action :set_topic, only: [ :show, :edit, :update, :destroy ]
   def index
   end
 
+  def new
+    @topic = Topic.new
+  end
+  def create
+    @topic = Topic.new(topic_params)
+
+    if @topic.save
+      redirect_to admin_courses_path, notice: "Topic was successfully created."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
   def show
     @topic = Topic.find(params[:id])
     @taggable_users = User.limit(5)
@@ -23,6 +35,11 @@ class Admin::TopicsController < Admin::BaseController
     else
       render "edit"
     end
+  end
+
+  def destroy
+    @topic.destroy
+    redirect_to admin_courses_path, notice: "Topic was successfully deleted."
   end
 
   def remove_attachment

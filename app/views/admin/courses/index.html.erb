@@ -25,8 +25,9 @@
               <td><%= course.title %></td>
               <td><span class="italic"><%= course.owners.map(&:full_name).join(' | ') %></span></td>
               <td>
-                <%= link_to "View", admin_course_path(course.id), class: "btn btn-info" %>
-                <%= link_to admin_course_path(course.id),
+                <%= link_to "View", admin_course_path(course), class: "btn btn-info" %>
+                <%= link_to "Edit", edit_admin_course_path(course), class: "btn btn-info" %>
+                <%= link_to admin_course_path(course),
                 data: {
                   turbo_method: :delete,
                   turbo_confirm: "Deleting #{course.title}"

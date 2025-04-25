@@ -2,7 +2,7 @@
               class: "card w-full max-w-lg mx-auto bg-base-100 shadow-xl p-6") do |f| %>
   <div class="card-body">
     <h2 class="card-title text-2xl mb-6 text-center">
-      Create new unit for <%= @course.title %>
+      <%= @unit.persisted? ? "Edit Unit" : "Create Unit" %>
     </h2>
 
     <% if @unit.errors.any? %>
@@ -33,7 +33,7 @@
     <%= f.hidden_field :course_id, value: @course.id %>
 
     <div class="form-control mt-6">
-      <%= f.submit "Create Unit", class: "btn btn-primary w-full" %>
+      <%= f.submit @unit.persisted? ? "Update Unit" : "Create Unit", class: "btn btn-primary w-full" %>
     </div>
   </div>
 <% end %>

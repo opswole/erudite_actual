@@ -45,10 +45,6 @@ class Admin::UnitsController < ApplicationController
     @unit = Unit.find(params[:id])
   end
 
-  def set_course
-    @course = Course.find(params[:course_id])
-  end
-
   def unit_params
     params.require(:unit).permit(:title, :description)
   end

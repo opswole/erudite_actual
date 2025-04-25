@@ -6,6 +6,9 @@ class Admin::CoursesController < ApplicationController
   end
   def new
     @course = Course.new
+    @course.course_ownerships.new
+
+    @staff = User.where(account_type: "teacher")
   end
 
   def show
@@ -13,13 +16,14 @@ class Admin::CoursesController < ApplicationController
   end
 
   def edit
+    @staff = User.where(account_type: "teacher")
   end
 
   def create
     @course = Course.new(course_params)
 
     if @course.save
-      redirect_to admin_courses_path, notice: "Course was successfully created."
+      redirect_to edit_admin_course_path(@course), notice: "Course was successfully created."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -30,6 +34,7 @@ class Admin::CoursesController < ApplicationController
       flash.now[:success] = "Course was successfully updated."
       redirect_to admin_courses_path, notice: "Course was successfully updated."
     else
+      @staff = User.where(account_type: "teacher")
       render :edit, status: :unprocessable_entity
     end
   end
@@ -41,12 +46,9 @@ class Admin::CoursesController < ApplicationController
 
   private
   def course_params
-  params.require(:course).permit(
-    :title,
-    :owner,
-    )
+    params.require(:course).permit(:title, course_ownerships_attributes: [ :id ])
   end
   def set_course
-    @course = Current.user.course
+    @course = Course.find(params[:id])
   end
 end
