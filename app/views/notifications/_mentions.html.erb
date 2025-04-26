@@ -1,0 +1,28 @@
+<% if mentions.any? %>
+  <div class="py-4 h-[50%]">
+    <%# TODO: shrink, expand and overflow %>
+    <% mentions.each do |mention| %>
+      <%= link_to unit_path(topic_id: mention.message.messageable, id: mention.message.messageable.unit),
+                  data: {
+                    turbo_frame: "tab_content",
+                    action: "click->modal#close",
+                      "modal-target": "mention-link"
+                  },
+                  class: "block mb-2 p-2 border-b hover:bg-gray-100" do %>
+
+      <div>
+          <span class="font-semibold"><%= mention.message.user.full_name %></span> mentioned you in:
+          <span class="italic"><%#= mention.message.topic.title %></span>
+        </div>
+        <div class="mt-1">
+          <%= mention.message.content %>
+        </div>
+        <div class="text-sm text-gray-500">
+          - <%= mention.created_at.strftime("%b %d, %Y %H:%M") %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <p class="py-4">You have no new notifications</p>
+<% end %>

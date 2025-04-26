@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <div  class="p-4 flex-1 flex flex-col">
+    <%= month_calendar(events: @assignments) do |date, assignments| %>
+      <%= date %>
+      <% assignments.each do |assignment| %>
+        <div>
+          <%= assignment.title %>
+        </div>
+      <% end %>
+  <% end %>
+  </div>
+<% end %>
+

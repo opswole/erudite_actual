@@ -28,7 +28,7 @@ class Mention < ApplicationRecord
     broadcast_replace_to(
       "user_#{user_id}_notifications",
       target: "notifications",
-      partial: "user/notifications/mentions",
+      partial: "notifications/mentions",
       locals: { mentions: user.mentions.includes(:message).order(created_at: :desc) }
     )
   end

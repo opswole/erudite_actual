@@ -1,4 +1,4 @@
-class Admin::UnitsController < ApplicationController
+class Admin::UnitsController < Admin::BaseController
   before_action :set_unit, only: [ :show, :edit, :update, :destroy ]
 
   def new

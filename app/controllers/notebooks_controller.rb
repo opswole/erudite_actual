@@ -19,6 +19,7 @@ class NotebooksController < ApplicationController
   def edit
   end
 
+  # TODO: Move CD into Admin::
   # POST /notebooks or /notebooks.json
   def create
     @notebook = Notebook.new(notebook_params)

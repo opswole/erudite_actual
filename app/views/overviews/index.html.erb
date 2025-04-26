@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "tab_content" do %>
+    <div class="grid grid-cols-3 grid-rows-2 gap-4  flex-1 flex flex-col" >
+      <div class="flex justify-center place-items-center">
+        <%= render "tabs/deadlines", assignments: @assignments%>
+      </div>
+      <div class="flex justify-center row-span-2">
+        <%= render "tabs/recent_messages", messages: @recent_mentions, units: @units %>
+      </div>
+      <div class="flex place-items-center justify-center">
+        <%= render "tabs/gradebook" %>
+      </div>
+      <div class="flex justify-center">
+        <%= render "tabs/schedule", assignments: @assignments %>
+      </div>
+      <div class="flex justify-center">
+        <%= render "tabs/resources" %>
+      </div>
+    </div>
+<% end %>

@@ -1,65 +1,48 @@
 Rails.application.routes.draw do
-  root to: "user/home#index"
+  root to: "home#index", as: "root"
 
-  resources :notebooks
-  resources :assignments do
-    member do
-      delete :remove_attachment
-    end
-  end
+  resources :notebooks, only: %i[ edit update show ]
+  resources :assignments, only: %i[ index show ]
 
-  resources :mentions
   resources :messages
+  resources :conversations
   # Authentication
   resource :session
   resources :passwords, param: :token
 
-  resources :users
+  resources :users, only: %i[ show edit update ]
+  resources :mentions
+  resources :notifications
+  resources :overviews
+  resources :timetables, only: %i[ index show ]
+  resources :units, only: [ :index, :show ]
+  resources :topics, only: [ :index, :show ]
 
   # /admin
   namespace :admin do
-    root to: "dashboard#index"
-    # TODO: Make this RESTFUL
-    get "users/list", to: "users#list", as: "users_list"
+    root to: "home#index", as: "root"
+    get "/users", to: "users#list", as: "users_list"
+    resources :assignments do
+      member do
+        delete :remove_attachment
+      end
+    end
     resources :users
     resources :audits
     resources :courses do
       resources :course_ownerships
     end
     resources :units
+    resources :attachments, only: %i[ destroy ]
     resources :topics do
       member do
         delete :remove_attachment
       end
     end
 
-    resources :dashboard, only: [ :index ]
-    get "dashboard/overview", to: "dashboard#overview"
-    get "dashboard/courses", to: "courses#index"
-    get "dashboard/users", to: "users#index"
-  end
-
-  resources :courses
-  resources :users
-  resources :mentions
-  # /users
-  namespace :user do
-    root to: "home#index"
-    resources :units, only: [ :index, :show ]
-    resources :topics, only: [ :index, :show ]
-    resources :messages
-    resources :notifications
-    resources :timetables
+    resources :home
     resources :overviews
-    resources :assignments
-    post "/search", to: "users#search", as: :search
-    get "/profile", to: "profiles#show"
-    get "/home", to: "home#index"
   end
-
-  resource :assignments
-
-  resources :messages
 
   # Footer pages
   get "/sitemap", to: "footer#show", defaults: { page: "sitemap" }

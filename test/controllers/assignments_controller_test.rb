@@ -11,7 +11,7 @@ class AssignmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get new_assignment_url
+    get new_admin_assignment_url
     assert_response :success
   end
 
@@ -29,7 +29,7 @@ class AssignmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
-    get edit_assignment_url(@assignment)
+    get edit_admin_assignment_url(@assignment)
     assert_response :success
   end
 

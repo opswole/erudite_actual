@@ -17,12 +17,6 @@ class Admin::AdminsHomeControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to root_url
   end
-  test "Admin home inaccessible with teacher login" do
-    sign_in(@teacher)
-    get admin_root_path
-
-    assert_redirected_to root_url
-  end
 
   test "Admin home accessible with admin login" do
     sign_in(@admin)

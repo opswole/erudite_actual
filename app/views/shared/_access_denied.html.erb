@@ -1,0 +1,11 @@
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Hello there <%= user.full_name %>,</h1>
+      <p class="py-6">
+        Thrilled that you're curious! Unfortunately though, you aren't allowed here.
+      </p>
+      <%= link_to "Home", admin_root_path, class: "btn btn-soft btn-warning" %>
+    </div>
+  </div>
+</div>

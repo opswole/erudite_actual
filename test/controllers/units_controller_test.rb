@@ -14,7 +14,7 @@ class UnitsControllerTest < ActionDispatch::IntegrationTest
   # =end
   #
   #   test "should show unit" do
-  #     get user_unit_url(id: @user.units.first)
+  #     get unit_url(id: @user.units.first)
   #     assert_response :success
   #   end
   #
@@ -23,5 +23,5 @@ class UnitsControllerTest < ActionDispatch::IntegrationTest
   #     post session_url, params: { email_address: user.email_address, password: "password" }
   #   end
 
-  # assert_redirected_to user_units_url
+  # assert_redirected_to units_url
 end

@@ -5,7 +5,7 @@
 #  id          :integer          not null, primary key
 #  title       :string
 #  description :string
-#  deadline    :string
+#  deadline    :datetime
 #  unit_id     :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -21,4 +21,8 @@ class Assignment < ApplicationRecord
   has_many :messages, as: :messageable, dependent: :destroy
   has_many :notebooks, as: :notebookable, dependent: :destroy
   has_many_attached :files, dependent: :destroy
+
+  def start_time
+    self.deadline
+  end
 end

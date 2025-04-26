@@ -26,6 +26,7 @@
     "tailwindcss": "^4.0.6",
     "trix": "^2.1.13",
     "vite-plugin-full-reload": "^1.2.0",
-    "vite-plugin-stimulus-hmr": "^3.0.0"
+    "vite-plugin-stimulus-hmr": "^3.0.0",
+    "vuetify": "^3.8.2"
   }
 }

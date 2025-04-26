@@ -16,13 +16,10 @@
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyText
-  unit: one
-  unit_id: 1
+topic_one:
+  title: "Variables and Data Types"
+  unit_id: <%= ActiveRecord::FixtureSet.identify(:unit_one) %>
 
-two:
-  title: MyString
-  description: MyText
-  unit: two
+topic_two:
+  title: "Routing in Rails"
+  unit_id: <%= ActiveRecord::FixtureSet.identify(:unit_one) %>

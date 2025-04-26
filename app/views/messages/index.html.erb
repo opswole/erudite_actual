@@ -1,45 +1,47 @@
 <%= turbo_frame_tag "tab_content" do %>
 <p style="color: green"><%= notice %></p>
+<div  class="p-4 flex-1 flex flex-col">
 
-<% if @mentions.empty? %>
-     <%= render "shared/empty" %>
-    <% else %>
-    <div class="overflow-x-auto" data-controller="tabs">
-      <table class="table">
-        <thead>
-        <tr>
-          <th></th>
-          <th>Unit/Topic</th>
-          <th>Message Body</th>
-          <th></th>
+</div>
+<%# if @mentions.empty? %>
+     <%#= render "shared/empty" %>
+    <%# else %>
+<!--    <div class="overflow-x-auto" data-controller="tabs">-->
+<!--      <table class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th></th>-->
+<!--          <th>Unit/Topic</th>-->
+<!--          <th>Message Body</th>-->
+<!--          <th></th>-->
 
-        </tr>
-        </thead>
-        <tbody>
-        <% @mentions.each do | mention | %>
-          <tr>
-            <th>
-              <%= mention.user.full_name %> <br> @ <%= mention.created_at %>
-            </th>
-            <td>
-              <%= Topic.find(mention.messageable_id).title %>: <br>
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+        <%# @mentions.each do | mention | %>
+<!--          <tr>-->
+<!--            <th>-->
+<!--              <%#= mention.user.full_name %> <br> @ <%#= mention.created_at %>-->
+<!--            </th>-->
+<!--            <td>-->
+<!--              <%#= Topic.find(mention.messageable_id).title %>: <br>-->
               <%#= content_tag :span, mention.topic.title, class: "italic" %>
-            </td>
-            <td>
-              <%= mention.content %>
-            </td>
-            <td>
-              <%#= link_to "Go to message", user_unit_path(mention.unit.id, topic_id: mention.topic.id),
+<!--            </td>-->
+<!--            <td>-->
+              <%#= mention.content %>
+<!--            </td>-->
+<!--            <td>-->
+              <%#= link_to "Go to message", unit_path(mention.unit.id, topic_id: mention.topic.id),
                           class: "btn btn-ghost",
                           data: {
                             action: "click->tabs#activateTabById",
                             tabs_target: "tab"
                           }%>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-<% end %>
+<!--            </td>-->
+<!--          </tr>-->
+        <%# end %>
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<%# end %>
 <% end %>

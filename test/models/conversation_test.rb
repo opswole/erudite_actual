@@ -2,22 +2,21 @@
 #
 # Table name: conversations
 #
-#  id           :integer          not null, primary key
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  sender_id    :integer          not null
-#  recipient_id :integer          not null
-#
-# Indexes
-#
-#  index_conversations_on_recipient_id  (recipient_id)
-#  index_conversations_on_sender_id     (sender_id)
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  name       :string
 #
 
 require "test_helper"
 
 class ConversationTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @conversation_attributes = conversations(:conversation_one).attributes.except("id", "created_at", "updated_at")
+  end
+
+  test "valid conversation is valid" do
+    conversation = Conversation.new(@conversation_attributes)
+    assert conversation.valid?
+  end
 end

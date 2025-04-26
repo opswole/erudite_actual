@@ -1,23 +1,30 @@
 <% password_digest = BCrypt::Password.create("password") %>
 
 student:
-  first_name: student
-  last_name: zero
   email_address: student@example.com
-  account_type: 0
+  first_name: Alice
+  last_name: Smith
   password_digest: <%= password_digest %>
-
+  account_type: student
 
 teacher:
-  first_name: teacher
-  last_name: one
-  account_type: 1
   email_address: teacher@example.com
+  first_name: Bob
+  last_name: Johnson
   password_digest: <%= password_digest %>
+  account_type: teacher
 
 admin:
-  first_name: admin
-  last_name: two
-  account_type: 2
   email_address: admin@example.com
+  first_name: Charlie
+  last_name: Brown
   password_digest: <%= password_digest %>
+  account_type: administrator
+
+user_with_avatar:
+  email_address: avatar@example.com
+  first_name: Emma
+  last_name: Wilson
+  password_digest: <%= password_digest %>
+  account_type: student
+#  avatar: <%#= fixture_file_upload(Rails.root.join('test', 'fixtures', 'files', 'file.jpg'), 'image/png') %>

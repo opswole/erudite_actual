@@ -983,7 +983,7 @@ tslib@^2.8.1:
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
-typescript@*, typescript@^5.8.2:
+typescript@*, typescript@^5.8.2, typescript@>=4.7:
   version "5.8.2"
   resolved "https://registry.npmjs.org/typescript/-/typescript-5.8.2.tgz"
   integrity sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==
@@ -1036,7 +1036,7 @@ vitefu@^1.0.4:
   resolved "https://registry.npmjs.org/vitefu/-/vitefu-1.0.6.tgz"
   integrity sha512-+Rex1GlappUyNN6UfwbVZne/9cYC4+R2XDk9xkNXBKMw6HQagdX9PgZ8V2v1WUSK1wfBLp7qbI1+XSNIlB1xmA==
 
-vue@^3.2.25, vue@^3.2.33, vue@3.5.13:
+vue@^3.2.25, vue@^3.2.33, vue@^3.5.0, vue@3.5.13:
   version "3.5.13"
   resolved "https://registry.npmjs.org/vue/-/vue-3.5.13.tgz"
   integrity sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==
@@ -1046,6 +1046,11 @@ vue@^3.2.25, vue@^3.2.33, vue@3.5.13:
     "@vue/runtime-dom" "3.5.13"
     "@vue/server-renderer" "3.5.13"
     "@vue/shared" "3.5.13"
+
+vuetify@^3.8.2:
+  version "3.8.2"
+  resolved "https://registry.npmjs.org/vuetify/-/vuetify-3.8.2.tgz"
+  integrity sha512-UJNFP4egmKJTQ3V3MKOq+7vIUKO7/Fko5G6yUsOW2Rm0VNBvAjgO6VY6EnK3DTqEKN6ugVXDEPw37NQSTGLZvw==
 
 yallist@^3.0.2:
   version "3.1.1"

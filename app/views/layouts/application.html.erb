@@ -31,26 +31,27 @@
     <%= render "layouts/navbar" %>
   <% end %>
 
-    <dialog
-      class="modal"
-      data-controller="modal"
-      data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close"
-    >
-      <div class="modal-box">
-        <h3 class="text-lg font-bold">Notifications</h3>
-        <div class="py-4">
-          <%= turbo_frame_tag "notifications" %>
-        </div>
-        <div class="modal-action">
-          <form method="dialog">
-            <button class="btn">Close</button>
-          </form>
-        </div>
+  <dialog
+    class="modal"
+    data-controller="modal"
+    data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close"
+  >
+    <div class="modal-box max-h-[50vh] flex flex-col">
+      <h3 class="text-lg font-bold mb-2">Notifications</h3>
+      <div class="flex-1 overflow-y-auto py-2">
+        <%= turbo_frame_tag "notifications" do %>
+          <p class="text-gray-500 text-center py-2">Loading notifications...</p>
+        <% end %>
       </div>
-    </dialog>
+      <div class="modal-action mt-2">
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
 
     <main class="container mx-auto w-11/12 max-w-none flex-1 px-5 flex flex-col min-h-screen">
-      <%= render 'shared/flash' %>
       <%= yield %>
     </main>
 

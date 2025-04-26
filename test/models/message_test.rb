@@ -20,7 +20,32 @@
 require "test_helper"
 
 class MessageTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+    setup do
+      @message_attributes = messages(:message_one).attributes.except("id", "created_at", "updated_at")
+    end
+
+    test "valid message with content, user, and messageable is valid" do
+      message = Message.new(@message_attributes)
+      assert message.valid?
+    end
+
+    test "invalid message without content (nil)" do
+      message = Message.new(@message_attributes.merge(content: nil))
+      assert_not message.valid?
+    end
+
+    test "invalid message with blank content" do
+      message = Message.new(@message_attributes.merge(content: ""))
+      assert_not message.valid?
+    end
+
+    test "invalid message without user" do
+      message = Message.new(@message_attributes.merge(user_id: nil))
+      assert_not message.valid?
+    end
+
+    test "invalid message without messageable" do
+      message = Message.new(@message_attributes.merge(messageable_id: nil, messageable_type: nil))
+      assert_not message.valid?
+    end
 end
