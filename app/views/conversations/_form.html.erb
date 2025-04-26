@@ -1,0 +1,43 @@
+<div class="container mx-auto px-4 py-8">
+  <h2 class="text-2xl font-bold mb-6">Start a New Conversation</h2>
+
+  <%= form_with(model: @conversation, class: "space-y-6") do |form| %>
+    <% if @conversation.errors.any? %>
+      <div class="alert alert-error">
+        <h3><%= pluralize(@conversation.errors.count, "error") %> prevented this conversation from being saved:</h3>
+        <ul>
+          <% @conversation.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-control">
+      <%= form.label :name, "Conversation Name (optional)", class: "label" %>
+      <%= form.text_field :name, class: "input input-bordered w-full" %>
+    </div>
+
+    <div class="form-control">
+      <label class="label">Select a user to chat with:</label>
+      <div class="bg-base-200 rounded-box p-4 max-h-60 overflow-y-auto">
+        <ul class="menu bg-base-200 rounded-box w-full">
+          <li class="menu-title">Users</li>
+          <% User.where.not(id: Current.user.id).each do |user| %>
+            <li>
+              <label class="label cursor-pointer justify-start gap-2">
+                <%= radio_button_tag 'user_id', user.id, false, class: "radio" %>
+                <span><%= user.full_name %></span>
+              </label>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex justify-end">
+      <%= form.submit "Create Conversation", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+

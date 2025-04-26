@@ -2,11 +2,9 @@ class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[ show edit update destroy ]
   def index
   end
-
   def list
     @users = User.all
   end
-
   def new
     @user = User.new
   end
@@ -25,18 +23,16 @@ class Admin::UsersController < Admin::BaseController
     if @user.save
       create_enrollment if params[:user][:course_id].present?
 
-      redirect_to admin_users_list_path, notice: "User was successfully created."
+      redirect_to admin_users_path, notice: "User was successfully created."
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-
-
   def update
     if @user.update(user_params)
       flash.now[:success] = "User was successfully updated."
-      redirect_to admin_users_list_path, notice: "User was successfully updated."
+      redirect_to admin_users_path, notice: "User was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

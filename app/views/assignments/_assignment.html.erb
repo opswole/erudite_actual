@@ -3,12 +3,6 @@
   <div class="text-center mb-4">
     <h1 class="text-3xl font-bold mb-4">
       <%= assignment.title %> for <%= @unit_title %>
-      <% if Current.user.authorised? %>
-      <%= link_to "Edit", edit_assignment_path(assignment), class: "btn btn-xs btn-outline btn-info" %>
-      <%= link_to "Delete", assignment_path(assignment), class: "btn btn-xs btn-outline btn-error", data: {
-        turbo_method: :delete,
-        turbo_confirm: "Deleting #{}" } %>
-        <% end %>
     </h1>
   </div>
 <div id="<%= dom_id assignment %>">

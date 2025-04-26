@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <div  class="p-4 flex-1 flex flex-col">
+    <div>
+      <%= render "admin/overviews/overview" %>
+    </div>
+      <div>
+        <% if Current.user.teacher? %>
+          <h1 class="text-2xl mb-6 text-center">Hello!</h1>
+          <br>
+          <p class="text-center">You can amend your owned courses under <em>courses</em>. The rest of the pages will appear bare as you
+          aren't an admin :).</p>
+        <% else %>
+          <%= render "admin/audits/user_audit", user_audits: @user_audits %>
+        <% end %>
+      </div>
+  </div>
+<% end %>

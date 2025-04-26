@@ -8,11 +8,11 @@
       <%= link_to "Create Users", new_admin_user_path,  data: { turbo_frame: "user_content" }%>
     </li>
     <li>
-      <%= link_to "Edit User", admin_users_list_path,  data: { turbo_frame: "user_content" }%>
+      <%= link_to "Edit User", admin_users_path,  data: { turbo_frame: "user_content" }%>
     </li>
     </ul>
     </div>
 
-  <%= turbo_frame_tag "user_content", src: admin_audits_path, class: "col-span-3 row-start-3 h-64 overflow-y-auto" %>
+  <%= turbo_frame_tag "user_content", src: admin_users_list_path, class: "col-span-3 row-start-3 h-64 overflow-y-auto" %>
 
 <% end %>

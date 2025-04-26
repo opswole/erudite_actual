@@ -1,0 +1,26 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <div class="p-4 flex-1 flex flex-row overflow-y-auto">
+    <div class="menu w-1/4 flex flex-col items-start">
+      <div class="menu-title flex flex-col items-start mb-2 w-full">
+        <span class="text-lg font-semibold">Users</span>
+        <%= link_to "New", new_conversation_path, data: { turbo_frame: "conversation" }, class: "btn btn-sm btn-primary mt-2 w-full" %>
+      </div>
+      <ul class="w-full">
+        <% @conversations.each do |conversation| %>
+          <% @author = conversation.users.find { |user| user != Current.user }&.full_name || "Unknown" %>
+          <li class="flex items-center py-1">
+            <%= link_to @author, conversation_path(conversation),
+                        data: { turbo_frame: "conversation" },
+                        class: "flex-1 text-left hover:bg-base-300 rounded px-2 py-1" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="p-4 w-3/4 h-full overflow-y-auto">
+      <%= turbo_frame_tag "conversation" do %>
+        <%= render "shared/empty" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

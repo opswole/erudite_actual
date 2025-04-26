@@ -16,13 +16,12 @@
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyString
-  course: one
-  course_id: 1
+unit_one:
+  title: "Ruby Basics"
+  description: "Introduction to Ruby programming"
+  course_id: <%= ActiveRecord::FixtureSet.identify(:course_one) %>
 
-two:
-  title: MyString
-  description: MyString
-  course: two
+unit_two:
+  title: "Rails Fundamentals"
+  description: "Building web apps with Rails"
+  course_id: <%= ActiveRecord::FixtureSet.identify(:course_one) %>

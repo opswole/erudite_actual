@@ -1,4 +1,4 @@
-class Admin::CourseOwnershipsController < ApplicationController
+class Admin::CourseOwnershipsController < Admin::BaseController
   before_action :set_current_owners, :set_staff, only: [ :show, :edit, :update, :destroy ]
   before_action :set_course, only: [ :edit, :create ]
   before_action :find_owner_by_email, only: [ :create ]
@@ -24,15 +24,6 @@ class Admin::CourseOwnershipsController < ApplicationController
   end
 
   def edit
-  end
-
-  def update
-    # if @course_ownership.update(course_ownership_params)
-    #   redirect_to admin_courses_path, notice: "Course ownership was successfully updated."
-    # else
-    #   set_staff
-    #   render :edit, status: :unprocessable_entity
-    # end
   end
 
   def destroy

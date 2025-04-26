@@ -17,7 +17,37 @@
 require "test_helper"
 
 class UnitTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @unit_attributes = units(:unit_one).attributes.except("id", "created_at", "updated_at")
+  end
+
+  test "valid unit is valid" do
+    unit = Unit.new(@unit_attributes)
+    assert unit.valid?
+  end
+
+  test "invalid unit with nil title" do
+    unit = Unit.new(@unit_attributes.merge(title: nil))
+    assert_not unit.valid?
+  end
+
+  test "invalid unit with blank title" do
+    unit = Unit.new(@unit_attributes.merge(title: ""))
+    assert_not unit.valid?
+  end
+
+  test "invalid unit with nil description" do
+    unit = Unit.new(@unit_attributes.merge(description: nil))
+    assert_not unit.valid?
+  end
+
+  test "invalid unit with blank description" do
+    unit = Unit.new(@unit_attributes.merge(description: ""))
+    assert_not unit.valid?
+  end
+
+  test "invalid unit with nil course" do
+    unit = Unit.new(@unit_attributes.merge(course_id: nil))
+    assert_not unit.valid?
+  end
 end

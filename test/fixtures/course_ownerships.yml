@@ -1,0 +1,7 @@
+course_ownership_one:
+  course_id: <%= ActiveRecord::FixtureSet.identify(:course_one) %>
+  user_id: <%= ActiveRecord::FixtureSet.identify(:admin) %>
+
+course_ownership_two:
+  course_id: <%= ActiveRecord::FixtureSet.identify(:course_two) %>
+  user_id: <%= ActiveRecord::FixtureSet.identify(:teacher) %>

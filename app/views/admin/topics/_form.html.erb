@@ -47,6 +47,12 @@
                        direct_upload: true,
                        class: "file-input file-input-bordered w-full",
                        accept: "application/pdf" %>
+
+      <% if @topic.files? %>
+        <% @topic.files.each do |t| %>
+          <span><%= t %></span>
+        <% end %>
+      <% end %>
     </div>
 
 

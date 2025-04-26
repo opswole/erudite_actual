@@ -13,6 +13,7 @@ export default defineConfig({
     FullReload(['config/routes.rb', 'app/views/**/*'], { delay: 200 }),
     StimulusHMR(),
     vue(),
+
   ],
   envDir: '../',
 })

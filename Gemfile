@@ -62,11 +62,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'simplecov', require: false
 end
 
 gem "logger", "~> 1.6.5"
-
-gem "rdoc", "~> 6.12.0"
 
 gem "faker"
 

@@ -27,7 +27,7 @@
             <li class="flex items-center space-x-2">
               <%= form.hidden_field :files, multiple: true, value: file.signed_id %>
               <%= link_to file.filename.to_s, rails_blob_path(file, disposition: "attachment"), class: "text-blue-600 hover:underline" %>
-              <%#= link_to "Delete", admin_attachment_path(id: file.id), class: "btn btn-xs btn-outline btn-error", data: {
+              <%= link_to "Delete", admin_attachment_path(id: file.id, topic: @topic.id), class: "btn btn-xs btn-outline btn-error", data: {
                 turbo_method: :delete,
                 turbo_confirm: "Deleting #{file.filename.to_s}" } %>
             </li>
