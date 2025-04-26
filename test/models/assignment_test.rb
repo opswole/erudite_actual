@@ -18,7 +18,22 @@
 require "test_helper"
 
 class AssignmentTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @assignment_attributes = assignments(:assignment_one).attributes.except("id", "created_at", "updated_at")
+  end
+
+  test "valid assignment with unit is valid" do
+    assignment = Assignment.new(@assignment_attributes)
+    assert assignment.valid?
+  end
+
+  test "invalid assignment without unit" do
+    assignment = Assignment.new(@assignment_attributes.merge(unit_id: nil))
+    assert_not assignment.valid?
+  end
+
+  test "assignment has course through unit" do
+    assignment = assignments(:assignment_one)
+    assert assignment.course.present?
+  end
 end

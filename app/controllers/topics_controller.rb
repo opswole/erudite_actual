@@ -5,17 +5,14 @@ class TopicsController < ApplicationController
   end
 
   def show
-  end
-
-  private
-  def set_topic
-    @topic = Topic.find(params[:id])
-  end
-  def set_unit
-    @unit = @topic.unit
-  end
-
-  def topic_params
-    params.require(:topic).permit(:title, :description, :unit_id, files: [])
+    @messageable = Topic.find(params[:id])
+    @taggable_users = User
+                        .joins(:topics)
+                        .where(topics: { id: @topic.id })
+                        .where(account_type: %w[student teacher])
+                        .where(taggable_by_students: true)
+                        .distinct
+                        .sort_by(&:account_type)
+                        .reverse
   end
 end

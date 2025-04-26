@@ -1,0 +1,29 @@
+
+<%if @recent_mentions.empty? %>
+  <%= render "shared/empty" %>
+
+  <% else %>
+  <% @recent_mentions.group_by { |mention| mention.message.messageable.unit }.each do |unit, mentions| %>
+    <div class="collapse bg-base-200 mx-2 mt-8">
+      <input type="radio" name="my-accordion-1"/>
+      <div class="collapse-title text-s font-light"><%= unit.title %></div>
+      <div class="collapse-content">
+        <% mentions.group_by { |mention| mention.message.messageable }.each do |messageable, messageable_mentions| %>
+          <% messageable_mentions.each do |mention| %>
+            <%= link_to unit_path(topic_id: mention.message.messageable, id: mention.message.messageable.unit),
+                        data: {
+                          turbo_frame: "tab_content",
+                          action: "click->modal#close",
+                          "modal-target": "mention-link"
+                        },
+                        class: "block mb-2 p-2 border-b hover:bg-gray-100" do %>
+              <p class="text-xs">
+                <%= mention.message.content %> | <%= messageable.title %>
+              </p>
+            <%end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

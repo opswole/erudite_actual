@@ -17,7 +17,22 @@
 require "test_helper"
 
 class ConversationUserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @conversation_user_attributes = conversation_users(:conversation_user_one).attributes.except("id", "created_at", "updated_at")
+  end
+
+  test "valid conversation_user with user and conversation is valid" do
+    conversation_user = ConversationUser.new(@conversation_user_attributes)
+    assert conversation_user.valid?
+  end
+
+  test "invalid conversation_user without user" do
+    conversation_user = ConversationUser.new(@conversation_user_attributes.merge(user_id: nil))
+    assert_not conversation_user.valid?
+  end
+
+  test "invalid conversation_user without conversation" do
+    conversation_user = ConversationUser.new(@conversation_user_attributes.merge(conversation_id: nil))
+    assert_not conversation_user.valid?
+  end
 end

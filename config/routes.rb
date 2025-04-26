@@ -1,22 +1,26 @@
 Rails.application.routes.draw do
-  root to: "user/home#index"
+  root to: "home#index", as: "root"
 
-  resources :notebooks
-  resources :assignments do
+  resources :notebooks, only: %i[ edit update show ]
+  resources :assignments, only: %i[ index show ] do
     member do
       delete :remove_attachment
     end
   end
 
-
-  resources :mentions
   resources :messages
   resources :conversations
   # Authentication
   resource :session
   resources :passwords, param: :token
 
-  resources :users
+  resources :users, only: %i[ show edit update ]
+  resources :mentions
+  resources :notifications
+  resources :overviews
+  resources :timetables, only: %i[ index show ]
+  resources :units, only: [ :index, :show ]
+  resources :topics, only: [ :index, :show ]
 
   # /admin
   namespace :admin do
@@ -40,28 +44,6 @@ Rails.application.routes.draw do
     get "dashboard/courses", to: "courses#index"
     get "dashboard/users", to: "users#index"
   end
-
-  resources :courses
-  resources :users
-  resources :mentions
-  # /users
-  namespace :user do
-    root to: "home#index"
-    resources :units, only: [ :index, :show ]
-    resources :topics, only: [ :index, :show ]
-    resources :messages
-    resources :notifications
-    resources :timetables
-    resources :overviews
-    resources :assignments
-    post "/search", to: "users#search", as: :search
-    get "/profile", to: "profiles#show"
-    get "/home", to: "home#index"
-  end
-
-  resource :assignments
-
-  resources :messages
 
   # Footer pages
   get "/sitemap", to: "footer#show", defaults: { page: "sitemap" }

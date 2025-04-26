@@ -18,7 +18,7 @@ Course.destroy_all
 Unit.destroy_all
 Topic.destroy_all
 
-
+# TODO: Profile Pictures on seed
 puts "Creating admin..."
 admin = User.create!(
   email_address: "admin@erudite.com",
@@ -218,25 +218,25 @@ bio_units = bio.units.limit(3)
 puts "Creating Assignments"
 cs_units.each_with_index do |u, i|
   u.create_assignment(
-    title: "Assignment #{i}",
+    title: "#{u.title} Assignment",
     description: "Assignment #{i} for #{u.title}",
-    deadline: "2025-05-22T18:00:00+00:00",
-    )
+    deadline: DateTime.now + rand(1..30).days
+  )
 end
 
 env_units.each_with_index do |u, i|
   u.create_assignment(
-    title: "Assignment #{i}",
+    title: "#{u.title} Assignment",
     description: "Assignment #{i} for #{u.title}",
-    deadline: "2025-05-22T18:00:00+00:00",
+    deadline: DateTime.now + rand(1..30).days
     )
 end
 
 bio_units.each_with_index do |u, i|
   u.create_assignment(
-    title: "Assignment #{i}",
+    title: "#{u.title} Assignment",
     description: "Assignment #{i} for #{u.title}",
-    deadline: "2025-05-22T18:00:00+00:00",
+    deadline: DateTime.now + rand(1..30).days
     )
 end
 

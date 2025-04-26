@@ -26,15 +26,6 @@ class Admin::CourseOwnershipsController < ApplicationController
   def edit
   end
 
-  def update
-    # if @course_ownership.update(course_ownership_params)
-    #   redirect_to admin_courses_path, notice: "Course ownership was successfully updated."
-    # else
-    #   set_staff
-    #   render :edit, status: :unprocessable_entity
-    # end
-  end
-
   def destroy
     CourseOwnership.find_by(course_id: params[:course_id], user_id: params[:id]).destroy
     redirect_to admin_courses_path, notice: "Course ownership was successfully deleted."

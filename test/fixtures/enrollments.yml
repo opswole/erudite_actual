@@ -1,0 +1,7 @@
+enrollment_one:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:student) %>
+  course_id: <%= ActiveRecord::FixtureSet.identify(:course_one) %>
+
+enrollment_two:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:teacher) %>
+  course_id: <%= ActiveRecord::FixtureSet.identify(:course_two) %>

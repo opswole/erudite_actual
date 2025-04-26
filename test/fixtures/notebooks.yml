@@ -22,8 +22,14 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+notebook_one:
+  title: "Ruby Notes"
+  user_id: <%= ActiveRecord::FixtureSet.identify(:student) %>
+  notebookable_type: Topic
+  notebookable_id: <%= ActiveRecord::FixtureSet.identify(:topic_one) %>
+
+notebook_two:
+  title: "Rails Notes"
+  user_id: <%= ActiveRecord::FixtureSet.identify(:student) %>
+  notebookable_type: Unit
+  notebookable_id: <%= ActiveRecord::FixtureSet.identify(:unit_one) %>

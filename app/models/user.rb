@@ -29,6 +29,7 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   validates :email_address, presence: true, uniqueness: true
   validates :first_name, :last_name, presence: true
+  validates :account_type, inclusion: %w[student teacher administrator]
 
   enum :account_type, {
     student: 0,

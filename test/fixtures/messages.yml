@@ -19,10 +19,16 @@
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user_id: MyString
-  topic_id: MyString
+message_one:
+  title: "Welcome Message"
+  content: "Hello, welcome to the course!"
+  user_id: <%= ActiveRecord::FixtureSet.identify(:student) %>
+  messageable_type: Course
+  messageable_id: <%= ActiveRecord::FixtureSet.identify(:course_one) %>
 
-two:
-  user_id: MyString
-  topic_id: MyString
+message_two:
+  title: "Unit Discussion"
+  content: "Let's discuss this unit."
+  user_id: <%= ActiveRecord::FixtureSet.identify(:student) %>
+  messageable_type: Unit
+  messageable_id: <%= ActiveRecord::FixtureSet.identify(:unit_one) %>

@@ -17,11 +17,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
+#  model, remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+conversation_user_one:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:student) %>
+  conversation_id: <%= ActiveRecord::FixtureSet.identify(:conversation_one) %>
+
+conversation_user_two:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:admin) %>
+  conversation_id: <%= ActiveRecord::FixtureSet.identify(:conversation_two) %>

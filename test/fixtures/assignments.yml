@@ -17,14 +17,14 @@
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyString
-  deadline: MyString
-  unit: one
+assignment_one:
+  title: "Ruby Assignment"
+  description: "Create a Ruby program"
+  deadline: <%= 1.week.from_now %>
+  unit_id: <%= ActiveRecord::FixtureSet.identify(:unit_one) %>
 
-two:
-  title: MyString
-  description: MyString
-  deadline: MyString
-  unit: two
+assignment_two:
+  title: "Rails Project"
+  description: "Build a Rails app"
+  deadline: <%= 2.weeks.from_now %>
+  unit_id: <%= ActiveRecord::FixtureSet.identify(:unit_one) %>

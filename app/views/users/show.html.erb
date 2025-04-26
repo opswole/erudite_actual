@@ -1,26 +1,26 @@
 <%= turbo_frame_tag "tab_content" do %>
   <div id="<%= dom_id @user %>">
-  <div class="w-full p-6">
+    <div class="w-full p-6">
 
-    <h2 class="text-2xl font-semibold mb-4"><%= "#{@user&.first_name}" %></h2>
+      <h2 class="text-2xl font-semibold mb-4"><%= "#{@user&.first_name}" %></h2>
 
-    <div class="glass gap-6 p-6 rounded-lg w-full flex flex-col items-center">
+      <div class="glass gap-6 p-6 rounded-lg w-full flex flex-col items-center">
 
-      <% if @user.avatar.attached? %>
-        <div class="avatar">
-          <%= image_tag @user.avatar %>
-        </div>
+        <% if @user.avatar.attached? %>
+          <div class="avatar">
+            <%= image_tag @user.avatar %>
+          </div>
         <% else %>
           <span>
             No Profile Picture
           </span>
-      <% end %>
+        <% end %>
 
-      <%= render partial: "user", locals: { user: @user } %>
-      <%= render partial: "passwords/form", locals: { user: @user } %>
-      <%= render partial: "form", locals: { user: @user } %>
+        <%= render partial: "user", locals: { user: @user } %>
+        <%= render partial: "passwords/form", locals: { user: @user } %>
+        <%= render partial: "form", locals: { user: @user } %>
 
+      </div>
     </div>
-  </div>
   </div>
 <% end %>

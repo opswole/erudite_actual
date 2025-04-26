@@ -17,10 +17,10 @@
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  message: one
+mention_one:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:student) %>
+  message_id: <%= ActiveRecord::FixtureSet.identify(:message_one) %>
 
-two:
-  user: two
-  message: two
+mention_two:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:admin) %>
+  message_id: <%= ActiveRecord::FixtureSet.identify(:message_two) %>
