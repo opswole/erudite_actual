@@ -1,4 +1,4 @@
-class Admin::CourseOwnershipsController < ApplicationController
+class Admin::CourseOwnershipsController < Admin::BaseController
   before_action :set_current_owners, :set_staff, only: [ :show, :edit, :update, :destroy ]
   before_action :set_course, only: [ :edit, :create ]
   before_action :find_owner_by_email, only: [ :create ]

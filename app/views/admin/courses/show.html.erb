@@ -1,45 +1,52 @@
 <%= turbo_frame_tag "tab_content" do %>
-  <% content_for :title, "View Course" %>
-  <h1 class="text-2xl">Units for <%= @course.title %></h1>
-  <%= link_to "Delete Course", admin_course_path(@course),
-              data: {
-                turbo_method: :delete,
-                turbo_confirm: "Are you sure?",
-              },
-              class: "btn btn-error btn-sm"%>
-  <span>
-    <%= link_to "Create Unit", new_admin_unit_path(course_id: @course.id), class: "btn btn-primary btn-sm" %>
-  </span>
-  <div class="overflow-x-auto">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th> Action </th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @course.units.each do |unit| %>
-        <tr>
-          <td><%= unit.title %></td>
-          <td><%= unit.description %></td>
-          <td>
-            <%= link_to "View", admin_unit_path(unit), class: "btn btn-info" %>
-            <%= link_to "Edit", edit_admin_unit_path(unit), class: "btn btn-info" %>
-            <%= link_to "Delete Unit", admin_unit_path(unit.id),
-                        data:{
-                          turbo_method: :delete,
-                          turbo_confirm: "You are about to delete #{unit.title}"
-                        },
-                        class: "btn btn-error" %>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="flex justify-center">
-  <%= link_to "Back", admin_courses_path,
-              class: "btn btn-info"%>
+  <div  class="p-4 flex-1 flex flex-col">
+    <% content_for :title, "View Course" %>
+
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-2xl font-medium text-gray-900">Units for <%= @course.title %></h1>
+      <%= link_to "Create Unit", new_admin_unit_path(course_id: @course.id),
+                  class: "btn btn-primary btn-sm" %>
+    </div>
+
+
+    <div class="overflow-y-auto">
+      <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+          <% @course.units.each do |unit| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <%= unit.title %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <%= unit.description %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                <%= link_to "View", admin_unit_path(unit), class: "btn btn-info" %>
+                <%= link_to "Edit", edit_admin_unit_path(unit), class: "btn btn-info" %>
+                <%= link_to "Delete", admin_unit_path(unit),
+                            data: {
+                              turbo_method: :delete,
+                              turbo_confirm: "You are about to delete #{unit.title}"
+                            },
+                            class: "btn btn-error" %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-6">
+      <%= link_to "Back", admin_courses_path, class: "btn btn-info" %>
+    </div>
   </div>
 <% end %>

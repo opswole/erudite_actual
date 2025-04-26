@@ -13,7 +13,10 @@ class OverviewsController < ApplicationController
                             .includes(message: [ :user, messageable: [ :unit ] ])
                             .order(created_at: :desc)
                             .limit(20)
+
     @assignments = @user.assignments
+                        .order(deadline: :asc)
+                        .limit(3)
   end
 
   private

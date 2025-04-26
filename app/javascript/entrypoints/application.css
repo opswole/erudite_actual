@@ -4,24 +4,25 @@
 
 
 @plugin "daisyui" {
-    themes: nord --default
+    themes: wireframe --default
 }
 
+.tab-active{
+    color: #8a1f11;
+}
 
+#tab_content {
+    border-width: 2px;
+    border-style: dotted;
+    margin-bottom: 2%;
+}
 /* hide attach button on editor */
 .trix-button.trix-button--icon.trix-button--icon-attach {
     display: none;
 }
 
-#topic_content > div {
-    border: 1px dashed #000;
-}
 
 .trix-content {
     max-height: 400px !important;
     overflow-y: auto;
-}
-
-div.test {
-    background-color: red;
 }

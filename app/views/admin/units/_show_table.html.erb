@@ -13,7 +13,6 @@
           <%= topic.title %>
         </td>
         <td class="w-[30%] px-6 py-4 whitespace-nowrap text-sm text-gray-500 space-x-2">
-          <%= link_to "Student View", unit_path(topic_id: topic.id, id: @unit), class: "btn btn-info" %>
           <%= link_to "Edit", edit_admin_topic_path(topic), class: "btn btn-info" %>
           <%= link_to admin_topic_path(topic),
                       data: {

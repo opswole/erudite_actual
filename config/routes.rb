@@ -2,11 +2,7 @@ Rails.application.routes.draw do
   root to: "home#index", as: "root"
 
   resources :notebooks, only: %i[ edit update show ]
-  resources :assignments, only: %i[ index show ] do
-    member do
-      delete :remove_attachment
-    end
-  end
+  resources :assignments, only: %i[ index show ]
 
   resources :messages
   resources :conversations
@@ -24,25 +20,28 @@ Rails.application.routes.draw do
 
   # /admin
   namespace :admin do
-    root to: "dashboard#index"
-    # TODO: Make this RESTFUL
-    get "users/list", to: "users#list", as: "users_list"
+    root to: "home#index", as: "root"
+    get "/users", to: "users#list", as: "users_list"
+    resources :assignments do
+      member do
+        delete :remove_attachment
+      end
+    end
     resources :users
     resources :audits
     resources :courses do
       resources :course_ownerships
     end
     resources :units
+    resources :attachments, only: %i[ destroy ]
     resources :topics do
       member do
         delete :remove_attachment
       end
     end
 
-    resources :dashboard, only: [ :index ]
-    get "dashboard/overview", to: "dashboard#overview"
-    get "dashboard/courses", to: "courses#index"
-    get "dashboard/users", to: "users#index"
+    resources :home
+    resources :overviews
   end
 
   # Footer pages

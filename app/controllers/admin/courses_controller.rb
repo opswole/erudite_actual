@@ -1,8 +1,15 @@
-class Admin::CoursesController < ApplicationController
+class Admin::CoursesController < Admin::BaseController
   before_action :set_course, only: %i[ show edit update destroy ]
 
   def index
-    @courses = Course.all.includes(units: :topics)
+    if Current.user.administrator?
+      @courses = Course.all.includes(units: :topics)
+    else
+      @courses = Course.includes(units: :topics)
+                       .joins(:owners)
+                       .where(users: { id: Current.user.id })
+                       .distinct
+    end
   end
   def new
     @course = Course.new

@@ -1,3 +1,41 @@
-<h4><%= assignment.title %></h4>
-<p><%= assignment.description %></p>
-<span>Deadline: <%= assignment.deadline %></span>
+<%= turbo_frame_tag "tab_content" do %>
+
+  <div class="text-center mb-4">
+    <h1 class="text-3xl font-bold mb-4">
+      <%= assignment.title %> for <%= @unit_title %>
+      <% if Current.user.authorised? %>
+      <%= link_to "Edit", edit_admin_assignment_path(assignment), class: "btn btn-xs btn-outline btn-info" %>
+      <%= link_to "Delete", assignment_path(assignment), class: "btn btn-xs btn-outline btn-error", data: {
+        turbo_method: :delete,
+        turbo_confirm: "Deleting #{}" } %>
+        <% end %>
+    </h1>
+  </div>
+<div id="<%= dom_id assignment %>">
+  <%# TODO: Markdown Support? %>
+  <p>
+    <strong>Description:</strong> <br>
+    <%= assignment.description %>
+  </p>
+
+  <p>
+    <strong>Deadline:</strong><br>
+    <%= assignment.deadline %>
+  </p>
+  <div class="grid grid-cols-2 gap-6 p-4">
+
+    <div>
+      <h2 class="text-3xl font-bold mb-4">Attachments for <%= assignment.title %>:</h2>
+      <% if assignment.files.attached? %>
+        <%= render "shared/file_dropdown", obj: assignment %>
+      <% end %>
+    </div>
+
+    <div>
+        <div id="<%= dom_id(assignment, :messages) %>">
+          <%= render "shared/chat_window", messageable: assignment %>
+        </div>
+    </div>
+  </div>
+</div>
+<% end %>

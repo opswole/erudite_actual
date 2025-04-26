@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "tab_content" do %>
-  <%= form_with(model: assignment, class: "space-y-4") do |form| %>
+  <%= form_with(model: [:admin, assignment], class: "space-y-4") do |form| %>
     <% if assignment.errors.any? %>
       <div class="text-red-600">
         <h2 class="text-lg font-medium"><%= pluralize(assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
@@ -46,6 +46,9 @@
             <li class="flex items-center space-x-2">
               <%= form.hidden_field :files, multiple: true, value: file.signed_id %>
               <%= link_to file.filename.to_s, rails_blob_path(file, disposition: "attachment"), class: "text-blue-600 hover:underline" %>
+              <%= link_to "Delete", remove_attachment_admin_assignment_path(id: file.id, assignment_id: assignment.id), class: "btn btn-xs btn-outline btn-error", data: {
+                turbo_method: :delete,
+                turbo_confirm: "Deleting #{file.filename.to_s}" } %>
             </li>
           <% end %>
         </ul>

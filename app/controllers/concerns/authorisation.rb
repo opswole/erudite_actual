@@ -7,7 +7,7 @@ module Authorisation
 
   private
   def elevated_access?
-    Current.user&.administrator?
+    Current.user&.administrator? || Current.user&.teacher?
   end
   def require_elevated_access
     unless elevated_access?

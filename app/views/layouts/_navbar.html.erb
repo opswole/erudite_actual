@@ -4,20 +4,27 @@
     <div class="stat-value" data-controller="clock">
       <span data-clock-target="display">00:00:00</span>
     </div>
-    <a class="btn btn-ghost text-xl">{Next Timetabled Event}</a>
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
       <li>
-        <%# TODO add logo %>
-        <%# TODO Trigger Tab on click %>
-        <%= link_to "Erudite", root_path, class: "btn btn-ghost text-xl", id: "test" %>
-        <%# TODO -> Don't leave this here %>
-        <%= link_to "admin", admin_dashboard_index_path, class: "btn btn-ghost text-xl" %>
+        <% if Current.user.authorised? %>
+          <%= link_to "Erudite", admin_root_path, class: "btn btn-ghost text-xl", id: "test" %>
+        <% else %>
+          <%= link_to "Erudite", root_path, class: "btn btn-ghost text-xl", id: "test" %>
+        <% end %>
       </li>
     </ul>
   </div>
   <div class="navbar-end">
+    <% if Current.user.account_type == "teacher" %>
+    <%= link_to "Available Courses",
+                admin_root_path,
+                data: {
+                  turbo_frame: "notifications",
+                },
+                class: "btn mx-2" %>
+      <% end %>
     <%= link_to "Notifications",
                 notifications_path,
                 data: {
