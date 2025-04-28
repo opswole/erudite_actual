@@ -1,1 +1,22 @@
 # Erudite
+
+## Running Locally
+`$ git clone https://github.com/ChrisFDev00/erudite_actual.git`
+
+`$ cd erudite_actual`
+
+`$ bundle install`
+
+`$ npm install`
+
+`$ bin/rails server` -> Starts the Rails Server
+
+*open another terminal window*
+
+`$ bundle exec vite dev` -> Starts Vite Dev
+
+
+Doing the above will start Erudite but it will be unusable due to absence of any database information.
+
+To seed the database accordingly you'll need to configure [ActiveStorage](https://guides.rubyonrails.org/active_storage_overview.html)
+to use a BLOB storage. Erudite was built using an S3, though this will rapidly reach its free tier limit for GET requests.
