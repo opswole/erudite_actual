@@ -29,6 +29,7 @@ class Message < ApplicationRecord
   after_create_commit do
     broadcast_append_to [ messageable, :messages ],
                         partial: "messages/message",
-                        target: "messages-container"
+                        target: "messages-container",
+                        locals: { message: self }
   end
 end

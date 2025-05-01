@@ -5,11 +5,11 @@
     <% if messageable.messages.empty? %>
       <p class="italic text-gray-500 text-center py-4">No messages yet</p>
     <% else %>
-      <article id="messages-container"
-               class="overflow-auto max-h-[400px] space-y-4 p-2"
-               data-message-target="messages">
-        <%= render partial: "messages/message", collection: messageable.messages %>
-      </article>
+      <div id="messages-container"
+           class="overflow-auto max-h-[400px] space-y-4 p-2"
+           data-message-target="messages">
+        <%= render messageable.messages %>
+      </div>
     <% end %>
 
     <%= render "messages/form", messageable: messageable, taggable_users: @taggable_users %>
