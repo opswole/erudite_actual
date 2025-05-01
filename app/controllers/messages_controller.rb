@@ -15,7 +15,6 @@ class MessagesController < ApplicationController
     p message_params
 
     if @message.save!
-      Message.first.destroy
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to user_topic_path(@message.topic), notice: "Message created successfully." }
