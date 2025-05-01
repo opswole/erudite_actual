@@ -1,6 +1,9 @@
 # Erudite
 
+## A note to Aston Staff
+If you're reviewing this code-base please ensure it's the codebase at commit [f275acc](https://github.com/ChrisFDev00/erudite_actual/tree/f275acc364614bdbaaf58cee66defce4d0117e53) as this was the commit zipped & submitted to Blackboard. For convenience, the codebase at this point is available as a [release](https://github.com/ChrisFDev00/erudite_actual/releases/tag/Submitted) 
 ## Running Locally
+
 `$ git clone https://github.com/ChrisFDev00/erudite_actual.git`
 
 `$ cd erudite_actual`
