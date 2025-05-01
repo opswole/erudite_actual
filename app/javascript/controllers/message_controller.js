@@ -4,7 +4,6 @@ export default class extends Controller {
     static targets = ["messages", "textArea"];
 
     connect() {
-        // console.log("Message controller connected");
 
         this.setScrollPosition();
 
@@ -20,7 +19,6 @@ export default class extends Controller {
     }
 
     submitForm(event) {
-        console.log(event)
         if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
             const form = event.target.closest("form");
@@ -33,7 +31,6 @@ export default class extends Controller {
 }
 
 document.addEventListener("turbo:frame-load", (event) => {
-    // console.log("Turbo Frame Loaded:", event.target);
     setTimeout(() => {
         const application = window.Stimulus;
         if (application) {
