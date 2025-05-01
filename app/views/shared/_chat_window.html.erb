@@ -1,18 +1,14 @@
 <div class="space-y-4">
-<!--  <h2 class="text-3xl font-bold mb-4">Messages for <%#= messageable.title %>:</h2>-->
-
   <article class="border rounded-lg p-4 shadow-sm overflow-y-auto" data-controller="message">
     <%= turbo_stream_from messageable, :messages %>
 
     <% if messageable.messages.empty? %>
       <p class="italic text-gray-500 text-center py-4">No messages yet</p>
     <% else %>
-      <article id="messages"
+      <article id="messages-container"
                class="overflow-auto max-h-[400px] space-y-4 p-2"
                data-message-target="messages">
-        <div id="<%= dom_id(messageable, :messages) %>">
-          <%= render partial: "messages/message", locals: {user: Current.user}, collection: messageable.messages %>
-        </div>
+        <%= render partial: "messages/message", collection: messageable.messages %>
       </article>
     <% end %>
 
