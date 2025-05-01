@@ -62,7 +62,7 @@ end
 puts "Creating default courses..."
 cs = Course.create!(
   title: "BSc Computer Science",
-  owners: [ admin ]
+  owners: [ admin, staff ]
 )
 
 env = Course.create!(

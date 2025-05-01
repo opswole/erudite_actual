@@ -20,9 +20,6 @@
     <% if Current.user.account_type == "teacher" %>
     <%= link_to "Available Courses",
                 admin_root_path,
-                data: {
-                  turbo_frame: "notifications",
-                },
                 class: "btn mx-2" %>
       <% end %>
     <%= link_to "Notifications",

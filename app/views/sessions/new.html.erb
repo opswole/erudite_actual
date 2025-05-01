@@ -1,4 +1,39 @@
 <div class="min-h-screen w-screen bg-aqua flex items-center justify-center">
+  <div class="grid grid-cols-2 p-6 gap-4">
+    <div class="bg-white rounded-lg shadow-lg overflow-y-auto">
+      <p class="break-words p-8">Hello! <br>
+      This exists as a somewhat functional demo of my final-project with some changes for the sake of not hitting API limits or unnecessarily raising storage reqs.
+      Most notably, the PDFs are served from one file through ActiveStorage on disk due to the GET limit attached to the S3 free tier & the newest message will
+        delete the oldest on creation as to not massively inflate the message windows. The first would be minimised with proper caching & the second would actually
+        be ideal in a production environment for the sake of persistence but I don't intend to update this beyond that which I submitted as my university project, not yet anyways.
+        <br><br>
+      This sign-in flow may seem strange but ad-hoc buttons seemed nicer than a list of email addresses and then the expecation
+        for people to want to type them in.
+        <br><br>
+      There are three courses configured through the seed, Admin is a listed owner of them all, with Staff owning Course 1.
+        Staff can be made an owner of the latter two by editing the course as Admin and adding the email address <em>staff@erudite.com</em>.
+        All being well, student's on differing courses shouldn't know of each others assistance. The accounts of the other students shown as taggable
+        are accessible via <em>student#{i}@erudite.com</em>, with the 3 courses splitting the 15 students into thirds, <em>i</em> being the index of the student.
+        <br><br>
+      There's a bug with the WebSockets I haven't solved just yet whereby Messages don't always update on send, clicking the relevant topic tab again should solve the issue
+        <br><br>
+      The seeded messages randomly tag a user, messages the current user are tagged in are displayed with a different background.
+        Also, the creation of a new messages deletes the message held at Message.first. This is solely to stop thousands of messages amassing
+        <br><br>
+      Generally, this project was ambitious given my experience and there are issues/things I'd have liked to added before submission some of which being:
+        <br>
+        - Caching to stop the PDF loading on every nav <br>
+        - A better implementation of tracking the active tab <br>
+        - Email verification for pw resets as currently anyone can do it <br>
+        - An imitation feature instead of having Admins enrolled on a course to view student views <br>
+        - A MD editor alongside Trix for choice <br>
+        - JS features that permitted tagging via "@user" instead of a select <br>
+        Frankly, given the timescale and the associated report I'm proud with what I managed to make, despite it being rough around the edges.
+        The above bullet points are effectively pipe dreams for if I had double the time or a second developer.
+
+      </p>
+
+    </div>
   <div class="p-6 bg-white rounded-lg shadow-lg w-full max-w-xl">
     <%= form_with url: session_path do |form| %>
       <div class="mb-4 w-full">
@@ -22,8 +57,72 @@
       </div>
     <% end %>
 
+    <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+      <%= form.hidden_field :email_address, value: "admin@erudite.com" %>
+      <%= form.hidden_field :password, value: "password" %>
+      <%= form.submit "Admin Account", class: "w-full btn btn-warning text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+    <% end %>
+
+    <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+      <%= form.hidden_field :email_address, value: "staff@erudite.com" %>
+      <%= form.hidden_field :password, value: "password" %>
+      <%= form.submit "Staff Account", class: "w-full btn btn-warning text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+    <% end %>
+
+    <div class="grid grid-cols-2">
+      <div>
+        <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+          <%= form.hidden_field :email_address, value: "student1@erudite.com" %>
+          <%= form.hidden_field :password, value: "password" %>
+          <%= form.submit "Student #1 on course #1", class: "w-full btn btn-warning text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+        <% end %>
+      </div>
+      <div>
+        <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+          <%= form.hidden_field :email_address, value: "student2@erudite.com" %>
+          <%= form.hidden_field :password, value: "password" %>
+          <%= form.submit "Student #2 on course #1", class: "w-full btn btn-warning text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2">
+      <div>
+        <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+          <%= form.hidden_field :email_address, value: "student6@erudite.com" %>
+          <%= form.hidden_field :password, value: "password" %>
+          <%= form.submit "Student #1 on course #2", class: "w-full btn btn-warning text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+        <% end %>
+      </div>
+      <div>
+        <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+          <%= form.hidden_field :email_address, value: "student7@erudite.com" %>
+          <%= form.hidden_field :password, value: "password" %>
+          <%= form.submit "Student #2 on course #2", class: "w-full btn btn-warning text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2">
+      <div>
+        <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+          <%= form.hidden_field :email_address, value: "student11@erudite.com" %>
+          <%= form.hidden_field :password, value: "password" %>
+          <%= form.submit "Student #1 on course #3", class: "w-full btn btn-warning text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+        <% end %>
+      </div>
+      <div>
+        <%= form_with url: session_path, method: :post, class: "mb-4" do |form| %>
+          <%= form.hidden_field :email_address, value: "student12@erudite.com" %>
+          <%= form.hidden_field :password, value: "password" %>
+          <%= form.submit "Student #2 on course #3", class: "btn btn-warning w-full  text-white py-2 px-4 rounded-lg hover:bg-green-600" %>
+        <% end %>
+      </div>
+    </div>
+
     <div class="text-center">
       <%= link_to "Forgot password?", new_password_path, class: "text-blue-500 hover:underline" %>
     </div>
+  </div>
   </div>
 </div>
