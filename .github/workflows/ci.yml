@@ -32,13 +32,14 @@ jobs:
           service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
       - name: Load secrets from 1Password
+        id: load-rails-creds
         uses: 1password/load-secrets-action@v2
         with:
           export-env: true
         env:
-          KAMAL_REGISTRY_PASSWORD: "op://Dev_Keys/Erudite_Prod/KAMAL_REGISTRY_PASSWORD"
-          RAILS_MASTER_KEY: "op://Dev_Keys/Erudite_Prod/PROD_MASTER_KEY"
-          SSH_PRIVATE_KEY: "op://Dev_Keys/ec2_aws/private key"
+          KAMAL_REGISTRY_PASSWORD: op://Dev_Keys/Erudite_Prod/KAMAL_REGISTRY_PASSWORD
+          RAILS_MASTER_KEY: op://Dev_Keys/Erudite_Prod/PROD_MASTER_KEY
+          SSH_PRIVATE_KEY: op://Dev_Keys/DigitalOcean/private key
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -49,24 +50,27 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval $(ssh-agent -s)
-          ssh-add ~/.ssh/id_rsa
-          ssh-keyscan 188.166.153.61 >> ~/.ssh/known_hosts
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Print masked secret
+        run: 'echo "Secret: $KAMAL_REGISTRY_PASSWORD $RAILS_MASTER_KEY $SSH_PRIVATE_KEY"'
 
-      - name: Deploy using Kamal
-        run: bin/kamal deploy
-        env:
-          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
-          RAILS_MASTER_KEY: ${{ env.RAILS_MASTER_KEY }}
-          SECRET_KEY_BASE: ${{ env.SECRET_KEY_BASE }}
-          KAMAL_REGISTRY_PASSWORD: ${{ env.KAMAL_REGISTRY_PASSWORD }}
-          AWS_SECRET_KEY_ID: ${{ env.AWS_SECRET_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          VITE_SYNCFUSION_KEY: ${{ env.VITE_SYNCFUSION_KEY }}
+      # - name: Set up SSH
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+      #     chmod 600 ~/.ssh/id_rsa
+      #     eval $(ssh-agent -s)
+      #     ssh-add ~/.ssh/id_rsa
+      #     ssh-keyscan erudite.christopherfagg.me >> ~/.ssh/known_hosts
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # - name: Deploy using Kamal
+      #   run: bin/kamal deploy
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
+      #     RAILS_MASTER_KEY: ${{ env.RAILS_MASTER_KEY }}
+      #     SECRET_KEY_BASE: ${{ env.SECRET_KEY_BASE }}
+      #     KAMAL_REGISTRY_PASSWORD: ${{ env.KAMAL_REGISTRY_PASSWORD }}
+      #     AWS_SECRET_KEY_ID: ${{ env.AWS_SECRET_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
+      #     VITE_SYNCFUSION_KEY: ${{ env.VITE_SYNCFUSION_KEY }}
