@@ -54,15 +54,6 @@ jobs:
       - name: Print masked secret
         run: 'echo "Secret: $KAMAL_REGISTRY_PASSWORD $RAILS_MASTER_KEY $SSH_PRIVATE_KEY"'
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval $(ssh-agent -s)
-          ssh-add ~/.ssh/id_rsa
-          ssh-keyscan erudite.christopherfagg.me >> ~/.ssh/known_hosts
-
       - name: Deploy using Kamal
         run: bin/kamal deploy
         env:
