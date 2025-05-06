@@ -30,6 +30,9 @@ class Message < ApplicationRecord
     broadcast_append_to [ messageable, :messages ],
                         partial: "messages/message",
                         target: "messages-container",
-                        locals: { message: self }
+                        locals: {
+                          message: self,
+                          is_current_user: user == Current.user
+                        }
   end
 end
