@@ -60,12 +60,12 @@ jobs:
           ssh-add ~/.ssh/id_rsa
           ssh-keyscan ww.xx.yy.zz >> ~/.ssh/known_hosts
         env:
-          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrest.SSH_PRIVATE_KEY }}
 
       - name: Deploy using Kamal
         run: bin/kamal deploy
         env:
-          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           RAILS_MASTER_KEY: ${{ env.RAILS_MASTER_KEY }}
           SECRET_KEY_BASE: ${{ env.SECRET_KEY_BASE }}
           KAMAL_REGISTRY_PASSWORD: ${{ env.KAMAL_REGISTRY_PASSWORD }}
