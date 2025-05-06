@@ -51,8 +51,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Print masked secret
-        run: 'echo "Secret: $KAMAL_REGISTRY_PASSWORD $RAILS_MASTER_KEY $SSH_PRIVATE_KEY"'
+      - name: Set up SSH Agent
+        run: |
+          eval $(ssh-agent -s)
+          echo "${SSH_PRIVATE_KEY}" | ssh-add -
+          mkdir -p ~/.ssh
+          ssh-keyscan -H erudite.christopherfagg.me >> ~/.ssh/known_hosts
+        env:
+          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
 
       - name: Deploy using Kamal
         run: bin/kamal deploy
