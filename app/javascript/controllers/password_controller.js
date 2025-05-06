@@ -5,7 +5,7 @@ export default class extends Controller {
     static targets = ["password", "confirmation", "error"];
 
     connect() {
-        console.log("connected")
+
     }
 
     validate(event) {

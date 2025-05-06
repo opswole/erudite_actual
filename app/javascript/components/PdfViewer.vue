@@ -36,7 +36,7 @@ const pdfUrl = pdfContainer.getAttribute('data-pdf-url')
 
 const page = ref(1)
 const { pdf, pages: totalPages } = usePDF(pdfUrl)
-console.log(`PDF URL ${pdfUrl}`)
+
 </script>
 
 <style scoped>

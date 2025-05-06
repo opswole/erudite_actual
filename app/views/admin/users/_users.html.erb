@@ -2,13 +2,13 @@
 <h1 class="text-red-600">INDEX UNDER TAB CONTENT</h1>
 <ul class="menu bg-base-200 lg:menu-horizontal rounded-box">
   <li>
-    <%= link_to "View Audit", admin_audits_path, data: { turbo_frame: "user_content" } %>
+    <%= link_to "View Audit", admin_audits_path, data: { turbo_frame: "tab_content" } %>
   </li>
   <li>
-    <%= link_to "Create Users", new_admin_user_path, data: { turbo_frame: "user_content" } %>
+    <%= link_to "Create Users", new_admin_user_path, data: { turbo_frame: "tab_content" } %>
   </li>
   <li>
-    <%= link_to "Edit User", admin_users_path, data: { turbo_frame: "user_content" } %>
+    <%= link_to "Edit User", admin_users_path, data: { turbo_frame: "tab_content" } %>
   </li>
 </ul>
 <%# end %>

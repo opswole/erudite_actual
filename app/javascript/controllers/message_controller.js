@@ -20,7 +20,7 @@ export default class extends Controller {
     }
 
     submitForm(event) {
-        console.log(event)
+
         if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
             const form = event.target.closest("form");

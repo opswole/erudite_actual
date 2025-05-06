@@ -17,7 +17,6 @@ function mountPdfViewer() {
     if (el) {
         app = createApp(PdfViewer);
         app.mount(el);
-        console.log('PDF Viewer mounted');
     }
 }
 

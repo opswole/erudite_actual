@@ -73,7 +73,7 @@ gem "tailwindcss-ruby", "~> 4.0"
 
 gem "vite_rails"
 
-gem "aws-sdk-s3", require: false
+# gem "aws-sdk-s3", require: false
 
 # gem "azure-storage-blob", "~> 2.0", require: false
 

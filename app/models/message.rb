@@ -26,6 +26,10 @@ class Message < ApplicationRecord
 
   validates :content, presence: true
 
-  broadcasts_to ->(message) { [ message.messageable, :messages ] }, partial: "/messages/message",
-                locals: { user: Current.user }
+  after_create_commit do
+    broadcast_append_to [ messageable, :messages ],
+                        partial: "messages/message",
+                        target: "messages-container",
+                        locals: { message: self }
+  end
 end
