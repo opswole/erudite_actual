@@ -7,7 +7,7 @@ image: christopherfdev/erudite_actual
 # Deploy to these servers.
 servers:
   web:
-    - 188.166.153.61
+    - erudite.christopherfagg.me
   # job:
   #   hosts:
   #     - 192.168.0.1

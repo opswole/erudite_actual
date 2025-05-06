@@ -2,8 +2,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "VITE_SYNCFUSION_LICENSE_KEY=$(rails runner 'puts Rails.application.credentials.syncfusion_license_key') vite dev",
-    "build": "VITE_SYNCFUSION_LICENSE_KEY=$(rails runner 'puts Rails.application.credentials.syncfusion_license_key') vite build"
+    "dev": "vite dev",
+    "build": "vite build"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
